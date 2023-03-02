@@ -19,9 +19,11 @@ namespace article_to_json
             Article article;
             DocuReader docuReader = new DocuReader("Why am I Presbyterian");
             article = docuReader.article;
+            article.title = "Why am I Presbyterian";
+            string stringjson = JsonConvert.SerializeObject(article);
+            stringjson.Replace("\r", "");
+            Console.WriteLine(stringjson);
             Console.ReadKey();
-            //string stringjson = JsonConvert.SerializeObject(article);
-            //Console.WriteLine(stringjson);
         }
     }
 }

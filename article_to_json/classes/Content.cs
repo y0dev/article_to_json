@@ -99,5 +99,10 @@ namespace article_to_json.classes
             }
             return string.Format("{0}\n{1}\n{2}", titleText, paragraphText, links.Count);
         }
+
+        public static implicit operator List<object>(Content v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

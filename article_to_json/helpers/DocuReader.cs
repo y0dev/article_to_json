@@ -13,12 +13,14 @@ namespace article_to_json.helpers
     {
         public Article article { get; }
         private string filepath;
+
         public DocuReader(string documentTitle)
         {
             filepath = String.Format(@"F:\Documents\blog_articles\{0}.docx", documentTitle);
             // Console.WriteLine(filepath);
-            
 
+            article = new Article();
+            article.content = new List<Content>();
             if ( !parse_document() )
             {
                 Console.WriteLine("Can not parse document because document doesn't not exist.");
@@ -26,7 +28,7 @@ namespace article_to_json.helpers
             }
             else
             {
-
+                Console.WriteLine(article.content);
             }
         }
 
@@ -63,7 +65,7 @@ namespace article_to_json.helpers
             int trueIdx = 0;
             int listIdx = 0;
 
-            Content content = new Content();
+            //Content content = new Content();
             foreach (Paragraph paragraph in document.Paragraphs)
             {
                 Style style = paragraph.get_Style() as Style;
@@ -79,9 +81,12 @@ namespace article_to_json.helpers
                         case "Heading 1":
                         case "Heading 2":
                             {
+                                Content content = new Content();
+                                article.content.Add(content);
                                 content.title.tag = "h2";
                                 content.title.text = text;
                                 Console.WriteLine(content.title);
+                                trueIdx += 1;
                                 break;
                             }
 
@@ -120,7 +125,7 @@ namespace article_to_json.helpers
                                             Console.WriteLine(contentLink.ToString());
                                             idx += 1;
                                         }// end foreach links
-                                        content.links = links;
+                                        article.content[trueIdx - 1].links = links;
                                     }
 
 #if NOT_READY
@@ -131,8 +136,8 @@ namespace article_to_json.helpers
                                     Console.Read();
                                 }
 #endif
-                                    content.paragraghs.Add(paragraphText);
-                                    trueIdx += 1;
+                                    article.content[trueIdx - 1].paragraghs.Add(paragraphText);
+                                    paragraphIdx += 1;
                                 }// end if
                                 break;
                             }
@@ -140,12 +145,12 @@ namespace article_to_json.helpers
                             {
                                 //Console.WriteLine(content.ToString());
                                 // Get previous paragraph to append to end
-                                if (content.paragraghs.Count >= 1)
+                                if (article.content[trueIdx - 1].paragraghs.Count >= 1)
                                 {
                                     // Add to end of previous paragraph
                                     string listPlace = String.Format(":listPlace({0,2:D3})", listIdx + 1);
-                                    Console.WriteLine(content.paragraghs.Count);
-                                    content.paragraghs[trueIdx - 1] += listPlace;
+                                    Console.WriteLine(article.content[trueIdx - 1].paragraghs.Count);
+                                    article.content[trueIdx - 1].paragraghs[paragraphIdx - 1] += listPlace;
                                     listIdx += 1;
                                 }
                                 break;
@@ -176,14 +181,8 @@ namespace article_to_json.helpers
                     break;
                 }
                 
-
-                paragraphIdx += 1;
             }// end foreach paragraph
-            Console.WriteLine(content.title.text);
-            foreach(ContentLink link in content.links)
-            {
-                Console.WriteLine("{0}, {1}",link.link, link.text);
-            }
+
             // Close word.
             document.Save();
             application.Quit();
