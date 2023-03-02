@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using article_to_json.classes;
+using article_to_json.helpers;
 
 namespace article_to_json
 {
@@ -14,9 +16,12 @@ namespace article_to_json
             // The code provided will print ‘Hello World’ to the console.
             // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
             Console.WriteLine("Hello World!");
+            Article article;
+            DocuReader docuReader = new DocuReader("Why am I Presbyterian");
+            article = docuReader.article;
             Console.ReadKey();
-
-            // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+            //string stringjson = JsonConvert.SerializeObject(article);
+            //Console.WriteLine(stringjson);
         }
     }
 }
