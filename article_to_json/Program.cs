@@ -13,17 +13,58 @@ namespace article_to_json
     {
         static void Main(string[] args)
         {
-            // The code provided will print ‘Hello World’ to the console.
-            // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            Console.WriteLine("Hello World!");
+            string Title = "";
+            string Filename = "";
+            string ID = "";
+            string ImageName = "";
+            string ImageAlt = "";
+            List<string> Tags = new List<string>();
+
+            if ( args.Length > 0 )
+            {
+                Title = args[0];
+                Filename = args[0];
+                ID = args[0].Replace(" ","-").ToLower();
+
+                if (args.Length > 1 & args.Length <= 4) // Include tags
+                {
+                    Tags.Add(args[1]);
+                    Tags.Add(args[2]);
+                    Tags.Add(args[3]);
+                }
+                else if (args.Length > 4 & args.Length <= 6) // Include tags and image
+                {
+
+                    Tags.Add(args[1]);
+                    Tags.Add(args[2]);
+                    Tags.Add(args[3]);
+
+                    ImageName = args[4];
+                    ImageAlt = args[5];
+                }
+            }
+            // Run on sample.docx
+            else
+            {
+                Console.WriteLine("\nRunning on Sample.docx\n");
+            }
+
             Article article;
-            DocuReader docuReader = new DocuReader("Why am I Presbyterian");
+            string file = Filename == "" ? "Sample" : Filename;
+            string title = Title == "" ? "Sample" : Title;
+
+            DocuReader docuReader = new DocuReader(file);
             article = docuReader.article;
-            article.title = "Why am I Presbyterian";
+            article.id = ID;
+            article.title = title;
+            article.tags = Tags;
+            article.image.name = ImageName;
+            article.image.alt = ImageAlt;
+            article.date = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
+
             string stringjson = JsonConvert.SerializeObject(article);
-            stringjson.Replace("\r", "");
             Console.WriteLine(stringjson);
-            Console.ReadKey();
+            // Console.ReadKey();
         }
     }
 }

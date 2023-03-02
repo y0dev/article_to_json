@@ -26,10 +26,6 @@ namespace article_to_json.helpers
                 Console.WriteLine("Can not parse document because document doesn't not exist.");
                 Console.WriteLine("Check the following file path: {0}", filepath);
             }
-            else
-            {
-                Console.WriteLine(article.content);
-            }
         }
 
         
@@ -48,8 +44,8 @@ namespace article_to_json.helpers
             //;
             //document.Lists.Count;
             //document.Hyperlinks.Count;
-            Console.WriteLine("Paragraph Count: {0}", document.Paragraphs.Count);
-            Console.WriteLine("Word Count: {0}", wordCount);
+            //Console.WriteLine("Paragraph Count: {0}", document.Paragraphs.Count);
+            //Console.WriteLine("Word Count: {0}", wordCount);
             /*
             foreach (List list in document.Lists)
             {
@@ -65,15 +61,16 @@ namespace article_to_json.helpers
             int trueIdx = 0;
             int listIdx = 0;
 
-            //Content content = new Content();
+            bool sameList = false;
+            
             foreach (Paragraph paragraph in document.Paragraphs)
             {
                 Style style = paragraph.get_Style() as Style;
                 string styleName = style.NameLocal;
-                string text = paragraph.Range.Text;
+                string text = paragraph.Range.Text.Replace("\r", String.Empty); ;
 
-                Console.WriteLine("Style Name: {0}", styleName);
-                Console.WriteLine("Text: {0}\nLength: {1}", text, text.Length);
+                // Console.WriteLine("Style Name: {0}", styleName);
+                // Console.WriteLine("Text: {0}\nLength: {1}", text, text.Length);
                 try
                 {
                     switch (styleName)
@@ -84,22 +81,28 @@ namespace article_to_json.helpers
                                 Content content = new Content();
                                 article.content.Add(content);
                                 content.title.tag = "h2";
-                                content.title.text = text;
-                                Console.WriteLine(content.title);
+                                content.title.text = text.Replace("\r", String.Empty);
+
+                                // Console.WriteLine(content.title);
                                 trueIdx += 1;
+                                paragraphIdx = 0;
+                                sameList = false;
                                 break;
                             }
 
                         case "Normal":
                             {
+                                string[] words = text.Split(new string[] { " " }, StringSplitOptions.None);
+                                // Console.WriteLine("Word Length {0}",words.Length);
+
                                 // Make sure there is text to read
-                                if (text.Length > 1)
+                                if (text.Length > 1 && words.Length > 3 )
                                 {
                                     
                                     string paragraphText = "";
+
                                     // Check if paragraph has links
                                     int linksCount = paragraph.Range.Hyperlinks.Count;
-
                                     if (linksCount > 0)
                                     {
                                         int idx = 0;
@@ -114,18 +117,23 @@ namespace article_to_json.helpers
                                             //Console.WriteLine("Link Address: {0}", linkAddress);
 
                                             // Replace Text with :linkPlace(001)
-                                            paragraphText = text.Replace(linkText, linkPlace);
-                                            Console.WriteLine("Link Text: {0}", paragraphText);
+                                            paragraphText = text.Replace(linkText, linkPlace).Replace("\r", String.Empty);
+                                            // Console.WriteLine("Link Text: {0}", paragraphText);
+
                                             ContentLink contentLink = new ContentLink();
                                             contentLink.id = String.Format("{0,2:D3}", idx + 1);
                                             contentLink.link = linkAddress;
                                             contentLink.text = linkText;
                                             links.Add(contentLink);
 
-                                            Console.WriteLine(contentLink.ToString());
+                                            // Console.WriteLine(contentLink.ToString());
                                             idx += 1;
                                         }// end foreach links
                                         article.content[trueIdx - 1].links = links;
+                                    }
+                                    else
+                                    {
+
                                     }
 
 #if NOT_READY
@@ -139,19 +147,55 @@ namespace article_to_json.helpers
                                     article.content[trueIdx - 1].paragraghs.Add(paragraphText);
                                     paragraphIdx += 1;
                                 }// end if
+                                else if ( text != "" && ( words.Length >= 1 && words.Length <= 3) )
+                                {
+                                    // Add another content since this is another heading
+                                    Content content = new Content();
+                                    article.content.Add(content);
+                                    content.title.tag = "h2";
+                                    content.title.text = text.Replace("\r", String.Empty);
+                                    // Console.WriteLine(content.title);
+                                    
+
+                                    trueIdx += 1;
+                                    listIdx = 0;
+                                    paragraphIdx = 0;
+                                    sameList = false;
+                                }
                                 break;
                             }
                         case "List Paragraph":
                             {
                                 //Console.WriteLine(content.ToString());
-                                // Get previous paragraph to append to end
-                                if (article.content[trueIdx - 1].paragraghs.Count >= 1)
+                                // Handle cases where there are a paragraph before
+                                if (article.content[trueIdx - 1].paragraghs.Count < 1 )
                                 {
-                                    // Add to end of previous paragraph
-                                    string listPlace = String.Format(":listPlace({0,2:D3})", listIdx + 1);
-                                    Console.WriteLine(article.content[trueIdx - 1].paragraghs.Count);
+                                    article.content[trueIdx - 1].paragraghs.Add("");
+                                    paragraphIdx += 1;
+                                }
+
+
+                                string listPlace = String.Format(":listPlace({0,2:D3})", listIdx + 1);
+
+                                // Add to end of previous paragraph
+                                if ( !sameList )
+                                {
+                                    // Console.WriteLine(article.content[trueIdx - 1].paragraghs.Count);
                                     article.content[trueIdx - 1].paragraghs[paragraphIdx - 1] += listPlace;
+
+                                    string listType = paragraph.Range.ListFormat.ListType.ToString();
+                                    ContentList clist = new ContentList();
+                                    clist.id = String.Format("{0,2:D3}", listIdx + 1);
+                                    clist.items.Add(text.Replace("\r", String.Empty));
+                                    clist.listType = listType == "wdListBullet" ? "unordered" : "ordered";
+                                    article.content[trueIdx - 1].lists.Add(clist);
+
                                     listIdx += 1;
+                                    sameList = true;
+                                }
+                                else // List has already been created just update list items
+                                {
+                                    article.content[trueIdx - 1].lists[listIdx - 1].items.Add(text.Replace("\r", String.Empty));
                                 }
                                 break;
                             }

@@ -17,5 +17,11 @@ namespace article_to_json.classes
          */
         public string name { get; set; }
         public string alt { get; set; }
+
+        public Image()
+        {
+            name = "";
+            alt = "";
+        }
     }
 }

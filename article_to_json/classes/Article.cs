@@ -26,5 +26,16 @@ namespace article_to_json.classes
         public List<string> tags { get; set; }
         public Image image { get; set; }
         public List<Content> content { get; set; }
+
+        public Article()
+        {
+            title = "";
+            description = "";
+            date = "";
+            id = "";
+            tags = new List<string>();
+            image = new Image();
+            content = new List<Content>();
+        }
     }
 }
