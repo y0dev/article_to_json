@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classes\Article.cs" />
+    <Compile Include="classes\Tags.cs" />
     <Compile Include="classes\Content.cs" />
     <Compile Include="classes\Image.cs" />
     <Compile Include="helpers\DocuReader.cs" />

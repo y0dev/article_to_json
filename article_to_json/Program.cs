@@ -19,7 +19,7 @@ namespace article_to_json
             string ID = "";
             string ImageName = "";
             string ImageAlt = "";
-            List<string> Tags = new List<string>();
+            List<string> TagList = new List<string>();
 
             if ( args.Length > 0 )
             {
@@ -27,28 +27,34 @@ namespace article_to_json
                 Filename = args[0];
                 ID = args[0].Replace(" ","-").ToLower();
 
-                if (args.Length > 1 & args.Length <= 4) // Include tags
-                {
-                    Tags.Add(args[1]);
-                    Tags.Add(args[2]);
-                    Tags.Add(args[3]);
-                }
-                else if (args.Length > 4 & args.Length <= 6) // Include tags and image
+                if (args.Length > 1 & args.Length <= 2) // Include tags
                 {
 
-                    Tags.Add(args[1]);
-                    Tags.Add(args[2]);
-                    Tags.Add(args[3]);
-
-                    ImageName = args[4];
-                    ImageAlt = args[5];
+					Tags tags = new Tags(args[1]);
+					TagList = tags.getTagList();
                 }
+                else if (args.Length > 2 & args.Length <= 4) // Include tags and image
+                {
+					Tags tags = new Tags(args[1]);
+					TagList = tags.getTagList();
+
+					ImageName = args[2];
+                    ImageAlt = args[3];
+                }
+				else
+				{
+					Console.WriteLine("\nToo many arguments!!!\n");
+					// Add Help Menu
+					return;
+				}
             }
             // Run on sample.docx
             else
             {
                 Console.WriteLine("\nRunning on Sample.docx\n");
-            }
+				Tags tags = new Tags("Sample");
+				TagList = tags.getTagList();
+			}
 
             Article article;
             string file = Filename == "" ? "Sample" : Filename;
@@ -58,7 +64,7 @@ namespace article_to_json
             article = docuReader.article;
             article.id = ID;
             article.title = title;
-            article.tags = Tags;
+            article.tags = TagList;
             article.image.name = ImageName;
             article.image.alt = ImageAlt;
             article.date = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
@@ -67,7 +73,7 @@ namespace article_to_json
             // Console.WriteLine(stringjson);
             Console.WriteLine("Finished");
             File.WriteAllText(String.Format(@"F:\Documents\blog_articles\json_outputs\{0}.json", title.ToLower()), stringjson);
-            Console.ReadKey();
+            // Console.ReadKey();
         }
     }
 }
