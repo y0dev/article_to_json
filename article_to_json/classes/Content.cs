@@ -75,7 +75,7 @@ namespace article_to_json.classes
     class Content
     {
         public ContentTitle title { get; set; }
-        public List<string> paragraghs { get; set; }
+        public List<string> paragraphs { get; set; }
         public List<ContentImage> images { get; set; }
         public List<ContentLink> links { get; set; }
         public List<ContentList> lists { get; set; }
@@ -83,7 +83,7 @@ namespace article_to_json.classes
         public Content()
         {
             title = new ContentTitle();
-            paragraghs = new List<string>();
+            paragraphs = new List<string>();
             images = new List<ContentImage>();
             links = new List<ContentLink>();
             lists = new List<ContentList>();
@@ -93,7 +93,7 @@ namespace article_to_json.classes
         {
             string titleText = String.Format("{0}", title.ToString());
             string paragraphText = "";
-            foreach(string para in paragraghs)
+            foreach(string para in paragraphs)
             {
                 paragraphText += String.Format("{0}\n", para);
             }

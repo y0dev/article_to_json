@@ -36,44 +36,86 @@ namespace article_to_json.helpers
             {
                 return false;
             }
+#if KEEP
+			// Load the Word document.
+			Aspose.Words.Document doc = new Aspose.Words.Document(filepath);
 
-            Application application = new Application();
+			// Shape nodes that have the "HasImage" flag set contain and display images.
+			IEnumerable<Aspose.Words.Drawing.Shape> shapes = doc.GetChildNodes(Aspose.Words.NodeType.Shape, true)
+				.OfType<Aspose.Words.Drawing.Shape>().Where(s => s.HasImage);
+			int imageIndex = 0;
+
+			// Loop through shapes.
+			foreach (Aspose.Words.Drawing.Shape shape in shapes)
+			{
+				// Save images.
+				string imageFileName =
+					$"Image_{imageIndex}{Aspose.Words.FileFormatUtil.ImageTypeToExtension(shape.ImageData.ImageType)}";
+				shape.ImageData.Save(imageFileName);
+				imageIndex++;
+			}
+#endif           
+
+			Application application = new Application();
             application.Visible = false;
             Document document = application.Documents.Open(filepath);
             int wordCount = document.Words.Count;
-            //;
-            //document.Lists.Count;
-            //document.Hyperlinks.Count;
-            //Console.WriteLine("Paragraph Count: {0}", document.Paragraphs.Count);
-            //Console.WriteLine("Word Count: {0}", wordCount);
-            /*
-            foreach (List list in document.Lists)
-            {
-                //Type type = list.GetType();
-                string styleName = list.StyleName;
-                //string text = paragraph.Range.Text;
 
-
-                Console.WriteLine("List Style: {0}", list.Range);
-            }
-            */
             int paragraphIdx = 0;
             int trueIdx = 0;
             int listIdx = 0;
+			int imageIdx = 0;
 
-            bool sameList = false;
+			bool sameList = false;
+			//grabImages(document);
             
             foreach (Paragraph paragraph in document.Paragraphs)
             {
                 Style style = paragraph.get_Style() as Style;
                 string styleName = style.NameLocal;
-                string text = paragraph.Range.Text.Replace("\r", String.Empty); ;
+                string text = paragraph.Range.Text.Replace("\r", String.Empty);
 
-                // Console.WriteLine("Style Name: {0}", styleName);
-                // Console.WriteLine("Text: {0}\nLength: {1}", text, text.Length);
-                try
+				// Console.WriteLine("Style Name: {0}", styleName);
+				// Console.WriteLine("Text: {0}\nLength: {1}", text, text.Length);
+
+				// Check for images
+				if (paragraph.Range.InlineShapes.Count > 0 && paragraph.Range.InlineShapes[1] != null )
+				{
+
+
+					// Handle cases where there are a paragraph before
+					if (article.content[trueIdx - 1].paragraphs.Count < 1)
+					{
+						article.content[trueIdx - 1].paragraphs.Add("");
+						paragraphIdx += 1;
+					}
+
+
+					InlineShape shape = paragraph.Range.InlineShapes[1];
+					string imagePlace = String.Format(":imagePlace({0,2:D3})", imageIdx + 1);
+
+					ContentImage image = new ContentImage();
+					image.alt = "";
+					image.caption = "";
+					image.link = shape.Hyperlink.Address;
+					image.id = String.Format("{0,2:D3}", imageIdx + 1);
+
+
+					article.content[trueIdx - 1].paragraphs[paragraphIdx - 1] += imagePlace;
+					article.content[trueIdx - 1].images.Add(image);
+
+					imageIdx += 1;
+
+					// Console.WriteLine($"Shape (width,height) = ({shape.Width},{shape.Height})");
+					Console.WriteLine($"Shape type = {shape.Title}");
+					Console.WriteLine($"Shape type = {shape.AlternativeText}");
+					// Console.WriteLine($"Shape address = {shape.Hyperlink.Address}");
+				}
+				try
                 {
-                    switch (styleName)
+
+
+					switch (styleName)
                     {
                         case "Heading 1":
                         case "Heading 2":
@@ -133,7 +175,7 @@ namespace article_to_json.helpers
                                     }
                                     else
                                     {
-
+                                        paragraphText = text.Replace("\r", String.Empty);
                                     }
 
 #if NOT_READY
@@ -144,7 +186,7 @@ namespace article_to_json.helpers
                                     Console.Read();
                                 }
 #endif
-                                    article.content[trueIdx - 1].paragraghs.Add(paragraphText);
+                                    article.content[trueIdx - 1].paragraphs.Add(paragraphText);
                                     paragraphIdx += 1;
                                 }// end if
                                 else if ( text != "" && ( words.Length >= 1 && words.Length <= 3) )
@@ -168,9 +210,9 @@ namespace article_to_json.helpers
                             {
                                 //Console.WriteLine(content.ToString());
                                 // Handle cases where there are a paragraph before
-                                if (article.content[trueIdx - 1].paragraghs.Count < 1 )
+                                if (article.content[trueIdx - 1].paragraphs.Count < 1 )
                                 {
-                                    article.content[trueIdx - 1].paragraghs.Add("");
+                                    article.content[trueIdx - 1].paragraphs.Add("");
                                     paragraphIdx += 1;
                                 }
 
@@ -181,7 +223,7 @@ namespace article_to_json.helpers
                                 if ( !sameList )
                                 {
                                     // Console.WriteLine(article.content[trueIdx - 1].paragraghs.Count);
-                                    article.content[trueIdx - 1].paragraghs[paragraphIdx - 1] += listPlace;
+                                    article.content[trueIdx - 1].paragraphs[paragraphIdx - 1] += listPlace;
 
                                     string listType = paragraph.Range.ListFormat.ListType.ToString();
                                     ContentList clist = new ContentList();
@@ -231,6 +273,49 @@ namespace article_to_json.helpers
             document.Save();
             application.Quit();
             return true;
-        }
-    }
-}
+        } // end parseDoc()
+
+		private void grabImages(Document doc)
+		{
+			foreach (InlineShape shape in doc.InlineShapes)
+			{
+				Console.WriteLine($"Shape (width,height) = ({shape.Width},{shape.Height})");
+				Console.WriteLine($"Shape type = {shape.Type}");
+				Console.WriteLine($"Shape title = {doc.Range(0)}");
+				Console.WriteLine($"Shape address = {shape.Hyperlink.Address}");
+
+				Console.WriteLine();
+				if (shape.Type == WdInlineShapeType.wdInlineShapePicture)
+				{
+					// ...
+				}
+			}
+
+		} // end grabImages()
+
+#if KEEP
+		private Image SaveInlineShapeToFile(int inlineShapeId, Microsoft.Office.Interop.Word.Application app)
+		{
+			var inlineShape = app.ActiveDocument.InlineShapes[inlineShapeId];
+			inlineShape.Select();
+			app.Selection.Copy();
+
+			// Check data is in the clipboard
+			if (Clipboard.GetDataObject() != null)
+			{
+				var data = Clipboard.GetDataObject();
+
+				// Check if the data conforms to a bitmap format
+				if (data != null && data.GetDataPresent(DataFormats.Bitmap))
+				{
+					// Fetch the image and convert it to a Bitmap
+					Image image = (Image)data.GetData(DataFormats.Bitmap, true);
+					return image;
+				}
+			}
+			return null;
+		}
+#endif
+
+	} // end class
+} // end namespace

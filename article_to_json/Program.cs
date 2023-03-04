@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using article_to_json.classes;
 using article_to_json.helpers;
+using System.IO;
 
 namespace article_to_json
 {
@@ -63,8 +64,10 @@ namespace article_to_json
             article.date = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
 
             string stringjson = JsonConvert.SerializeObject(article);
-            Console.WriteLine(stringjson);
-            // Console.ReadKey();
+            // Console.WriteLine(stringjson);
+            Console.WriteLine("Finished");
+            File.WriteAllText(String.Format(@"F:\Documents\blog_articles\json_outputs\{0}.json", title.ToLower()), stringjson);
+            Console.ReadKey();
         }
     }
 }
