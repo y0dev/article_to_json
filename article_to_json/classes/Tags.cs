@@ -41,9 +41,22 @@ namespace article_to_json.classes
 						tagList.Add("Gospel");
 						break;
 					}
+				case "Health":
+					{
+						tagList.Add("Health");
+						tagList.Add("Fitness");
+						break;
+					}
 				case "Tech":
 					{
 						tagList.Add("Technology");
+						break;
+					}
+				case "System Design":
+					{
+						tagList.Add("System Design");
+						tagList.Add("Technology");
+						tagList.Add("Tech Interview");
 						break;
 					}
 				default:

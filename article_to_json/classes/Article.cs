@@ -37,5 +37,57 @@ namespace article_to_json.classes
             image = new Image();
             content = new List<Content>();
         }
+
+		public void generateImage(string docType)
+		{
+			
+			switch ( docType )
+			{
+				case "Theology":
+				case "Covenant":
+					{
+						image.alt = "bible-icon";
+						image.name = "images/bible-icon.png";
+						break;
+					}
+				case "Family":
+					{
+						image.alt = "family-image";
+						image.name = "images/family.png";
+						break;
+					}
+				case "Health":
+					{
+						image.alt = "health-img";
+						image.name = "images/heart_strength.png";
+						break;
+					}
+				case "Tech":
+				case "System Design":
+					{
+						image.alt = "web-dev-img";
+						image.name = "images/web-dev.png";
+						break;
+					}
+				case "Docker":
+					{
+						image.alt = "docker-image";
+						image.name = "images/docker.png";
+						break;
+					}
+				case "Jenkins":
+					{
+						image.alt = "jenkins-image";
+						image.name = "images/jenkins.png";
+						break;
+					}
+				default:
+					{
+						image.alt = "image-title";
+						image.name = "images/image.png";
+						break;
+					}
+			}
+		}
     }
 }

@@ -23,5 +23,6 @@ namespace article_to_json.classes
             name = "";
             alt = "";
         }
+
     }
 }

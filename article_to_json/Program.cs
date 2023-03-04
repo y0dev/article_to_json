@@ -17,9 +17,10 @@ namespace article_to_json
             string Title = "";
             string Filename = "";
             string ID = "";
-            string ImageName = "";
-            string ImageAlt = "";
-            List<string> TagList = new List<string>();
+			string DocType = "Sample";
+
+			Article article;
+			List<string> TagList = new List<string>();
 
             if ( args.Length > 0 )
             {
@@ -27,19 +28,9 @@ namespace article_to_json
                 Filename = args[0];
                 ID = args[0].Replace(" ","-").ToLower();
 
-                if (args.Length > 1 & args.Length <= 2) // Include tags
+                if (args.Length > 1 & args.Length <= 2) // Include article type
                 {
-
-					Tags tags = new Tags(args[1]);
-					TagList = tags.getTagList();
-                }
-                else if (args.Length > 2 & args.Length <= 4) // Include tags and image
-                {
-					Tags tags = new Tags(args[1]);
-					TagList = tags.getTagList();
-
-					ImageName = args[2];
-                    ImageAlt = args[3];
+					DocType = args[1];
                 }
 				else
 				{
@@ -52,28 +43,34 @@ namespace article_to_json
             else
             {
                 Console.WriteLine("\nRunning on Sample.docx\n");
-				Tags tags = new Tags("Sample");
-				TagList = tags.getTagList();
 			}
 
-            Article article;
             string file = Filename == "" ? "Sample" : Filename;
             string title = Title == "" ? "Sample" : Title;
 
             DocuReader docuReader = new DocuReader(file);
             article = docuReader.article;
-            article.id = ID;
+            article.id = article.id == "" ? ID : article.id;
+			article.generateImage( DocType );
             article.title = title;
-            article.tags = TagList;
-            article.image.name = ImageName;
-            article.image.alt = ImageAlt;
-            article.date = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
 
-            string stringjson = JsonConvert.SerializeObject(article);
-            // Console.WriteLine(stringjson);
-            Console.WriteLine("Finished");
-            File.WriteAllText(String.Format(@"F:\Documents\blog_articles\json_outputs\{0}.json", title.ToLower()), stringjson);
-            // Console.ReadKey();
+			Tags tags = new Tags( DocType );
+			TagList = tags.getTagList();
+
+			article.tags = TagList;
+			DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+
+			DateTimeOffset dto = new DateTimeOffset(dt);
+			article.date = dto.ToUnixTimeMilliseconds().ToString();
+
+            string stringjson = JsonConvert.SerializeObject(article, Formatting.Indented);
+			// Console.WriteLine(stringjson);
+
+			File.WriteAllText(String.Format(@"F:\Documents\blog_articles\json_outputs\{0}.json", title.ToLower()), stringjson);
+
+			Console.WriteLine("Finished");
+
+			// Console.ReadKey();
         }
     }
 }

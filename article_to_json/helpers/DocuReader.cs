@@ -41,6 +41,7 @@ namespace article_to_json.helpers
             application.Visible = false;
             Document document = application.Documents.Open(filepath);
 
+			bool articleIdFound = false;
 			bool descriptionFound = false;
 			int trueIdx = 0; // This is for each content in the document based on finding the heading or a title
 
@@ -63,6 +64,17 @@ namespace article_to_json.helpers
 
 				// Console.WriteLine("Style Name: {0}", styleName);
 				// Console.WriteLine("Text: {0}\nLength: {1}", text, text.Length);
+
+				// Check for id
+				if ( text.ToLower().Contains("article-id =")  && !articleIdFound )
+				{
+					int startIdx = "article-id = ".Length;
+					string id = text.Substring(startIdx).Replace(" ","-");
+					article.id = id;
+					// Console.WriteLine($"id = {id}");
+					articleIdFound = true;
+					continue;
+				}
 
 				// Handle the input of description
 				if ( descriptionFound && text != "" )
