@@ -23,9 +23,9 @@ namespace article_to_json.classes
 
 		private void generateTagList()
 		{
-			switch ( this.docType )
+			switch ( this.docType.ToLower() )
 			{
-				case "Theology":
+				case "theology":
 					{
 						tagList.Add("Theology");
 						tagList.Add("God");
@@ -33,7 +33,7 @@ namespace article_to_json.classes
 						tagList.Add("Reformed");
 						break;
 					}
-				case "Covenant":
+				case "covenant":
 					{
 						tagList.Add("Christ");
 						tagList.Add("Covenant");
@@ -41,18 +41,19 @@ namespace article_to_json.classes
 						tagList.Add("Gospel");
 						break;
 					}
-				case "Health":
+				case "health":
 					{
 						tagList.Add("Health");
 						tagList.Add("Fitness");
 						break;
 					}
-				case "Tech":
+				case "tech":
+				case "technology":
 					{
 						tagList.Add("Technology");
 						break;
 					}
-				case "System Design":
+				case "system design":
 					{
 						tagList.Add("System Design");
 						tagList.Add("Technology");

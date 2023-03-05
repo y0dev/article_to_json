@@ -41,41 +41,42 @@ namespace article_to_json.classes
 		public void generateImage(string docType)
 		{
 			
-			switch ( docType )
+			switch ( docType.ToLower() )
 			{
-				case "Theology":
-				case "Covenant":
+				case "theology":
+				case "covenant":
 					{
 						image.alt = "bible-icon";
 						image.name = "images/bible-icon.png";
 						break;
 					}
-				case "Family":
+				case "family":
 					{
 						image.alt = "family-image";
 						image.name = "images/family.png";
 						break;
 					}
-				case "Health":
+				case "health":
 					{
 						image.alt = "health-img";
 						image.name = "images/heart_strength.png";
 						break;
 					}
-				case "Tech":
-				case "System Design":
+				case "tech":
+				case "technology":
+				case "system design":
 					{
 						image.alt = "web-dev-img";
 						image.name = "images/web-dev.png";
 						break;
 					}
-				case "Docker":
+				case "docker":
 					{
 						image.alt = "docker-image";
 						image.name = "images/docker.png";
 						break;
 					}
-				case "Jenkins":
+				case "jenkins":
 					{
 						image.alt = "jenkins-image";
 						image.name = "images/jenkins.png";

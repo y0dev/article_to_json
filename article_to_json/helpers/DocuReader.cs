@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using article_to_json.classes;
 using Microsoft.Office.Interop.Word;
@@ -40,7 +41,8 @@ namespace article_to_json.helpers
 			Application application = new Application();
             application.Visible = false;
             Document document = application.Documents.Open(filepath);
-
+			Regex regx = new Regex(@"[\u25A0\u00A0\s]+",
+				RegexOptions.Compiled | RegexOptions.IgnoreCase);
 			bool articleIdFound = false;
 			bool descriptionFound = false;
 			int trueIdx = 0; // This is for each content in the document based on finding the heading or a title
@@ -165,14 +167,14 @@ namespace article_to_json.helpers
 									if (rangeWord.Bold != 0)
 									{
 										string boldString = String.Format(":special-text(key=bold,{0})special-text-end", rangeWord.Text);
-										Console.WriteLine($"{boldString}");
+										// Console.WriteLine($"{boldString}");
 										rangeWord.Bold = 0;
 										rangeWord.Text = boldString;
 									}
 									else if (rangeWord.Italic != 0)
 									{
 										string italicString = String.Format(":special-text(key=italic,{0})special-text-end", rangeWord.Text);
-										Console.WriteLine($"{italicString}");
+										// Console.WriteLine($"{italicString}");
 										rangeWord.Italic = 0;
 										rangeWord.Text = italicString;
 
@@ -190,7 +192,7 @@ namespace article_to_json.helpers
 								}
 
 								text = paragraph.Range.Text.Replace("\r", String.Empty);
-
+								
 								// Make sure there is text to read
 								if (text.Length > 1 && words.Length > 3 )
                                 {
@@ -199,22 +201,27 @@ namespace article_to_json.helpers
 
                                     // Check if paragraph has links
                                     int linksCount = paragraph.Range.Hyperlinks.Count;
+
                                     if (linksCount > 0)
                                     {
                                         int idx = 0;
                                         List<ContentLink> links = new List<ContentLink>();
-                                        foreach (Hyperlink link in paragraph.Range.Hyperlinks)
+										string paragraphTextLinks = text;
+
+										foreach (Hyperlink link in paragraph.Range.Hyperlinks)
                                         {
                                             string linkPlace = String.Format(":linkPlace({0,2:D3})", idx + 1);
                                             string linkText = link.TextToDisplay;
                                             string linkAddress = link.Address;
-                                            //Console.WriteLine("Link Text: {0}", linkText);
-                                            //Console.WriteLine("Link Place: {0}", linkPlace);
-                                            //Console.WriteLine("Link Address: {0}", linkAddress);
+											// Console.WriteLine("Link Text: {0}", linkText);
+											//Console.WriteLine("Link Place: {0}", linkPlace);
+											//Console.WriteLine("Link Address: {0}", linkAddress);
 
-                                            // Replace Text with :linkPlace(001)
-                                            paragraphText = text.Replace(linkText, linkPlace).Replace("\r", String.Empty);
-                                            // Console.WriteLine("Link Text: {0}", paragraphText);
+											// Replace Text with :linkPlace(001)
+											paragraphTextLinks = paragraphTextLinks.Replace(linkText, linkPlace)
+																.Replace("\r", String.Empty);
+											// paragraphTextLinks = regx.Replace(paragraphTextLinks, String.Empty);
+                                            // Console.WriteLine("Link Text: {0}", paragraphTextLinks);
 
                                             ContentLink contentLink = new ContentLink();
                                             contentLink.id = String.Format("{0,2:D3}", idx + 1);
@@ -226,7 +233,8 @@ namespace article_to_json.helpers
                                             idx += 1;
                                         }// end foreach links
                                         article.content[trueIdx - 1].links = links;
-                                    }
+										paragraphText = paragraphTextLinks.Replace("\r", String.Empty);
+									}
                                     else
                                     {
                                         paragraphText = text.Replace("\r", String.Empty);
@@ -308,9 +316,12 @@ namespace article_to_json.helpers
                         Console.WriteLine("NullReferenceException source: {0}", e.Source);
                     break;
                 }
-                catch
+                catch (Exception e)
                 {
-                    break;
+					Console.WriteLine("Exception message: {0}", e.Message);
+					if (e.Source != null)
+						Console.WriteLine("Exception source: {0}", e.Source);
+					break;
                 }
                 
             }// end foreach paragraph
