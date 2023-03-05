@@ -19,7 +19,6 @@ namespace article_to_json
             string ID = "";
 			string DocType = "Sample";
 
-			Article article;
 			List<string> TagList = new List<string>();
 
             if ( args.Length > 0 )
@@ -49,7 +48,8 @@ namespace article_to_json
             string title = Title == "" ? "Sample" : Title;
 
             DocuReader docuReader = new DocuReader(file);
-            article = docuReader.article;
+			Article article;
+			article = docuReader.article;
             article.id = article.id == "" ? ID : article.id;
 			article.generateImage( DocType );
             article.title = title;
@@ -66,7 +66,7 @@ namespace article_to_json
             string stringjson = JsonConvert.SerializeObject(article, Formatting.Indented);
 			// Console.WriteLine(stringjson);
 
-			File.WriteAllText(String.Format(@"F:\Documents\blog_articles\json_outputs\{0}.json", title.ToLower()), stringjson);
+			File.WriteAllText(String.Format(@"F:\Documents\blog_articles\json_outputs\{0}.json", title.ToLower().Replace(" ","-")), stringjson);
 
 			Console.WriteLine("Finished");
 

@@ -84,6 +84,7 @@ namespace article_to_json.helpers
 					continue;
 				}
 
+				// Add caption to recently added image
 				if ( imageFound )
 				{
 					article.content[trueIdx - 1].images[imageIdx - 1].caption = text;
@@ -155,8 +156,43 @@ namespace article_to_json.helpers
 									continue;
 								}
 
-                                // Make sure there is text to read
-                                if (text.Length > 1 && words.Length > 3 )
+
+								// Check if any word is bold or italized
+								foreach (Range rangeWord in paragraph.Range.Words)
+								{
+									// :special-text(key=
+									// )special-text-end
+									if (rangeWord.Bold != 0)
+									{
+										string boldString = String.Format(":special-text(key=bold,{0})special-text-end", rangeWord.Text);
+										Console.WriteLine($"{boldString}");
+										rangeWord.Bold = 0;
+										rangeWord.Text = boldString;
+									}
+									else if (rangeWord.Italic != 0)
+									{
+										string italicString = String.Format(":special-text(key=italic,{0})special-text-end", rangeWord.Text);
+										Console.WriteLine($"{italicString}");
+										rangeWord.Italic = 0;
+										rangeWord.Text = italicString;
+
+									}
+									/*
+									else if (rangeWord.Underline != 0)
+									{
+										string underlineString = String.Format(":special-text(key=underline,{0})special-text-end", rangeWord.Text);
+										Console.WriteLine($"{underlineString}");
+										rangeWord.Underline = 0;
+										rangeWord.Text = underlineString;
+
+									}
+									*/
+								}
+
+								text = paragraph.Range.Text.Replace("\r", String.Empty);
+
+								// Make sure there is text to read
+								if (text.Length > 1 && words.Length > 3 )
                                 {
                                     
                                     string paragraphText = "";
@@ -196,14 +232,6 @@ namespace article_to_json.helpers
                                         paragraphText = text.Replace("\r", String.Empty);
                                     }
 
-#if NOT_READY
-                                    // Check if any word is bold or italized
-                                    if (paragraph.Range.Font.Bold == -1)
-                                {
-                                    Console.WriteLine("Is bold");
-                                    Console.Read();
-                                }
-#endif
                                     article.content[trueIdx - 1].paragraphs.Add(paragraphText);
                                     paragraphIdx += 1;
                                 }// end if
@@ -287,8 +315,12 @@ namespace article_to_json.helpers
                 
             }// end foreach paragraph
 
-            // Close word.
-            document.Save();
+			// Close word.
+			object saveOption = WdSaveOptions.wdDoNotSaveChanges;
+			object originalFormat = WdOriginalFormat.wdOriginalDocumentFormat;
+			object routeDocument = false;
+			document.Close(ref saveOption, ref originalFormat, ref routeDocument);
+			// document.Save();
             application.Quit();
             return true;
         } // end parseDoc()
