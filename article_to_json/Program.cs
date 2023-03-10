@@ -14,7 +14,16 @@ namespace article_to_json
     {
         static void Main(string[] args)
         {
-            string Title = "";
+			const string menuString = "Article to JSON\n" +
+								"\n" +
+								"To use: \n" +
+								"                        article_to_json.exe \"document-name\" \"document-category\"\n" +
+								"                                                                or\n" +
+								"                        article_to_json.exe \"document-name\"";
+
+
+
+			string Title = "";
             string Filename = "";
             string ID = "";
 			string DocType = "Sample";
@@ -31,9 +40,10 @@ namespace article_to_json
                 {
 					DocType = args[1];
                 }
-				else
+				else if ( args.Length > 2 )
 				{
 					Console.WriteLine("\nToo many arguments!!!\n");
+					Console.WriteLine(menuString);
 					// Add Help Menu
 					return;
 				}
@@ -48,27 +58,33 @@ namespace article_to_json
             string title = Title == "" ? "Sample" : Title;
 
             DocuReader docuReader = new DocuReader(file);
-			Article article;
-			article = docuReader.article;
-            article.id = article.id == "" ? ID : article.id;
-			article.generateImage( DocType );
-            article.title = title;
+			if (docuReader.fileCreated)
+			{
 
-			Tags tags = new Tags( DocType );
-			TagList = tags.getTagList();
+				Article article;
+				article = docuReader.article;
+				article.id = article.id == "" ? ID : article.id;
+				article.generateImage(DocType);
+				article.title = title;
 
-			article.tags = TagList;
-			DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+				Tags tags = new Tags(DocType);
+				TagList = tags.getTagList();
 
-			DateTimeOffset dto = new DateTimeOffset(dt);
-			article.date = dto.ToUnixTimeMilliseconds().ToString();
+				article.tags = TagList;
+				DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
 
-            string stringjson = JsonConvert.SerializeObject(article, Formatting.Indented);
-			// Console.WriteLine(stringjson);
+				DateTimeOffset dto = new DateTimeOffset(dt);
+				article.date = dto.ToUnixTimeMilliseconds().ToString();
 
-			File.WriteAllText(String.Format(@"F:\Documents\blog_articles\json_outputs\{0}.json", title.ToLower().Replace(" ","-")), stringjson);
+				string stringjson = JsonConvert.SerializeObject(article, Formatting.Indented);
+				// Console.WriteLine(stringjson);
 
-			Console.WriteLine("Finished");
+				File.WriteAllText(String.Format(@"F:\Documents\blog_articles\json_outputs\{0}.json", title.ToLower().Replace(" ", "-")), stringjson);
+
+				Console.WriteLine("Finished");
+
+			}
+
 
 			// Console.ReadKey();
         }

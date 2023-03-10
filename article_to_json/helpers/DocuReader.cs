@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 using article_to_json.classes;
 using Microsoft.Office.Interop.Word;
 
+
 namespace article_to_json.helpers
 {
-    class DocuReader
+	class DocuReader
     {
-        public Article article { get; }
+		const int MAX_TITLE_LENGTH = 3;
+		public Article article { get; }
+		public bool fileCreated { get; }
         private string filepath;
 
         public DocuReader(string documentTitle)
@@ -22,10 +25,10 @@ namespace article_to_json.helpers
 
             article = new Article();
             article.content = new List<Content>();
-            if ( !parse_document() )
+			fileCreated = true;
+			if ( !parse_document() )
             {
-                Console.WriteLine("Can not parse document because document doesn't not exist.");
-                Console.WriteLine("Check the following file path: {0}", filepath);
+				fileCreated = false;
             }
         }
 
@@ -33,14 +36,19 @@ namespace article_to_json.helpers
 
         private Boolean parse_document()
         {
-            if (!File.Exists(filepath))
+            if ( !File.Exists(filepath) )
             {
-                return false;
-            }   
+				Console.WriteLine("Can not parse document because document doesn't not exist.");
+				Console.WriteLine("Check the following file path: {0}", filepath);
+				return false;
+            }  
+			
 
 			Application application = new Application();
             application.Visible = false;
-            Document document = application.Documents.Open(filepath);
+            Document document = application.Documents.Open(filepath, ReadOnly: true);
+			
+
 			Regex regx = new Regex(@"[\u25A0\u00A0\s]+",
 				RegexOptions.Compiled | RegexOptions.IgnoreCase);
 			bool articleIdFound = false;
@@ -192,9 +200,11 @@ namespace article_to_json.helpers
 								}
 
 								text = paragraph.Range.Text.Replace("\r", String.Empty);
-								
+
+								// Remove all spaces to verify that there is text in the string
+								string trimText = text.Trim();
 								// Make sure there is text to read
-								if (text.Length > 1 && words.Length > 3 )
+								if (trimText.Length > 1 && words.Length > MAX_TITLE_LENGTH )
                                 {
                                     
                                     string paragraphText = "";
@@ -243,8 +253,9 @@ namespace article_to_json.helpers
                                     article.content[trueIdx - 1].paragraphs.Add(paragraphText);
                                     paragraphIdx += 1;
                                 }// end if
-                                else if ( text != "" && ( words.Length >= 1 && words.Length <= 3) )
+                                else if ( trimText != "" && ( words.Length >= 1 && words.Length <= MAX_TITLE_LENGTH) )
                                 {
+									//Edge case where " " gets registered as a title
                                     // Add another content since this is another heading
                                     Content content = new Content();
                                     article.content.Add(content);
@@ -323,8 +334,8 @@ namespace article_to_json.helpers
 						Console.WriteLine("Exception source: {0}", e.Source);
 					break;
                 }
-                
-            }// end foreach paragraph
+
+			}// end foreach paragraph
 
 			// Close word.
 			object saveOption = WdSaveOptions.wdDoNotSaveChanges;
@@ -335,7 +346,7 @@ namespace article_to_json.helpers
             application.Quit();
             return true;
         } // end parseDoc()
-		
+
 
 	} // end class
 } // end namespace

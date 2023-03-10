@@ -41,6 +41,14 @@ namespace article_to_json.classes
 						tagList.Add("Gospel");
 						break;
 					}
+				case "thankful":
+					{
+						tagList.Add("Christ");
+						tagList.Add("Salvation");
+						tagList.Add("Love");
+						tagList.Add("Thankful");
+						break;
+					}
 				case "health":
 					{
 						tagList.Add("Health");
