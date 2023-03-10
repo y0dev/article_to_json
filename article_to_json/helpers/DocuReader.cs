@@ -51,6 +51,7 @@ namespace article_to_json.helpers
 
 			Regex regx = new Regex(@"[\u25A0\u00A0\s]+",
 				RegexOptions.Compiled | RegexOptions.IgnoreCase);
+			bool articleTitleFound = false;
 			bool articleIdFound = false;
 			bool descriptionFound = false;
 			int trueIdx = 0; // This is for each content in the document based on finding the heading or a title
@@ -74,6 +75,16 @@ namespace article_to_json.helpers
 
 				// Console.WriteLine("Style Name: {0}", styleName);
 				// Console.WriteLine("Text: {0}\nLength: {1}", text, text.Length);
+
+				// Check for title
+				if (text.ToLower().Contains("article-title =") && !articleTitleFound)
+				{
+					int startIdx = "article-title = ".Length;
+					string title = text.Substring(startIdx);
+					article.title = title;
+					articleTitleFound = true;
+					continue;
+				}
 
 				// Check for id
 				if ( text.ToLower().Contains("article-id =")  && !articleIdFound )

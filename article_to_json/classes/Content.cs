@@ -72,21 +72,55 @@ namespace article_to_json.classes
         }
     }
 
-    class Content
+	class ContentQuotes
+	{
+		public string id { get; set; }
+		public string author { get; set; }
+		public string text { get; set; }
+
+		public ContentQuotes()
+		{
+			id = "";
+			author = "";
+			text = "";
+		}
+	}
+
+	class ContentCode
+	{
+		public string id { get; set; }
+		public string title { get; set; }
+		public string language { get; set; }
+		public List<string> content { get; set; }
+
+		public ContentCode()
+		{
+			id = "";
+			title = "";
+			language = "";
+			content = new List<string>();
+		}
+	}
+
+	class Content
     {
         public ContentTitle title { get; set; }
         public List<string> paragraphs { get; set; }
         public List<ContentImage> images { get; set; }
         public List<ContentLink> links { get; set; }
         public List<ContentList> lists { get; set; }
+		public List<ContentQuotes> quotes { get; set; }
+		public List<ContentCode> code { get; set; }
 
-        public Content()
+		public Content()
         {
             title = new ContentTitle();
             paragraphs = new List<string>();
             images = new List<ContentImage>();
             links = new List<ContentLink>();
             lists = new List<ContentList>();
+			quotes = new List<ContentQuotes>();
+			code = new List<ContentCode>();
         }
 
         public override string ToString()

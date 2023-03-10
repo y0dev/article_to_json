@@ -8,10 +8,14 @@ using article_to_json.classes;
 using article_to_json.helpers;
 using System.IO;
 
+
 namespace article_to_json
 {
+
     class Program
     {
+
+
         static void Main(string[] args)
         {
 			const string menuString = "Article to JSON\n" +
@@ -25,7 +29,6 @@ namespace article_to_json
 
 			string Title = "";
             string Filename = "";
-            string ID = "";
 			string DocType = "Sample";
 
 			List<string> TagList = new List<string>();
@@ -34,7 +37,6 @@ namespace article_to_json
             {
                 Title = args[0];
                 Filename = args[0];
-                ID = args[0].Replace(" ","-").ToLower();
 
                 if (args.Length > 1 & args.Length <= 2) // Include article type
                 {
@@ -55,7 +57,7 @@ namespace article_to_json
 			}
 
             string file = Filename == "" ? "Sample" : Filename;
-            string title = Title == "" ? "Sample" : Title;
+            string title = Title == "" ? "Sample" : Title.Replace("-", " ").Replace("_", " ");
 
             DocuReader docuReader = new DocuReader(file);
 			if (docuReader.fileCreated)
@@ -63,9 +65,7 @@ namespace article_to_json
 
 				Article article;
 				article = docuReader.article;
-				article.id = article.id == "" ? ID : article.id;
 				article.generateImage(DocType);
-				article.title = title;
 
 				Tags tags = new Tags(DocType);
 				TagList = tags.getTagList();
@@ -88,5 +88,15 @@ namespace article_to_json
 
 			// Console.ReadKey();
         }
-    }
+
+		private static string FirstCharToUpper(string input)
+		{
+			switch (input)
+			{
+				case null: throw new ArgumentNullException(nameof(input));
+				case "": throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input));
+				default: return input[0].ToString().ToUpper() + input.Substring(1);
+			}
+		}
+	}
 }

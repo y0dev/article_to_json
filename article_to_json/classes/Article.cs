@@ -50,6 +50,12 @@ namespace article_to_json.classes
 						image.name = "images/bible-icon.png";
 						break;
 					}
+				case "thankful":
+					{
+						image.alt = "thankful-icon";
+						image.name = "images/thankful.png";
+						break;
+					}
 				case "family":
 					{
 						image.alt = "family-image";
@@ -62,6 +68,7 @@ namespace article_to_json.classes
 						image.name = "images/heart_strength.png";
 						break;
 					}
+				case "code":
 				case "tech":
 				case "technology":
 				case "system design":

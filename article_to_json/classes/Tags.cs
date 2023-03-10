@@ -59,6 +59,7 @@ namespace article_to_json.classes
 				case "technology":
 					{
 						tagList.Add("Technology");
+						tagList.Add("Engineer");
 						break;
 					}
 				case "system design":
