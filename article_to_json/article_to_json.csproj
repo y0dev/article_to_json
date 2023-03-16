@@ -68,6 +68,7 @@
     <Compile Include="classes\Tags.cs" />
     <Compile Include="classes\Content.cs" />
     <Compile Include="classes\Image.cs" />
+    <Compile Include="classes\TimeToRead.cs" />
     <Compile Include="helpers\DocuReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

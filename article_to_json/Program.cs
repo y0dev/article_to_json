@@ -86,7 +86,7 @@ namespace article_to_json
 			}
 
 
-			// Console.ReadKey();
+			Console.ReadKey();
         }
 
 		private static string FirstCharToUpper(string input)

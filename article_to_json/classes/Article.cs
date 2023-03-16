@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace article_to_json.classes
 {
-    /*
+	/*
      * 
      * "title": "Help with System Design Interviews",
         "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
@@ -17,13 +17,15 @@ namespace article_to_json.classes
             "System Design", "Technology", "MAANG"
         ],
      */
-    class Article
+
+	class Article
     {
         public string title { get; set; }
         public string description { get; set; }
         public string date { get; set; }
         public string id { get; set; }
-        public List<string> tags { get; set; }
+		public TimeToRead time { get; set; }
+		public List<string> tags { get; set; }
         public Image image { get; set; }
         public List<Content> content { get; set; }
 
@@ -97,5 +99,6 @@ namespace article_to_json.classes
 					}
 			}
 		}
-    }
+    } // end class
+
 }

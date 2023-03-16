@@ -29,7 +29,27 @@ namespace article_to_json.helpers
 			if ( !parse_document() )
             {
 				fileCreated = false;
-            }
+            } 
+			else
+			{
+				int wordCount = 0;
+				foreach( Content content in article.content )
+				{
+					foreach ( string paragraph in content.paragraphs )
+					{
+						wordCount +=  paragraph.Split(new string[] { " " }, StringSplitOptions.None).Length;
+					}
+
+					foreach ( ContentList list in content.lists )
+					{
+						foreach ( string item in list.items )
+						{
+							wordCount += item.Split(new string[] { " " }, StringSplitOptions.None).Length;
+						}
+					}
+				}
+				article.time = new TimeToRead( wordCount );
+			}
         }
 
         
@@ -55,8 +75,6 @@ namespace article_to_json.helpers
 			bool articleIdFound = false;
 			bool descriptionFound = false;
 			int trueIdx = 0; // This is for each content in the document based on finding the heading or a title
-
-			int wordCount = document.Words.Count;
 
             int paragraphIdx = 0;
 
