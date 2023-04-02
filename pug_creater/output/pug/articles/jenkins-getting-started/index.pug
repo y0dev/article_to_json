@@ -1,0 +1,264 @@
+doctype html
+html(lang='en')
+	head
+		link(rel="icon" type="image/x-icon" href="/images/logo.png")
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		title Basics of Jenkins
+		meta(name="title" property="og:title" content="Basics of Jenkins")
+		meta(name="title" property="twitter:title" content="Basics of Jenkins")
+		meta(name="description" property="og:description" content="Blog post about Learn the basics of Jenkins, an open source automation server for continuous integration and continuous delivery. Get up and running quickly and easily..")
+		meta(name="description" property="twitter:description" content="Blog post about Learn the basics of Jenkins, an open source automation server for continuous integration and continuous delivery. Get up and running quickly and easily..")
+		meta(name="image" property="og:image" content="https://www.devontaereid.com/images/jenkins.png")
+		meta(name="image" property="twitter:image" content="https://www.devontaereid.com/images/jenkins.png")
+		meta(property="twitter:card" content="summary_large_image")
+		meta(property="twitter:site" content="@_yodev_")
+		meta(property="og:url" content="https://www.devontaereid.com")
+		meta(property="og:type" content="website")
+		link(rel="stylesheet" href="/style.css")
+	body
+		div#nav-bar.navbar.header-content--mini
+			nav
+				div.main-menu
+					a.menu-branding(href="/")
+						img.menu-branding(src="/images/logo.png" alt="branding-logo")
+						h3 Devontae Reid
+					ul.menu-list
+						li
+							a(href="/projects") Projects
+						li
+							a(href="/articles") Articles
+						li
+							a(href="/gospel") Gospel
+						li
+							button.display-switch ☀️
+		div.post-body
+			article.button#post-container
+			div.post-header-container
+				div.post-header-details
+					h1#post-header-title Basics of Jenkins
+					div.post-header-meta
+						img.post-header-icon(src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot")
+						p.post-header-time Thursday, February 02, 2023
+						span.post-header-divider |
+						p#post-read-time
+						button.post-header-shareButton#shareButton
+							span.post-header-shareButton-icon
+								img(src="/images/share_icon.png" alt="share_icon")
+								.
+									Share
+					div.post-header-tags
+							span.post-header-tag Technology
+							span.post-header-tag Jenkins
+							span.post-header-tag CI/CD
+				img.post-header-image(src="/images/jenkins.png" alt="jenkins-image")
+			div.post-content
+				div.post-section-container#creating-a-jenkinsfile
+					h2.section-title Creating a Jenkinsfile
+					div.post-image-container
+						a.post-image-container(href="https://www.jenkins.io/images/logo-title-opengraph.png")
+							img.post-image(src="https://www.jenkins.io/images/logo-title-opengraph.png" alt="jenkins")
+						figcaption.post-image-caption Jenkins Image from Jenkins Website
+					p.post-details When creating a Jenkinsfile the necessary fields must are: pipeline, agent, stages. "pipeline" is always needed and is at the top-level. From here we have the "agent" which describes where to execute (default would be set to any). Then we have stages which describes where the works happens, and within "stages" you define "stage" that will have parameters such as: ("init"), ("build"), ("test"), and ("deploy").
+					p.post-details Another field that may be added and this is added after "stages". This is "post" and what this does is execute some logic after all stages have executed. The conditions that are within the "post" section are: always, success, failure. Always will always execute whether the script failed or not. Examples of this are sending emails out to the team after a build.
+				div.post-section-container#adding-environmental-variables
+					h2.section-title Adding Environmental Variables
+					p.post-details In order to add environmental variables to your file, before "stages" you need to add "environment" into your pipeline.
+					p.post-details 
+						div.code-snippet-container
+							div.code-snippet-header
+								h5.code-snippet-title jenkins_file_env
+								button.copy-bttn
+									img.copy-icon(src="/images/copy-icon.png")
+							div.code-snippet-body
+								pre.language-jenkins
+									code.language-jenkins
+										span.code-specific pipeline 
+										.
+											{
+										br
+										span.code-specific(class="indent-1") agent 
+										span.indent-1 any
+										br
+										span.code-specific(class="indent-1") environment 
+										span.indent-1 {
+										br
+										span.indent-2 EXAMPLE_VAR = 'Something'
+										br
+										span.indent-1 }
+										br
+										span.indent-1 ...
+										br
+										span.indent-1 }
+										br
+				div.post-section-container#adding-build-tools-for-project
+					h2.section-title Adding Build Tools for Project
+					p.post-details 
+						div.code-snippet-container
+							div.code-snippet-header
+								h5.code-snippet-title jenkins_file_tools
+								button.copy-bttn
+									img.copy-icon(src="/images/copy-icon.png")
+							div.code-snippet-body
+								pre.language-jenkins
+									code.language-jenkins
+										span.code-specific pipeline 
+										.
+											{
+										br
+										span.code-specific(class="indent-1") agent 
+										span.indent-1 any
+										br
+										span.code-specific(class="indent-1") tools 
+										span.indent-1  {
+										br
+										span.indent-2 nodejs 'NodeJS'
+										br
+											 
+										span.code-bracket }
+										br
+										span.indent-1 ...
+										br
+										span.indent-1 }
+										br
+				div.post-section-container#building-jenkinsfile
+					h2.section-title Building Jenkinsfile
+					p.post-details After this you would then go to Jenkins localhost webpage and create a new job. Depending on the version of Jenkins you have downloaded this menu may be different. What you should see is a text field and beneath a list of types of projects you can create. The projects are Freestyle project, Pipeline, Multi-configuration project, Folder, GitHub Organization, and Multibranch Pipeline. For my example I am using Multibranch Pipeline.
+					p.post-details Within the General Tab, scroll down to Branch Sources and add the link to the Git project repository and add the correct credentials. You can determine what branches you want to build by selecting the next drop-down. Click build and you should now be presented with a new page that displays the pipeline output/log.
+				div.post-section-container#final-results
+					h2.section-title Final Results
+					p.post-details 
+						div.code-snippet-container
+							div.code-snippet-header
+								h5.code-snippet-title jenkins_file_final
+								button.copy-bttn
+									img.copy-icon(src="/images/copy-icon.png")
+							div.code-snippet-body
+								pre.language-jenkins
+									code.language-jenkins
+										span.code-specific def 
+										.
+											gv
+										br
+										span.code-specific pipeline 
+										.
+											{
+										br
+										span.code-specific(class="indent-1") agent 
+										span.indent-1 any
+										br
+										span.code-specific(class="indent-1") parameters 
+										span.indent-1 {
+										br
+										span.indent-2 choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+										br
+										span.indent-2 booleanParam(name: 'executeTests', defaultValue: true, description: '')
+										br
+										span.indent-1 }
+										br
+										span.code-specific(class="indent-1") stages 
+										span.indent-1 {
+										br
+										span.code-specific(class="indent-2") stage 
+										span.indent-2 ("init") {
+										br
+										span.code-specific(class="indent-3") steps 
+										span.indent-3 {
+										br
+										span.code-specific(class="indent-4") script 
+										span.indent-4 {
+										br
+										span.indent-5 gv = load "script.groovy"
+										br
+										span.indent-4 }
+										br
+										span.indent-3 }
+										br
+										span.indent-2 }
+										br
+										span.code-specific(class="indent-2") stage 
+										span.indent-2 ("build") {
+										br
+										span.code-specific(class="indent-3") steps 
+										span.indent-3 {
+										br
+										span.code-specific(class="indent-4") script 
+										span.indent-4 {
+										br
+										span.indent-5 gv.buildApp()
+										br
+										span.indent-4 }
+										br
+										span.indent-3 }
+										br
+										span.indent-2 }
+										br
+										span.code-specific(class="indent-2") stage 
+										span.indent-2 ("test") {
+										br
+										span.code-specific(class="indent-3") when 
+										span.indent-3 {
+										br
+										span.code-specific(class="indent-4") expression 
+										span.indent-4 {
+										br
+										span.indent-5 params.executeTests
+										br
+										span.indent-4 }
+										br
+										span.indent-3 }
+										br
+										span.code-specific(class="indent-3") steps 
+										span.indent-3 {
+										br
+										span.code-specific(class="indent-4") script 
+										span.indent-4 {
+										br
+										span.indent-5 gv.testApp()
+										br
+										span.indent-4 }
+										br
+										span.indent-3 }
+										br
+										span.indent-2 }
+										br
+										span.code-specific(class="indent-2") stage 
+										span.indent-2 ("deploy") {
+										br
+										span.code-specific(class="indent-3") steps 
+										span.indent-3 {
+										br
+										span.code-specific(class="indent-4") script 
+										span.indent-4 {
+										br
+										span.indent-5 gv.deployApp()
+										br
+										span.indent-4 }
+										br
+										span.indent-3 }
+										br
+										span.indent-2 }
+										br
+										span.indent-1 }
+										br
+										span.indent-1 }
+										br
+		.footer
+			.footer-container
+				p Sola Scriptura ( Scripture Alone ), Solus Christus ( Christ Alone ), Sola fide ( Faith Alone ), Sola Gratia ( Grace Alone ), and Soli Deo Gloria ( Glory to God Alone )
+				.socials
+					ul
+						li.social-links
+							a(href="https://www.linkedin.com/in/devontaereid/")
+								img(src="/images/websites/linkedin.png")
+						li.social-links
+							a(href="https://twitter.com/_yodev_")
+								img(src="/images/websites/twitter.png")
+						li.social-links
+							a(href="https://github.com/y0dev")
+								img(src="/images/websites/github.png")
+				p.footer-small Icons provided by 
+					a(href="https://www.flaticon.com/authors/freepik" title="Freepik") Freepik
+		script(type="text/javascript" src="/scripts/main.js")
+		script(type="text/javascript" src="/scripts/code_script.js")
+		script(type="text/javascript" src="https://static.esvmedia.org/crossref/crossref.min.js")

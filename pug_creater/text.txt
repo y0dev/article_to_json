@@ -1,0 +1,9 @@
+# Parent Image: Software and version
+FROM python:3
+WORKDIR /Users/user_directory/docker/textblob 
+COPY ./ 
+RUN pip install --no-cache-dir -r requirements.txt
+# First dot is relative file path where dockerfile resides
+# Second dot is the root directory
+COPY . .
+CMD [ "python", "./main.py" ]

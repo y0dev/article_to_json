@@ -1,0 +1,59 @@
+{
+   "git.autofetch": true,
+   "workbench.editorAssociations": {
+       "*.ipynb": "jupyter-notebook",
+       "*.epub": "default",
+       "*.elf": "default"
+   },
+   "notebook.cellToolbarLocation": {
+       "default": "right",
+       "jupyter-notebook": "left"
+   },
+   "workbench.colorTheme": "Default Dark+",
+   "liveshare.connectionMode": "relay",
+   "javascript.updateImportsOnFileMove.enabled": "always",
+   "liveshare.presence": true,
+   "editor.suggestSelection": "first",
+   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+   "cSpell.enableFiletypes": [
+       "vue"
+   ],
+   "cSpell.userWords": [
+       "autozone",
+       "Bttn",
+       "camelcase",
+       "Devontae",
+       "Leetcode",
+       "mutex",
+       "Newsmaker",
+       "speedwash",
+       "Statefarm",
+       "Trulia",
+       "webextensions"
+   ],
+   "files.exclude": {
+       "**/.classpath": true,
+       "**/.project": true,
+       "**/.settings": true,
+       "**/.factorypath": true
+   },
+   "workbench.colorTheme": "Monokai",
+   "workbench.editorAssociations": {
+       "*.ipynb": "jupyter.notebook.ipynb"
+   },
+   "python.pythonPath": "/usr/bin/python3",
+   "python.languageServer": "Pylance",
+   "editor.fontSize": 14,
+   "editor.tabSize": 4,
+   "tabnine.experimentalAutoImports": true,
+   "security.workspace.trust.untrustedFiles": "open",
+   "editor.largeFileOptimizations": false,
+   "workbench.iconTheme": "vscode-icons",
+   "bracketPairColorizer.depreciation-notice": false,
+   "editor.unicodeHighlight.nonBasicASCII": false,
+   "editor.unicodeHighlight.invisibleCharacters": false,
+   "editor.unicodeHighlight.allowedLocales": {
+       "cs": true
+   },
+   "editor.formatOnSave": true
+}

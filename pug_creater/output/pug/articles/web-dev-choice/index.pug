@@ -1,0 +1,84 @@
+doctype html
+html(lang='en')
+	head
+		link(rel="icon" type="image/x-icon" href="/images/logo.png")
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		title Web Development Choice
+		meta(name="title" property="og:title" content="Web Development Choice")
+		meta(name="title" property="twitter:title" content="Web Development Choice")
+		meta(name="description" property="og:description" content="Blog post about my time looking for a framework to create my portfolio website along with blog site.")
+		meta(name="description" property="twitter:description" content="Blog post about my time looking for a framework to create my portfolio website along with blog site.")
+		meta(name="image" property="og:image" content="https://www.devontaereid.com/images/web-dev.png")
+		meta(name="image" property="twitter:image" content="https://www.devontaereid.com/images/web-dev.png")
+		meta(property="twitter:card" content="summary_large_image")
+		meta(property="twitter:site" content="@_yodev_")
+		meta(property="og:url" content="https://www.devontaereid.com")
+		meta(property="og:type" content="website")
+		link(rel="stylesheet" href="/style.css")
+	body
+		div#nav-bar.navbar.header-content--mini
+			nav
+				div.main-menu
+					a.menu-branding(href="/")
+						img.menu-branding(src="/images/logo.png" alt="branding-logo")
+						h3 Devontae Reid
+					ul.menu-list
+						li
+							a(href="/projects") Projects
+						li
+							a(href="/articles") Articles
+						li
+							a(href="/gospel") Gospel
+						li
+							button.display-switch ☀️
+		div.post-body
+			article.button#post-container
+			div.post-header-container
+				div.post-header-details
+					h1#post-header-title Web Development Choice
+					div.post-header-meta
+						img.post-header-icon(src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot")
+						p.post-header-time Monday, November 08, 2021
+						span.post-header-divider |
+						p#post-read-time
+						button.post-header-shareButton#shareButton
+							span.post-header-shareButton-icon
+								img(src="/images/share_icon.png" alt="share_icon")
+								.
+									Share
+					div.post-header-tags
+							span.post-header-tag Technology
+							span.post-header-tag ReactJS
+							span.post-header-tag NodeJS
+				img.post-header-image(src="/images/web-dev.png" alt="js-image")
+			div.post-content
+				div.post-section-container#beginning-of-nodejs
+					h2.section-title Beginning of NodeJS
+					div.post-image-container
+						a.post-image-container(href="https://images.pexels.com/photos/196659/pexels-photo-196659.jpeg")
+							img.post-image(src="https://images.pexels.com/photos/196659/pexels-photo-196659.jpeg" alt="dev-work")
+						figcaption.post-image-caption Programming Away
+					p.post-details As I embraced the task of creating a website, I ran into some problems. Those problems were choosing the right framework. There are many out there from React, VueJS, and even embedded JavaScript.
+					p.post-details So the one that rose to the top of my list was React. I find React to be very powerful for something that seems so simple to use. There are many things that React offered that the others did not such as CSS animation. Working in VueJS I found it fairly difficult to work with CSS animation. I would've just JavaScript to handle my animations, but I don't need all that power when it something simple as moving a div.
+					p.post-details My overall appreciation of React is 
+						span.bold-text great
+						| !
+		.footer
+			.footer-container
+				p Sola Scriptura ( Scripture Alone ), Solus Christus ( Christ Alone ), Sola fide ( Faith Alone ), Sola Gratia ( Grace Alone ), and Soli Deo Gloria ( Glory to God Alone )
+				.socials
+					ul
+						li.social-links
+							a(href="https://www.linkedin.com/in/devontaereid/")
+								img(src="/images/websites/linkedin.png")
+						li.social-links
+							a(href="https://twitter.com/_yodev_")
+								img(src="/images/websites/twitter.png")
+						li.social-links
+							a(href="https://github.com/y0dev")
+								img(src="/images/websites/github.png")
+				p.footer-small Icons provided by 
+					a(href="https://www.flaticon.com/authors/freepik" title="Freepik") Freepik
+		script(type="text/javascript" src="/scripts/main.js")
+		script(type="text/javascript" src="https://static.esvmedia.org/crossref/crossref.min.js")

@@ -1,0 +1,803 @@
+[
+    {
+        "title": "Web Development Choice",
+        "description": "my time looking for a framework to create my portfolio website along with blog site",
+        "date": "1636423946203",
+        "id": "web-dev-choice",
+        "tags": [
+            "Technology",
+            "ReactJS",
+            "NodeJS"
+        ],
+        "image": {
+            "name": "images/web-dev.png",
+            "alt": "js-image"
+        },
+        "content": [
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Beginning of NodeJS"
+                },
+                "paragraphs": [
+                    " :imagePlace(001)",
+                    "As I embraced the task of creating a website, I ran into some problems. Those problems were choosing the right framework. There are many out there from React, VueJS, and even embedded JavaScript.",
+                    "So the one that rose to the top of my list was React. I find React to be very powerful for something that seems so simple to use. There are many things that React offered that the others did not such as CSS animation. Working in VueJS I found it fairly difficult to work with CSS animation. I would've just JavaScript to handle my animations, but I don't need all that power when it something simple as moving a div.",
+                    "My overall appreciation of React is :special-text(key='bold',great)special-text-end!"
+                ],
+                "images": [
+                    {
+                        "id": "001",
+                        "alt": "dev-work",
+                        "caption": "Programming Away",
+                        "link": "https://images.pexels.com/photos/196659/pexels-photo-196659.jpeg"
+                    }
+                ],
+                "code": [
+                    {
+                        "id": "001",
+                        "language": "javascript",
+                        "content": "laboris"
+                    }
+                ],
+                "blockquotes": [
+                    {
+                        "id": "001",
+                        "content": "laboris"
+                    }
+                ],
+                "links": [
+                    {
+                        "id": "001",
+                        "text": "",
+                        "website": "laboris"
+                    }
+                ],
+                "lists": [
+                    {
+                        "id": "001",
+                        "items": [],
+                        "list_type": "unordered"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Parenting with Few Rules | Doug Wilson",
+        "description": "parenting as a Christian with few rules from Doug Wilson podcast",
+        "date": "1628742217550",
+        "id": "parenting-with-few-rules",
+        "tags": [
+            "Parenting",
+            "Christ",
+            "Children"
+        ],
+        "image": {
+            "name": "images/family.png",
+            "alt": "parenting-img"
+        },
+        "content": [
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Is it That Simple?"
+                },
+                "paragraphs": [
+                    " :imagePlace(001)",
+                    "As being a new father I felt like this video was very helpful for setting ground rules for my kids as they grow up. You may think that if you have too many rules or your too lenient, but there is a way that one is ought to parent. If we want to be parents that live obedient to Christ as we raise our children while at the same time not being a helicopter parent.",
+                    "A video came up on my timeline from Pastor Doug Wilson of Christ Church in Moscow, Idaho. He speaks on being a parent who doesn't have so many rules and the reason why. He speaks on why as parents we shouldn't over complicate things for our children while at the same time teaching our children to think on their own when it comes to subject matters on what is right vs wrong. These rules not only established ground with you and your child, but also allows your child to critical think.",
+                    "Three Rules to Live by as a Parent: :listPlace(001)",
+                    "You can find the video on Youtube at the following :linkPlace(001)"
+                ],
+                "images": [
+                    {
+                        "id": "001",
+                        "alt": "doug-wilson-parenting",
+                        "caption": "Fewer Rules in Parenting? | Doug Wilson",
+                        "link": "https://i.ytimg.com/vi/6S4LCPI9wk4/maxresdefault.jpg"
+                    }
+                ],
+                "blockquotes": [
+                    {
+                        "id": "001",
+                        "content": "laboris"
+                    }
+                ],
+                "links": [
+                    {
+                        "id": "001",
+                        "video": 1,
+                        "text": "Fewer Rules in Parenting? | Doug Wilson",
+                        "link": "https://youtu.be/6S4LCPI9wk4"
+                    }
+                ],
+                "lists": [
+                    {
+                        "id": "001",
+                        "items": [
+                            "No lying",
+                            "No disobedience",
+                            "No disrespecting your mother"
+                        ],
+                        "list_type": "unordered"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Navy Seals & Breathing",
+        "description": "Learn how to breathe correctly while doing intense exercises to maximize performance and prevent injury. Tips to help you get the most out of your workouts.",
+        "date": "1665111900994",
+        "id": "navy-seals-breathing",
+        "tags": [
+            "Health",
+            "Fitness"
+        ],
+        "image": {
+            "name": "images/heart_strength.png",
+            "alt": "health-img"
+        },
+        "content": [
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Intro"
+                },
+                "paragraphs": [
+                    " :imagePlace(001)",
+                    "Ever wonder why Navy SEALs are some of the world's most elite warriors? It's as simple as \"breathing\" literally. According to the Lung Association of Canada, we take on average 22,000 breaths a day. Wow, we take 22,000 breaths a day and don't give thanks for even a quarter of it.",
+                    "Thanks God for His mercy to allow us to take these breaths! Psalm 136",
+                    " :imagePlace(002)",
+                    "We can do a lot to help ourselves by practicing better breathing patterns. There are many different breathing patterns that can result in more energy and a clearer head. The well known breathing pattern is known as \"Box Breathing\". In this pattern you would exhale and inhale for the same duration around a box so to speak. :listPlace(001)",
+                    "Box breathing helps you deal effectively with stress and anxiety. It also brings balance to your body and mind along with regulating your natural heart rhythm."
+                ],
+                "images": [
+                    {
+                        "id": "001",
+                        "alt": "navy-seals",
+                        "caption": "Navy Seals Training",
+                        "link": "https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTU3ODc4NjAzNzg5NDQ0NDI1/list-seal-missions-navy-seal-photos-beach-assualt-1708498496-o-3.jpg"
+                    },
+                    {
+                        "id": "002",
+                        "alt": "box-breathing-gif",
+                        "caption": "Box Breathing",
+                        "link": "https://images.squarespace-cdn.com/content/v1/5b8645f7266c07b084eb29c7/1570208020992-TRZCAX5P0A53CG0LS5AO/Box+breathing.gif"
+                    }
+                ],
+                "code": [
+                    {
+                        "id": "001",
+                        "language": "",
+                        "content": "laboris"
+                    }
+                ],
+                "lists": [
+                    {
+                        "id": "001",
+                        "items": [
+                            "Inhale along the left for 4 seconds",
+                            "Exhale along the top for 4 seconds",
+                            "Inside the along the right for 4 seconds",
+                            "Exhale along the bottom for 4 seconds"
+                        ],
+                        "list_type": "ordered"
+                    }
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Training"
+                },
+                "paragraphs": [
+                    "Navy Seals train in such a way to help them control their breathing not only to stay calm, but to also conserve energy. It starts with breathing and proper breathing. Proper breathing begins with breathing through the nose and out the mouth. We heard this before early in our sports career. Little that we know, that is very beneficial to our health. The benefits are: :listPlace(001)",
+                    "Here is a workout or things to do while working out that I believe will help with teaching yourself proper breathing and self control. 100s of pushups, burpees and squats. While at the bottom of a squat just breathe deep inhales, so that you will fill your lungs and slow exhales. The reasoning behind this is because shallow breaths leads to: :listPlace(002)",
+                    "While running, fill your lungs by breathing in through your nose only after each run or after each set. Sharp inhales through the nose and soft exhales through the mouth or nose."
+                ],
+                "images": [
+                    {
+                        "id": "001",
+                        "alt": "image1",
+                        "caption": "Breathing Counter",
+                        "link": "https://images.squarespace-cdn.com/content/v1/5b8645f7266c07b084eb29c7/1570208020992-TRZCAX5P0A53CG0LS5AO/Box+breathing.gif"
+                    }
+                ],
+                "lists": [
+                    {
+                        "id": "001",
+                        "items": [
+                            "Reduces exposure to foreign substances",
+                            "Increases oxygen uptake and circulation",
+                            "Aids our immune system",
+                            "Slows down breathing",
+                            "Improves lung volume",
+                            "Humidifies inhaled air"
+                        ],
+                        "list_type": "unordered"
+                    },
+                    {
+                        "id": "002",
+                        "items": [
+                            "Increased blood pressure",
+                            "Increased stress response",
+                            "Reduced oxygen intake",
+                            "Impaired thinking",
+                            "Slower recovery"
+                        ],
+                        "list_type": "unordered"
+                    }
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Finally"
+                },
+                "paragraphs": [
+                    "Start small! :listPlace(001)",
+                    "Link to the Twitter \ud83e\uddf5 : :linkPlace(001)"
+                ],
+                "links": [
+                    {
+                        "id": "001",
+                        "text": "Navy SEALs are the world's most elite warriors",
+                        "link": "https://twitter.com/tobi_emonts/status/1577998885125033985?s=20&t=aJC2U0dfO1wUkyJpjw1lzQ"
+                    }
+                ],
+                "lists": [
+                    {
+                        "id": "001",
+                        "items": [
+                            "Break up your big goals into small chunks, one breath at a time",
+                            "Breath control is stress control"
+                        ],
+                        "list_type": "ordered"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Getting Started with Docker",
+        "description": "Learn how to get started with Docker with this helpful article! It covers the basics of installation and usage, and provides tips for creating and running containers.",
+        "date": "1667624400000",
+        "id": "docker-getting-started",
+        "tags": [
+            "Technology",
+            "Docker"
+        ],
+        "image": {
+            "name": "images/docker.png",
+            "alt": "docker-image"
+        },
+        "content": [
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Initial Steps to Running Docker"
+                },
+                "paragraphs": [
+                    ":imagePlace(001)",
+                    "The lightweight development platform that we should all use as developers is Docker. What is Docker? Well, Docker is a software platform for building applications based on containers. Containers are small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another. What is the difference between an image and a container? An image is a portable, read-only, executable file containing the instructions for creating a container. This image gets created using a dockerfile. What is also included in these instructions are operating system, languages, environmental variables, file locations, network ports, and any other components it needs to run.",
+                    "If you have installed docker on your pc or mac. The steps to run a docker container are as follows: :listPlace(001)",
+                    "Creating a dockerfile and building and running it. Here's an example of a basic dockerfile :codePlace(001)"
+                ],
+                "images": [
+                    {
+                        "id": "001",
+                        "alt": "docker",
+                        "caption": "Docker @ Resource from Docker Website",
+                        "link": "https://www.ondat.io/hubfs/Docker.png"
+                    }
+                ],
+                "code": [
+                    {
+                        "id": "001",
+                        "language": "docker",
+                        "title": "docker_file",
+                        "content": [
+                            ":comment # Parent Image: Software and version",
+                            ":code-specific FROM :code-specific-end python:3",
+                            ":code-specific WORKDIR :code-specific-end :path-start /Users/user_directory/docker/textblob :path-end",
+                            ":code-specific COPY :code-specific-end requirements.txt :path-start ./ :path-end",
+                            ":code-specific RUN :code-specific-end pip install --no-cache-dir -r requirements.txt",
+                            ":comment # First dot is relative file path where dockerfile resides",
+                            ":comment # Second dot is the root directory",
+                            ":code-specific COPY :code-specific-end . .",
+                            ":code-specific CMD :code-specific-end :bracket-open [ :string-open \"python :string-close\", :string-open \"./main.py :string-close\" :bracket-close ]"
+                        ]
+                    }
+                ],
+                "lists": [
+                    {
+                        "id": "001",
+                        "items": [
+                            "Create a docker",
+                            "Build docker image \" docker build -t :user-defined-code image:end . \"",
+                            "Run the docker container \" docker run --name :user-defined-code container_name image:end \"",
+                            "Stop container \"docker stop :user-defined-code container_name:end \"",
+                            "List running containers \"docker ps -a \""
+                        ],
+                        "list_type": "ordered"
+                    }
+                ],
+                "links": [
+                    {
+                        "id": "001",
+                        "text": "Docker Help",
+                        "link": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Basics of Jenkins",
+        "description": "Learn the basics of Jenkins, an open source automation server for continuous integration and continuous delivery. Get up and running quickly and easily.",
+        "date": "1675365300000",
+        "id": "jenkins-getting-started",
+        "tags": [
+            "Technology",
+            "Jenkins",
+            "CI/CD"
+        ],
+        "image": {
+            "name": "images/jenkins.png",
+            "alt": "jenkins-image"
+        },
+        "content": [
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Creating a Jenkinsfile"
+                },
+                "paragraphs": [
+                    ":imagePlace(001)",
+                    "When creating a Jenkinsfile the necessary fields must are: pipeline, agent, stages. \"pipeline\" is always needed and is at the top-level. From here we have the \"agent\" which describes where to execute (default would be set to any). Then we have stages which describes where the works happens, and within \"stages\" you define \"stage\" that will have parameters such as: (\"init\"), (\"build\"), (\"test\"), and (\"deploy\").",
+                    "Another field that may be added and this is added after \"stages\". This is \"post\" and what this does is execute some logic after all stages have executed. The conditions that are within the \"post\" section are: always, success, failure. Always will always execute whether the script failed or not. Examples of this are sending emails out to the team after a build."
+                ],
+                "images": [
+                    {
+                        "id": "001",
+                        "alt": "jenkins",
+                        "caption": "Jenkins Image from Jenkins Website",
+                        "link": "https://www.jenkins.io/images/logo-title-opengraph.png"
+                    }
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Adding Environmental Variables"
+                },
+                "paragraphs": [
+                    "In order to add environmental variables to your file, before \"stages\" you need to add \"environment\" into your pipeline.",
+                    ":codePlace(001)"
+                ],
+                "code": [
+                    {
+                        "id": "001",
+                        "language": "jenkins",
+                        "title": "jenkins_file_env",
+                        "content": [
+                            ":code-specific pipeline :code-specific-end {",
+                            ":indent-text[1] :code-specific agent :code-specific-end any",
+                            ":indent-text[1] :code-specific environment :code-specific-end {",
+                            ":indent-text[2] EXAMPLE_VAR = 'Something'",
+                            ":indent-text[1] }",
+                            ":indent-text[1] ...",
+                            "}"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Adding Build Tools for Project"
+                },
+                "paragraphs": [
+                    ":codePlace(001)"
+                ],
+                "code": [
+                    {
+                        "id": "001",
+                        "language": "jenkins",
+                        "title": "jenkins_file_tools",
+                        "content": [
+                            ":code-specific pipeline :code-specific-end {",
+                            ":indent-text[1] :code-specific agent :code-specific-end any",
+                            ":indent-text[1] :code-specific tools :code-specific-end  {",
+                            ":indent-text[2] nodejs 'NodeJS'",
+                            ":indent-text[1]  :bracket-close }",
+                            ":indent-text[1] ...",
+                            "}"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Building Jenkinsfile"
+                },
+                "paragraphs": [
+                    "After this you would then go to Jenkins localhost webpage and create a new job. Depending on the version of Jenkins you have downloaded this menu may be different. What you should see is a text field and beneath a list of types of projects you can create. The projects are Freestyle project, Pipeline, Multi-configuration project, Folder, GitHub Organization, and Multibranch Pipeline. For my example I am using Multibranch Pipeline.",
+                    "Within the General Tab, scroll down to Branch Sources and add the link to the Git project repository and add the correct credentials. You can determine what branches you want to build by selecting the next drop-down. Click build and you should now be presented with a new page that displays the pipeline output/log."
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Final Results"
+                },
+                "paragraphs": [
+                    ":codePlace(001)"
+                ],
+                "code": [
+                    {
+                        "id": "001",
+                        "language": "jenkins",
+                        "title": "jenkins_file_final",
+                        "content": [
+                            ":code-specific def :code-specific-end gv",
+                            ":code-specific pipeline :code-specific-end {",
+                            ":indent-text[1] :code-specific agent :code-specific-end any",
+                            ":indent-text[1] :code-specific parameters :code-specific-end {",
+                            ":indent-text[2] choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')",
+                            ":indent-text[2] booleanParam(name: 'executeTests', defaultValue: true, description: '')",
+                            ":indent-text[1] }",
+                            ":indent-text[1] :code-specific stages :code-specific-end {",
+                            ":indent-text[2] :code-specific stage :code-specific-end (\"init\") {",
+                            ":indent-text[3] :code-specific steps :code-specific-end {",
+                            ":indent-text[4] :code-specific script :code-specific-end {",
+                            ":indent-text[5] gv = load \"script.groovy\"",
+                            ":indent-text[4] }",
+                            ":indent-text[3] }",
+                            ":indent-text[2] }",
+                            ":indent-text[2] :code-specific stage :code-specific-end (\"build\") {",
+                            ":indent-text[3] :code-specific steps :code-specific-end {",
+                            ":indent-text[4] :code-specific script :code-specific-end {",
+                            ":indent-text[5] gv.buildApp()",
+                            ":indent-text[4] }",
+                            ":indent-text[3] }",
+                            ":indent-text[2] }",
+                            ":indent-text[2] :code-specific stage :code-specific-end (\"test\") {",
+                            ":indent-text[3] :code-specific when :code-specific-end {",
+                            ":indent-text[4] :code-specific expression :code-specific-end {",
+                            ":indent-text[5] params.executeTests",
+                            ":indent-text[4] }",
+                            ":indent-text[3] }",
+                            ":indent-text[3] :code-specific steps :code-specific-end {",
+                            ":indent-text[4] :code-specific script :code-specific-end {",
+                            ":indent-text[5] gv.testApp()",
+                            ":indent-text[4] }",
+                            ":indent-text[3] }",
+                            ":indent-text[2] }",
+                            ":indent-text[2] :code-specific stage :code-specific-end (\"deploy\") {",
+                            ":indent-text[3] :code-specific steps :code-specific-end {",
+                            ":indent-text[4] :code-specific script :code-specific-end {",
+                            ":indent-text[5] gv.deployApp()",
+                            ":indent-text[4] }",
+                            ":indent-text[3] }",
+                            ":indent-text[2] }",
+                            ":indent-text[1] }",
+                            "}"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Help with System Design Interviews",
+        "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
+        "date": "1675836000000",
+        "id": "system-design",
+        "tags": [
+            "System Design",
+            "Technology",
+            "MAANG"
+        ],
+        "image": {
+            "name": "images/web-dev.png",
+            "alt": "web-dev-img"
+        },
+        "content": [
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Preparation for the Interview"
+                },
+                "paragraphs": [
+                    ":imagePlace(001)",
+                    "Why system design? System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors.  Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down. The ability to add new features also comes under the umbrella of maintainability.",
+                    "Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are :linkPlace(001), :linkPlace(002), :linkPlace(003), :linkPlace(004), :linkPlace(005), :linkPlace(006), :linkPlace(007), :linkPlace(008), :linkPlace(009), :linkPlace(010), :linkPlace(011), :linkPlace(012), and :linkPlace(013).",
+                    "Some thoughts that should happen when designing a system should be \u201cWhy does this system works?\u201d. Look into why some of the popular applications works at a high level. Understand why some component was used instead of another. Build serious side projects and improve on them and refine them. Build a system from scratch and get familiar with all the processes and details of its construction."
+                ],
+                "images": [
+                    {
+                        "id": "001",
+                        "alt": "system-design",
+                        "caption": "Load Balancing from G4G",
+                        "link": "https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png"
+                    }
+                ],
+                "links": [
+                    {
+                        "id": "001",
+                        "text": "Engineering at Meta",
+                        "link": "https://engineering.fb.com/"
+                    },
+                    {
+                        "id": "002",
+                        "text": "Meta Research",
+                        "link": "https://research.fb.com/"
+                    },
+                    {
+                        "id": "003",
+                        "text": "AWS Architecture Blog",
+                        "link": "https://aws.amazon.com/blogs/architecture/"
+                    },
+                    {
+                        "id": "004",
+                        "text": "Amazon Science Blog",
+                        "link": "https://www.amazon.science/blog"
+                    },
+                    {
+                        "id": "005",
+                        "text": "Netflix TechBlog",
+                        "link": "https://netflixtechblog.com/"
+                    },
+                    {
+                        "id": "006",
+                        "text": "Google Research",
+                        "link": "https://research.google/"
+                    },
+                    {
+                        "id": "007",
+                        "text": "Engineering at Quora",
+                        "link": "https://quoraengineering.quora.com/"
+                    },
+                    {
+                        "id": "008",
+                        "text": "Uber Engineering Blog",
+                        "link": "https://eng.uber.com/"
+                    },
+                    {
+                        "id": "009",
+                        "text": "Databricks Blog",
+                        "link": "https://databricks.com/blog/category/engineering"
+                    },
+                    {
+                        "id": "010",
+                        "text": "Pinterest Engineering",
+                        "link": "https://medium.com/@Pinterest_Engineering"
+                    },
+                    {
+                        "id": "011",
+                        "text": "BlackRock Engineering",
+                        "link": "https://medium.com/blackrock-engineering"
+                    },
+                    {
+                        "id": "012",
+                        "text": "Lyft Engineering",
+                        "link": "https://eng.lyft.com/"
+                    },
+                    {
+                        "id": "013",
+                        "text": "Salesforce Engineering",
+                        "link": "https://engineering.salesforce.com/"
+                    }
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Stay on track"
+                },
+                "paragraphs": [
+                    "At all costs, avoid going to the lower level! What this mean for example is to make sure you are having discussions about traditional databases like MySQL or NoSQL. This helps with creating conversations about the trade-offs of the two databases.",
+                    "Key things to remember when thinking of deliverables expected from the developed design :listPlace(001)"
+                ],
+                "lists": [
+                    {
+                        "id": "001",
+                        "items": [
+                            "Functional requirements: These represent the features a user of the designed system will be able to use. For example, the system will allow a user to search for content using the search bar.",
+                            "Non-functional requirements (NFRs): The non-functional requirements are criteria based on which the user of a system will consider the system usable. NFR may include requirements like high availability, low latency, scalability, and so on."
+                        ],
+                        "list_type": "ordered"
+                    }
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "The Interview"
+                },
+                "paragraphs": [
+                    "When going into an interview remember that the interview has ask these questions to other candidates. So, don't produce a design that sounds the same as other candidates.",
+                    "The most recommended strategy to use in a design interview is to ask refining questions, handle the given data, discussing the components, and finally discussing trade-offs. First thing you want to do is better understand the system planning to design is by asking refining questions. We need to find the functional and nonfunctional requirements. For example, the ability to send messages in near real-time to friend's vs messaging service performance shouldn't degrade with increasing user load. To better understand the data, we should ask the following questions: :listPlace(001)"
+                ],
+                "lists": [
+                    {
+                        "id": "001",
+                        "items": [
+                            "What is the size of the data right now? (Guessing this is the size of data type)",
+                            "At what rate is the data expected to grow over time?",
+                            "How will the data be consumed by other subsystems or end users?",
+                            "Is the data read-heavy or write-heavy?",
+                            "Do we need strict consistency of data, or will eventual consistency work?",
+                            "What is the durability target of the data?",
+                            "What privacy and regulatory requirements do we require for storing or transmitting user data?"
+                        ],
+                        "list_type": "unordered"
+                    }
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Abstraction"
+                },
+                "paragraphs": [
+                    "Abstraction is the process of hiding details that we don't need. Abstractions in distributed systems helps with simplifying their work and relieve them od the burden of dealing with the underlying complexity of the system."
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Remote Procedure Calls"
+                },
+                "paragraphs": [
+                    "Remote Procedure Calls (RPC) is an inter-process communication protocol that's widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics."
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Consistency"
+                },
+                "paragraphs": [
+                    "Consistency is having the same state across all different systems in the distributed system. A strong consistency means that our system is never in an inconsistent state, but at a cost of lower performance and availability because the systems must stay consistent with each other. Eventual consistency is having the system in an inconsistent state for some time but will eventually be in a consistent state. This is also the weakest of the consistencies. There are drawbacks from both. Let's use a YouTube example. Say if you have (n) number of users and one or more users watch a video. We must update the view counter every time a user watches a video, but we have other users that want to read the view count. If we use the strong consistency, we will have to be happy with a long wait time for the other users to read the view value of the video. This is mainly because you must replicate the data across multiple database servers which can be over many miles away from each other and possibility in many different geographic locations. Rather if we use the eventual consistency, we will have to be happy with stale servers (servers that haven't been updated with the current value). This will help with keeping the service up in running without users losing any time. In an interview describe both cases pros and cons. Stock market or updating are a good use for a strong consistency and YouTube is a good use of eventual consistency.",
+                    "There is another consistency in between these two consistencies. One being casual consistency and the other being sequential consistency with casual being the weaker of the two. Casual works by categorizing operations into dependent and independent operations. A dependent operation is used to preserve the order of the operations. If one operation is dependent on another the independent operation must run first before the dependent. For example, in order to reply to a comment a comment must be created first before the reply. This is used to prevent non-intuitive behavior such as replying to a comment that doesn't exist which will cause a long weight. Sequential consistency ensures that the ordered specified by the client program has been preserved. The downfall is that the user may not be able to read instantaneously or in the order that the write occurred. Example of this is a social network application, we usually don't care about the order in which some of our friends' posts appear. However, we still anticipate a single friend's posts to appear in the correct order in which they were created). Similarly, we expect our friends' comments in a post to display in the order that they were submitted. The sequential consistency model captures all of these qualities."
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Availability"
+                },
+                "paragraphs": [
+                    "Availability is the percentage of time that some service or infrastructure is accessible to clients and is operated upon under normal conditions. Each service provider may start measuring availability at different points in time. Some cloud providers start measuring it when they first offer the service, while some measure it for specific clients when they start using the service. Some providers might not reduce their reported availability numbers if their service was not down for all the clients. The planned downtimes are excluded. Downtime due to cyberattacks might not be incorporated into the calculation of availability. Therefore, we should carefully understand how a specific provider calculates their availability numbers."
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Reliability"
+                },
+                "paragraphs": [
+                    "Reliability is the probability that the service will perform its functions for a specified time. Reliability measures how the service performs under varying operating conditions."
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Scalability"
+                },
+                "paragraphs": [
+                    "Scalability is the ability of a system to handle an increasing amount of workload without compromising performance. A search engine, for example, must accommodate increasing numbers of users, as well as the amount of data it indexes. The workload can be of different types, including the following: :listPlace(001)",
+                    "There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. :listPlace(002)"
+                ],
+                "lists": [
+                    {
+                        "id": "001",
+                        "items": [
+                            "Request workload: This is the number of requests served by the system.",
+                            "Data/storage workload: This is the amount of data stored by the system."
+                        ],
+                        "list_type": "unordered"
+                    },
+                    {
+                        "id": "002",
+                        "items": [
+                            "Vertical Scaling = more space in a single system",
+                            "Horizontal Scaling = more nodes that need to be in sync with one another"
+                        ],
+                        "list_type": "unordered"
+                    }
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Maintainability"
+                },
+                "paragraphs": [
+                    "Is the ability to keep the system up and running by finding and fixing bugs, adding new functionalities, keeping the system's platform updated, and ensuring smooth system operations. Maintainability can be defined more clearly in close relation to reliability. The only difference between them is the variable of interest. Maintainability refers to time-to-repair, whereas reliability refers to both time-to-repair and the time-to-failure. Combining maintainability and reliability analysis can help us achieve availability, downtime, and uptime insights."
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Fault Tolerance"
+                },
+                "paragraphs": [
+                    "Fault tolerance refers to a system's ability to execute persistently even if one or more of its components fail. Here, components can be software or hardware. Conceiving a system that is hundred percent fault-tolerant is practically very difficult. Fault tolerance can be achieved by many approaches, considering the system structure. We compromise either on availability or on consistency under failures\u2014a reality that is outlined in the CAP theorem.",
+                    "Checkpointing is a technique that saves the system's state in stable storage when the system state is consistent. Checkpointing is performed in many stages at different time intervals. The primary purpose is to save the computational state at a given point. When a failure occurs in the system, we can get the last computed data from the previous checkpoint and start working from there. When the system has to perform checkpointing, it makes sure that the system is in a consistent state, meaning that all processes are stopped except read processes that do not change the state of the system. This type of checkpointing is known as synchronous checkpointing. On the other hand, checkpointing in an inconsistent state lead to data inconsistency problems."
+                ]
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Back-Of-The-Envelope"
+                },
+                "paragraphs": [
+                    "This is a very usual tool in your system design toolbox. The purpose of the back-of-the-envelope calculation for quick sanity check of the design. Absolute accuracy is not important rather than good enough. Remember that we have a variety of servers for providing various services within a data center.",
+                    "For example, if the math says that our service will need to handle about 1,000,000 requests per second. We find out our web server can only handle 10,000 request per second. What did we learn from this? We learn that we will need a cluster of web servers and we would need a load balancer. 1,000,000 / 10,000 = 100 servers.",
+                    ":imagePlace(001)",
+                    ":imagePlace(002)",
+                    ":imagePlace(003)"
+                ],
+                "images": [
+                    {
+                        "id": "001",
+                        "alt": "system-design-db-rates",
+                        "caption": "Database Rates",
+                        "link": "/images/system-design/database_rates.png"
+                    },
+                    {
+                        "id": "002",
+                        "alt": "system-design-latency-rates",
+                        "caption": "Latency Rates",
+                        "link": "/images/system-design/latency_values.png"
+                    },
+                    {
+                        "id": "003",
+                        "alt": "system-design-server-specs",
+                        "caption": "Server Specs",
+                        "link": "/images/system-design/server_specs.png"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Command for Thankfulness",
+        "description": "devotional from my morning reading on thankfulness and why we should always be thankful.",
+        "date": "1678428000000",
+        "id": "thankfulness",
+        "tags": [
+            "Christ",
+            "Salvation",
+            "Love",
+            "Thankful"
+        ],
+        "image": {
+            "name": "images/thankful.png",
+            "alt": "thankful-icon"
+        },
+        "content": [
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Command for Thankfulness"
+                },
+                "paragraphs": [
+                    "We seldom give thanks during all seasons of life. We give praises to God when things are well as we should, but not when things aren\u2019t. Prime example of this in scripture is Israel\u2019s ungrateful heart throughout their time in the wilderness (Num. 14:1-4; 20: 3-5). Also, remember this is after God hears their groaning in Egypt and rescues them out of the harness that they faced while there (Ex. 2: 24-25).",
+                    "The harshness that the Israelites faced in Egypt was bad and continued to get worse as Pharaoh saw how they were multiplying (Ex. 1: 8-15). Even when God had blessed Israel abundantly with manna and protection in the wilderness, they still thought it was better to go back and enjoy the life they had there with all the food (Num. 11:5). They\u2019re not the only ones that think this way.",
+                    "As I read Col. 3:15, Paul commands the saints in Colossae to be thankful. This would seem like a weird command because you would think that we should always be thankful. Paul here reminds the believer to be thankful after just telling them to put on these godly characteristics (Col. 3:12-14). Why should we then be thankful? Why this command? I believe Paul wants us to remember the mercy of God in saving us from the bondage of sin that once enslaved us. The believer may grumble about these characteristics that they have to put off (Col. 3:5-11) which they prided themselves in having before the saving grace of Christ or because they\u2019ve been wrong by someone and that person deserves it. As I was reminded by a brother, \u201cWe deserve much worse than what this person just said about us even though it may not be true.\u201d God did not need to save Israel from Egypt nor did he need to save us from our sins.",
+                    "So, to close as the Apostle Paul commands, \u201cBe Thankful\u201d. We ought to always be thankful in all circumstances because we deserve much more than we are receiving."
+                ],
+                "images": [],
+                "links": [],
+                "lists": []
+            }
+        ]
+    }
+]

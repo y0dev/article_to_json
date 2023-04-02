@@ -1,0 +1,124 @@
+[
+    {
+        "title": "Getting Started with Docker",
+        "description": "getting started with running docker. This is the simplest notes on the basics of using docker.",
+        "date": "1671213028000",
+        "id":  "docker-getting-started",
+        "tags": 
+        [
+            "Technology","Docker"
+        ],
+        "image": 
+        {
+            "name": "images/docker.png",
+            "alt": "docker-image"
+        },
+        "content":
+        [
+            {
+                "paragraphs": 
+                [
+                    ":imagePlace(001)",
+                    "The lightweight development platform that we should all use as developers is Docker. What is Docker? Well, Docker is a software platform for building applications based on containers. Containers are small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another. What is the difference between an image and a container? An image is a portable, read-only, executable file containing the instructions for creating a container. This image gets created using a dockerfile. What is also included in these instructions are operating system, languages, environmental variables, file locations, network ports, and any other components it needs to run.",
+                    "If you have installed docker on your pc or mac. The steps to run a docker container are as follows: :listPlace(001)",
+                    "Creating a dockerfile and building and running it"
+                ],
+
+                "images":
+                [
+                    {
+                        "id": "001",
+                        "alt": "docker",
+                        "caption": "Docker @ Resource from Docker Website",
+                        "link": "https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png"
+                    }
+                ],
+
+                "code":
+                [
+                    {
+                        "id": "001",
+                        "language": "docker",
+                        "content": 
+                        [
+                            "# Parent Image: Software and version",
+                            "FROM python:3",
+                            "WORKDIR /Users/user_directory/docker/textblob",
+                            "COPY requirements.txt ./",
+                            "RUN pip install --no-cache-dir -r requirements.txt",
+                            "# First dot is relative file path where dockerfile resides",
+                            "# Second dot is the root directory",
+                            "COPY . .",
+                            "CMD [ \"python\", \"./main.py\" ]"
+                        ]
+                    }
+                ],
+
+                "lists":
+                [
+                    {
+                        "id": "001",
+                        "items": 
+                        [
+                            "Create a docker :listPlace(002)",
+                            "Within your dockerfile :codePlace(001)",
+                            "Build docker image :listPlace(003)",
+                            "Run the docker container :listPlace(004)",
+                            "Stop container :listPlace(005)",
+                            "List running containers :listPlace(006)"
+                        ],
+                        "list_type": "unordered"
+                    },
+                    {
+                        "id": "002",
+                        "items": 
+                        [
+                            "Name you file dockerfile"
+                        ],
+                        "list_type": "unordered"
+                    },
+                    {
+                        "id": "003",
+                        "items": 
+                        [
+                            "docker build -t <image> ."
+                        ],
+                        "list_type": "unordered"
+                    },
+                    {
+                        "id": "004",
+                        "items": 
+                        [
+                            "docker run --name container_name image"
+                        ],
+                        "list_type": "unordered"
+                    },
+                    {
+                        "id": "005",
+                        "items": 
+                        [
+                            "docker stop container_name"
+                        ],
+                        "list_type": "unordered"
+                    },
+                    {
+                        "id": "006",
+                        "items": 
+                        [
+                            "docker ps -a"
+                        ],
+                        "list_type": "unordered"
+                    }
+                ],
+                "links":
+                [
+                    {
+                        "id": "001",
+                        "text": "Docker Help",
+                        "link": ""
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,37 @@
+{
+   "git.autofetch": true,
+   "workbench.editorAssociations": {
+       "*.ipynb": "jupyter-notebook",
+       "*.epub": "default",
+       "*.elf": "default"
+   },
+   "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe",
+   "security.workspace.trust.untrustedFiles": "open",
+   "notebook.cellToolbarLocation": {
+       "default": "right",
+       "jupyter-notebook": "left"
+   },
+   "workbench.colorTheme": "Default Dark+",
+   "liveshare.connectionMode": "relay",
+   "javascript.updateImportsOnFileMove.enabled": "always",
+   "explorer.confirmDelete": false,
+   "editor.formatOnType": true,
+   "files.eol": "\n",
+   "liveshare.presence": true,
+   "workbench.iconTheme": "vscode-icons",
+   "cSpell.userWords": [
+       "autozone",
+       "Bttn",
+       "camelcase",
+       "Devontae",
+       "Leetcode",
+       "mutex",
+       "Newsmaker",
+       "speedwash",
+       "Statefarm",
+       "Trulia",
+       "webextensions"
+   ],
+   "bracketPairColorizer.depreciation-notice": false,
+   "vsicons.dontShowNewVersionMessage": true
+}

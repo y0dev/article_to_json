@@ -1,0 +1,29 @@
+[
+    {
+        "icon": "✈️",
+        "details": {
+            "institution": "Raytheon Technologies",
+            "time": "( March 2019 - Present )",
+            "position": "Software Engineer",
+            "description": "Developed radar software on Green Hills Integrity using C and ADA.\nDesigned and implemented the software of embedded devices and systems from requirements to production deployment.\nLead software design meeting consisting of ICD designs and Sequence Diagrams"
+        }
+    },
+    {
+        "icon": "💻",
+        "details": {
+            "institution": "iOS Developer",
+            "time": "( 2014 - 2018 )",
+            "position": "Freelance Engineer",
+            "description": "Designed and built mobile applications for Apple's iOS platform.\nEnsuring quality and performance of the application to specifications.\nFixing application bugs before the final release.\nPublishing application on App Store."
+        }
+    },
+    {
+        "icon": "🎓",
+        "details": {
+            "institution": "California State University, Fullerton",
+            "time": "( 2016 - 2018 )",
+            "position": "Computer Science",
+            "description": "While at CSUF, I complete a wide range of projects from high level embedded in Python to iOS applications"
+        }
+    }
+]

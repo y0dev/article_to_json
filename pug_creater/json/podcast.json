@@ -1,0 +1,34 @@
+{
+   "podcasts": [
+      {
+         "title": "The Believer's Warfare, Part 2",
+         "author": "Grace To You",
+         "url": "https://cdn.gty.org/podcast/20210524.mp3",
+         "image": "https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/7b/dc/4a/7bdc4ad2-cdc2-e7ef-def4-f1f10a10771d/mza_18156360939712160107.jpg/552x0w.webp",
+         "date": ""
+      },
+      {
+         "title": "Wheat, Tares, and Waiting for the Harvest",
+         "author": "Renewing Your Mind",
+         "speaker": "R.C Sproul",
+         "url": "https://d17x3n2u54ktyq.cloudfront.net/mp3/rym20211007.mp3",
+         "image": "https://is3-ssl.mzstatic.com/image/thumb/Podcasts114/v4/c6/e4/d6/c6e4d64a-964e-9d2e-d7f2-9221d31dd6ff/mza_7886555244690771637.jpg/552x0w.webp",
+         "date": ""
+      },
+      {
+         "title": "Criticism And Compliments",
+         "author": "Renewing Your Mind",
+         "speaker": "R.C Sproul",
+         "url": "https://d17x3n2u54ktyq.cloudfront.net/mp3/rym20210611.mp3",
+         "image": "https://is3-ssl.mzstatic.com/image/thumb/Podcasts114/v4/c6/e4/d6/c6e4d64a-964e-9d2e-d7f2-9221d31dd6ff/mza_7886555244690771637.jpg/552x0w.webp",
+         "date": ""
+      },
+      {
+         "title": "Victory Against The Devil’s Roar!",
+         "author": "Grace Pulpit",
+         "url": "https://s3.amazonaws.com/media.gracechurch.org/pulpit/GCC-2021-10-03-1800-HARGROVEC.mp3",
+         "image": "https://s3.amazonaws.com/static.gracechurch.org/images/teachings/pulpit-album-art.jpg",
+         "date": ""
+      }
+   ]
+}

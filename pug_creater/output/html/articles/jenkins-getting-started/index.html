@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basics of Jenkins</title>
+    <meta name="title" property="og:title" content="Basics of Jenkins">
+    <meta name="title" property="twitter:title" content="Basics of Jenkins">
+    <meta name="description" property="og:description" content="Blog post about Learn the basics of Jenkins, an open source automation server for continuous integration and continuous delivery. Get up and running quickly and easily..">
+    <meta name="description" property="twitter:description" content="Blog post about Learn the basics of Jenkins, an open source automation server for continuous integration and continuous delivery. Get up and running quickly and easily..">
+    <meta name="image" property="og:image" content="https://www.devontaereid.com/images/jenkins.png">
+    <meta name="image" property="twitter:image" content="https://www.devontaereid.com/images/jenkins.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@_yodev_">
+    <meta property="og:url" content="https://www.devontaereid.com">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div class="navbar header-content--mini" id="nav-bar">
+      <nav>
+        <div class="main-menu"><a class="menu-branding" href="/"><img class="menu-branding" src="/images/logo.png" alt="branding-logo">
+            <h3>Devontae Reid</h3></a>
+          <ul class="menu-list">
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/articles">Articles</a></li>
+            <li><a href="/gospel">Gospel</a></li>
+            <li>
+              <button class="display-switch">☀️</button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="post-body">
+      <article class="button" id="post-container"></article>
+      <div class="post-header-container">
+        <div class="post-header-details">
+          <h1 id="post-header-title">Basics of Jenkins</h1>
+          <div class="post-header-meta"><img class="post-header-icon" src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot">
+            <p class="post-header-time">Thursday, February 02, 2023</p><span class="post-header-divider">|</span>
+            <p id="post-read-time"></p>
+            <button class="post-header-shareButton" id="shareButton"><span class="post-header-shareButton-icon"><img src="/images/share_icon.png" alt="share_icon">Share</span></button>
+          </div>
+          <div class="post-header-tags"><span class="post-header-tag">Technology</span><span class="post-header-tag">Jenkins</span><span class="post-header-tag">CI/CD</span></div>
+        </div><img class="post-header-image" src="/images/jenkins.png" alt="jenkins-image">
+      </div>
+      <div class="post-content">
+        <div class="post-section-container" id="creating-a-jenkinsfile">
+          <h2 class="section-title">Creating a Jenkinsfile</h2>
+          <div class="post-image-container"><a class="post-image-container" href="https://www.jenkins.io/images/logo-title-opengraph.png"><img class="post-image" src="https://www.jenkins.io/images/logo-title-opengraph.png" alt="jenkins"></a>
+            <figcaption class="post-image-caption">Jenkins Image from Jenkins Website</figcaption>
+          </div>
+          <p class="post-details">When creating a Jenkinsfile the necessary fields must are: pipeline, agent, stages. "pipeline" is always needed and is at the top-level. From here we have the "agent" which describes where to execute (default would be set to any). Then we have stages which describes where the works happens, and within "stages" you define "stage" that will have parameters such as: ("init"), ("build"), ("test"), and ("deploy").</p>
+          <p class="post-details">Another field that may be added and this is added after "stages". This is "post" and what this does is execute some logic after all stages have executed. The conditions that are within the "post" section are: always, success, failure. Always will always execute whether the script failed or not. Examples of this are sending emails out to the team after a build.</p>
+        </div>
+        <div class="post-section-container" id="adding-environmental-variables">
+          <h2 class="section-title">Adding Environmental Variables</h2>
+          <p class="post-details">In order to add environmental variables to your file, before "stages" you need to add "environment" into your pipeline.</p>
+          <p class="post-details"> 
+            <div class="code-snippet-container">
+              <div class="code-snippet-header">
+                <h5 class="code-snippet-title">jenkins_file_env</h5>
+                <button class="copy-bttn"><img class="copy-icon" src="/images/copy-icon.png"></button>
+              </div>
+              <div class="code-snippet-body">
+                <pre class="language-jenkins"><code class="language-jenkins"><span class="code-specific">pipeline </span>{<br><span class="code-specific indent-1">agent </span><span class="indent-1">any</span><br><span class="code-specific indent-1">environment </span><span class="indent-1">{</span><br><span class="indent-2">EXAMPLE_VAR = 'Something'</span><br><span class="indent-1">}</span><br><span class="indent-1">...</span><br><span class="indent-1">}</span><br></code></pre>
+              </div>
+            </div>
+          </p>
+        </div>
+        <div class="post-section-container" id="adding-build-tools-for-project">
+          <h2 class="section-title">Adding Build Tools for Project</h2>
+          <p class="post-details"> 
+            <div class="code-snippet-container">
+              <div class="code-snippet-header">
+                <h5 class="code-snippet-title">jenkins_file_tools</h5>
+                <button class="copy-bttn"><img class="copy-icon" src="/images/copy-icon.png"></button>
+              </div>
+              <div class="code-snippet-body">
+                <pre class="language-jenkins"><code class="language-jenkins"><span class="code-specific">pipeline </span>{<br><span class="code-specific indent-1">agent </span><span class="indent-1">any</span><br><span class="code-specific indent-1">tools </span><span class="indent-1"> {</span><br><span class="indent-2">nodejs 'NodeJS'</span><br><span class="code-bracket">}</span><br><span class="indent-1">...</span><br><span class="indent-1">}</span><br></code></pre>
+              </div>
+            </div>
+          </p>
+        </div>
+        <div class="post-section-container" id="building-jenkinsfile">
+          <h2 class="section-title">Building Jenkinsfile</h2>
+          <p class="post-details">After this you would then go to Jenkins localhost webpage and create a new job. Depending on the version of Jenkins you have downloaded this menu may be different. What you should see is a text field and beneath a list of types of projects you can create. The projects are Freestyle project, Pipeline, Multi-configuration project, Folder, GitHub Organization, and Multibranch Pipeline. For my example I am using Multibranch Pipeline.</p>
+          <p class="post-details">Within the General Tab, scroll down to Branch Sources and add the link to the Git project repository and add the correct credentials. You can determine what branches you want to build by selecting the next drop-down. Click build and you should now be presented with a new page that displays the pipeline output/log.</p>
+        </div>
+        <div class="post-section-container" id="final-results">
+          <h2 class="section-title">Final Results</h2>
+          <p class="post-details"> 
+            <div class="code-snippet-container">
+              <div class="code-snippet-header">
+                <h5 class="code-snippet-title">jenkins_file_final</h5>
+                <button class="copy-bttn"><img class="copy-icon" src="/images/copy-icon.png"></button>
+              </div>
+              <div class="code-snippet-body">
+                <pre class="language-jenkins"><code class="language-jenkins"><span class="code-specific">def </span>gv<br><span class="code-specific">pipeline </span>{<br><span class="code-specific indent-1">agent </span><span class="indent-1">any</span><br><span class="code-specific indent-1">parameters </span><span class="indent-1">{</span><br><span class="indent-2">choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')</span><br><span class="indent-2">booleanParam(name: 'executeTests', defaultValue: true, description: '')</span><br><span class="indent-1">}</span><br><span class="code-specific indent-1">stages </span><span class="indent-1">{</span><br><span class="code-specific indent-2">stage </span><span class="indent-2">("init") {</span><br><span class="code-specific indent-3">steps </span><span class="indent-3">{</span><br><span class="code-specific indent-4">script </span><span class="indent-4">{</span><br><span class="indent-5">gv = load "script.groovy"</span><br><span class="indent-4">}</span><br><span class="indent-3">}</span><br><span class="indent-2">}</span><br><span class="code-specific indent-2">stage </span><span class="indent-2">("build") {</span><br><span class="code-specific indent-3">steps </span><span class="indent-3">{</span><br><span class="code-specific indent-4">script </span><span class="indent-4">{</span><br><span class="indent-5">gv.buildApp()</span><br><span class="indent-4">}</span><br><span class="indent-3">}</span><br><span class="indent-2">}</span><br><span class="code-specific indent-2">stage </span><span class="indent-2">("test") {</span><br><span class="code-specific indent-3">when </span><span class="indent-3">{</span><br><span class="code-specific indent-4">expression </span><span class="indent-4">{</span><br><span class="indent-5">params.executeTests</span><br><span class="indent-4">}</span><br><span class="indent-3">}</span><br><span class="code-specific indent-3">steps </span><span class="indent-3">{</span><br><span class="code-specific indent-4">script </span><span class="indent-4">{</span><br><span class="indent-5">gv.testApp()</span><br><span class="indent-4">}</span><br><span class="indent-3">}</span><br><span class="indent-2">}</span><br><span class="code-specific indent-2">stage </span><span class="indent-2">("deploy") {</span><br><span class="code-specific indent-3">steps </span><span class="indent-3">{</span><br><span class="code-specific indent-4">script </span><span class="indent-4">{</span><br><span class="indent-5">gv.deployApp()</span><br><span class="indent-4">}</span><br><span class="indent-3">}</span><br><span class="indent-2">}</span><br><span class="indent-1">}</span><br><span class="indent-1">}</span><br></code></pre>
+              </div>
+            </div>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-container">
+        <p>Sola Scriptura ( Scripture Alone ), Solus Christus ( Christ Alone ), Sola fide ( Faith Alone ), Sola Gratia ( Grace Alone ), and Soli Deo Gloria ( Glory to God Alone )</p>
+        <div class="socials">
+          <ul>
+            <li class="social-links"><a href="https://www.linkedin.com/in/devontaereid/"><img src="/images/websites/linkedin.png"></a></li>
+            <li class="social-links"><a href="https://twitter.com/_yodev_"><img src="/images/websites/twitter.png"></a></li>
+            <li class="social-links"><a href="https://github.com/y0dev"><img src="/images/websites/github.png"></a></li>
+          </ul>
+        </div>
+        <p class="footer-small">Icons provided by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></p>
+      </div>
+    </div>
+    <script type="text/javascript" src="/scripts/main.js"></script>
+    <script type="text/javascript" src="/scripts/code_script.js"></script>
+    <script type="text/javascript" src="https://static.esvmedia.org/crossref/crossref.min.js"></script>
+  </body>
+</html>

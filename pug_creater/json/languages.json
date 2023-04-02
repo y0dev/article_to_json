@@ -1,0 +1,12 @@
+{
+   "javascript": 
+   {
+      "keywords": ["const","let","var","export","exports","function"],
+      "operators": ["+", "=","+=","-","-=","*","/", "%","&"],
+      "punctuations": [";",":","\"","{","}","[","]","(",")"]
+   },
+   "c": 
+   {
+
+   }
+}

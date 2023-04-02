@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with Docker</title>
+    <meta name="title" property="og:title" content="Getting Started with Docker">
+    <meta name="title" property="twitter:title" content="Getting Started with Docker">
+    <meta name="description" property="og:description" content="Blog post about Learn how to get started with Docker with this helpful article! It covers the basics of installation and usage, and provides tips for creating and running containers..">
+    <meta name="description" property="twitter:description" content="Blog post about Learn how to get started with Docker with this helpful article! It covers the basics of installation and usage, and provides tips for creating and running containers..">
+    <meta name="image" property="og:image" content="https://www.devontaereid.com/images/docker.png">
+    <meta name="image" property="twitter:image" content="https://www.devontaereid.com/images/docker.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@_yodev_">
+    <meta property="og:url" content="https://www.devontaereid.com">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div class="navbar header-content--mini" id="nav-bar">
+      <nav>
+        <div class="main-menu"><a class="menu-branding" href="/"><img class="menu-branding" src="/images/logo.png" alt="branding-logo">
+            <h3>Devontae Reid</h3></a>
+          <ul class="menu-list">
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/articles">Articles</a></li>
+            <li><a href="/gospel">Gospel</a></li>
+            <li>
+              <button class="display-switch">☀️</button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="post-body">
+      <article class="button" id="post-container"></article>
+      <div class="post-header-container">
+        <div class="post-header-details">
+          <h1 id="post-header-title">Getting Started with Docker</h1>
+          <div class="post-header-meta"><img class="post-header-icon" src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot">
+            <p class="post-header-time">Saturday, November 05, 2022</p><span class="post-header-divider">|</span>
+            <p id="post-read-time"></p>
+            <button class="post-header-shareButton" id="shareButton"><span class="post-header-shareButton-icon"><img src="/images/share_icon.png" alt="share_icon">Share</span></button>
+          </div>
+          <div class="post-header-tags"><span class="post-header-tag">Technology</span><span class="post-header-tag">Docker</span></div>
+        </div><img class="post-header-image" src="/images/docker.png" alt="docker-image">
+      </div>
+      <div class="post-content">
+        <div class="post-section-container" id="initial-steps-to-running-docker">
+          <h2 class="section-title">Initial Steps to Running Docker</h2>
+          <div class="post-image-container"><a class="post-image-container" href="https://www.ondat.io/hubfs/Docker.png"><img class="post-image" src="https://www.ondat.io/hubfs/Docker.png" alt="docker"></a>
+            <figcaption class="post-image-caption">Docker @ Resource from Docker Website</figcaption>
+          </div>
+          <p class="post-details">The lightweight development platform that we should all use as developers is Docker. What is Docker? Well, Docker is a software platform for building applications based on containers. Containers are small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another. What is the difference between an image and a container? An image is a portable, read-only, executable file containing the instructions for creating a container. This image gets created using a dockerfile. What is also included in these instructions are operating system, languages, environmental variables, file locations, network ports, and any other components it needs to run.</p>
+          <p class="post-details">If you have installed docker on your pc or mac. The steps to run a docker container are as follows: </p>
+          <ol>
+            <li class="post-list-item">Create a docker</li>
+            <li class="post-list-item">Build docker image " docker build -t <span class="user-define-code">image</span> . "</li>
+            <li class="post-list-item">Run the docker container " docker run --name <span class="user-define-code">container_name image</span> "</li>
+            <li class="post-list-item">Stop container "docker stop <span class="user-define-code">container_name</span> "</li>
+            <li class="post-list-item">List running containers "docker ps -a "</li>
+          </ol>
+          <p class="post-details">Creating a dockerfile and building and running it. Here's an example of a basic dockerfile 
+            <div class="code-snippet-container">
+              <div class="code-snippet-header">
+                <h5 class="code-snippet-title">docker_file</h5>
+                <button class="copy-bttn"><img class="copy-icon" src="/images/copy-icon.png"></button>
+              </div>
+              <div class="code-snippet-body">
+                <pre class="language-docker"><code class="language-docker"><span class="code-comment"># Parent Image: Software and version</span><br><span class="code-specific">FROM </span>python:3<br><span class="code-specific">WORKDIR </span><span class="code-file-path">/Users/user_directory/docker/textblob </span><br><span class="code-specific">COPY </span>requirements.txt <span class="code-file-path">./ </span><br><span class="code-specific">RUN </span>pip install --no-cache-dir -r requirements.txt<br><span class="code-comment"># First dot is relative file path where dockerfile resides</span><br><span class="code-comment"># Second dot is the root directory</span><br><span class="code-specific">COPY </span>. .<br><span class="code-specific">CMD </span><span class="code-bracket">[</span><span class="code-string">"python"</span>, <span class="code-string">"./main.py"</span><span class="code-bracket">]</span><br></code></pre>
+              </div>
+            </div>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-container">
+        <p>Sola Scriptura ( Scripture Alone ), Solus Christus ( Christ Alone ), Sola fide ( Faith Alone ), Sola Gratia ( Grace Alone ), and Soli Deo Gloria ( Glory to God Alone )</p>
+        <div class="socials">
+          <ul>
+            <li class="social-links"><a href="https://www.linkedin.com/in/devontaereid/"><img src="/images/websites/linkedin.png"></a></li>
+            <li class="social-links"><a href="https://twitter.com/_yodev_"><img src="/images/websites/twitter.png"></a></li>
+            <li class="social-links"><a href="https://github.com/y0dev"><img src="/images/websites/github.png"></a></li>
+          </ul>
+        </div>
+        <p class="footer-small">Icons provided by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></p>
+      </div>
+    </div>
+    <script type="text/javascript" src="/scripts/main.js"></script>
+    <script type="text/javascript" src="/scripts/code_script.js"></script>
+    <script type="text/javascript" src="https://static.esvmedia.org/crossref/crossref.min.js"></script>
+  </body>
+</html>

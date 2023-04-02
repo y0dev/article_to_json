@@ -1,0 +1,20 @@
+{
+   "about-me": 
+   [ 
+      {
+         "title": "First Family 4th of July",
+         "photo": "https://i.ibb.co/3yWwHxB/4oJ.jpg",
+         "slide_id": "slide-1"
+      },
+      {
+         "title": "Wedding Within A Pandemic",
+         "photo": "https://i.ibb.co/253vtTf/wed.jpg",
+         "slide_id": "slide-2"
+      },
+      {
+        "title": "Happy 3 Months Son",
+        "photo": "https://i.ibb.co/XzDTQrw/img-01.jpg",
+        "slide_id": "slide-3"
+      }
+   ]
+}

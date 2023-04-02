@@ -1,0 +1,107 @@
+[
+    {
+        "file-id": "article",
+        "date": "1636423946203",
+        "id": "web-dev-choice",
+        "image": {
+            "name": "images/web-dev.png",
+            "alt": "js-image"
+        },
+        "tags": [
+            "Technology",
+            "ReactJS",
+            "NodeJS"
+        ],
+        "title": "Web Development Choice"
+    },
+    {
+        "file-id": "article",
+        "date": "1628742217550",
+        "id": "parenting-with-few-rules",
+        "image": {
+            "name": "images/family.png",
+            "alt": "parenting-img"
+        },
+        "tags": [
+            "Parenting",
+            "Christ",
+            "Children"
+        ],
+        "title": "Parenting with Few Rules | Doug Wilson"
+    },
+    {
+        "file-id": "article",
+        "date": "1665111900994",
+        "id": "navy-seals-breathing",
+        "image": {
+            "name": "images/heart_strength.png",
+            "alt": "health-img"
+        },
+        "tags": [
+            "Health",
+            "Fitness"
+        ],
+        "title": "Navy Seals & Breathing"
+    },
+    {
+        "file-id": "article",
+        "date": "1667624400000",
+        "id": "docker-getting-started",
+        "image": {
+            "name": "images/docker.png",
+            "alt": "docker-image"
+        },
+        "tags": [
+            "Technology",
+            "Docker"
+        ],
+        "title": "Getting Started with Docker"
+    },
+    {
+        "file-id": "article",
+        "date": "1675365300000",
+        "id": "jenkins-getting-started",
+        "image": {
+            "name": "images/jenkins.png",
+            "alt": "jenkins-image"
+        },
+        "tags": [
+            "Technology",
+            "Jenkins",
+            "CI/CD"
+        ],
+        "title": "Basics of Jenkins"
+    },
+    {
+        "file-id": "article",
+        "date": "1675836000000",
+        "id": "system-design",
+        "image": {
+            "name": "images/web-dev.png",
+            "alt": "web-dev-img"
+        },
+        "tags": [
+            "System Design",
+            "Technology",
+            "MAANG"
+        ],
+        "title": "Help with System Design Interviews"
+    },
+    {
+        "file-id": "article",
+        "date": "1678428000000",
+        "id": "thankfulness",
+        "image": {
+            "name": "images/thankful.png",
+            "alt": "thankful-icon"
+        },
+        "tags": [
+            "Christ",
+            "Salvation",
+            "Love",
+            "Thankful"
+        ],
+        "title": "Command for Thankfulness"
+    }
+    
+]
