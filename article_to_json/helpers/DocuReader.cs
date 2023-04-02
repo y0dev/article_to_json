@@ -90,6 +90,7 @@ namespace article_to_json.helpers
                 Style style = paragraph.get_Style() as Style;
                 string styleName = style.NameLocal;
                 string text = paragraph.Range.Text.Replace("\r", String.Empty);
+				string formattedString = "";
 
 				// Console.WriteLine("Style Name: {0}", styleName);
 				// Console.WriteLine("Text: {0}\nLength: {1}", text, text.Length);
@@ -199,22 +200,56 @@ namespace article_to_json.helpers
 								// Check if any word is bold or italized
 								foreach (Range rangeWord in paragraph.Range.Words)
 								{
+									int boldStart  = -1;
+									int boldEnd = -1;
+
+									int italicStart = -1;
+									int italicEnd = -1;
 									// :special-text(key=
 									// )special-text-end
+									if (rangeWord.Bold != 0 && rangeWord.Italic != 0)
+									{
+										// If we're not already in a bold and italicized word, record the start position
+										if (boldStart == -1 && italicStart == -1)
+										{
+											boldStart = rangeWord.Start;
+											italicStart = rangeWord.Start;
+										}
+										// If we're already in a bold and italicized word, update the end position
+										boldEnd = rangeWord.End;
+										italicEnd = rangeWord.End;
+									}
 									if (rangeWord.Bold != 0)
 									{
-										string boldString = String.Format(":special-text(key=bold,{0})special-text-end", rangeWord.Text);
+										// If we're not already in an bold word, record the start position
+										if ( boldStart  == - 1 )
+										{
+											boldStart = rangeWord.Start;
+										}
+										// If we're already in an italicized word, update the end position
+										boldEnd = rangeWord.End;
+
+										Range wordRange = document.Range(boldStart, boldEnd);
+										string boldString = String.Format(":special-text(key=bold,{0})special-text-end ", wordRange.Text);
 										// Console.WriteLine($"{boldString}");
 										rangeWord.Bold = 0;
 										rangeWord.Text = boldString;
+										
 									}
 									else if (rangeWord.Italic != 0)
 									{
-										string italicString = String.Format(":special-text(key=italic,{0})special-text-end", rangeWord.Text);
-										// Console.WriteLine($"{italicString}");
+										//Console.WriteLine(rangeWord.Text);
+										if (italicStart == -1)
+										{
+											italicStart = rangeWord.Start;
+										}
+										// If we're already in an italicized word, update the end position
+										italicEnd = rangeWord.End;
+										Range wordRange = document.Range(italicStart, italicEnd);
+										string italicString = String.Format(":special-text(key=italic,{0})special-text-end ", wordRange.Text);
+										//Console.WriteLine($"{italicString}");
 										rangeWord.Italic = 0;
 										rangeWord.Text = italicString;
-
 									}
 									/*
 									else if (rangeWord.Underline != 0)
@@ -240,7 +275,7 @@ namespace article_to_json.helpers
 
                                     // Check if paragraph has links
                                     int linksCount = paragraph.Range.Hyperlinks.Count;
-
+									// Add Links to paragraph
                                     if (linksCount > 0)
                                     {
                                         int idx = 0;
@@ -276,6 +311,11 @@ namespace article_to_json.helpers
 									}
                                     else
                                     {
+										if (formattedString != "")
+										{
+											Console.WriteLine(formattedString);
+											formattedString = "";
+										}
                                         paragraphText = text.Replace("\r", String.Empty);
                                     }
 
