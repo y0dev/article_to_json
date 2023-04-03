@@ -102,6 +102,19 @@
             "Thankful"
         ],
         "title": "Command for Thankfulness"
+    },
+    {
+        "file-id": "article",
+        "date": "1680066000000",
+        "id": "debugging-in-node",
+        "image": {
+            "name": "images/web-dev.png",
+            "alt": "web-dev-img"
+        },
+        "tags": [
+            "Technology",
+            "Engineer"
+        ],
+        "title": "Debugging in NodeJS"
     }
-    
 ]

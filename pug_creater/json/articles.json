@@ -4,6 +4,11 @@
         "description": "my time looking for a framework to create my portfolio website along with blog site",
         "date": "1636423946203",
         "id": "web-dev-choice",
+        "time": {
+            "secs": "29",
+            "mins": "00",
+            "hours": "00"
+        },
         "tags": [
             "Technology",
             "ReactJS",
@@ -68,6 +73,11 @@
         "description": "parenting as a Christian with few rules from Doug Wilson podcast",
         "date": "1628742217550",
         "id": "parenting-with-few-rules",
+        "time": {
+            "secs": "47",
+            "mins": "00",
+            "hours": "00"
+        },
         "tags": [
             "Parenting",
             "Christ",
@@ -131,6 +141,11 @@
         "description": "Learn how to breathe correctly while doing intense exercises to maximize performance and prevent injury. Tips to help you get the most out of your workouts.",
         "date": "1665111900994",
         "id": "navy-seals-breathing",
+        "time": {
+            "secs": "37",
+            "mins": "01",
+            "hours": "00"
+        },
         "tags": [
             "Health",
             "Fitness"
@@ -158,7 +173,7 @@
                         "id": "001",
                         "alt": "navy-seals",
                         "caption": "Navy Seals Training",
-                        "link": "https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTU3ODc4NjAzNzg5NDQ0NDI1/list-seal-missions-navy-seal-photos-beach-assualt-1708498496-o-3.jpg"
+                        "link": "https://i0.wp.com/cms.sofrep.com/wp-content/uploads/2018/01/navy-seal-photo-065.jpg"
                     },
                     {
                         "id": "002",
@@ -265,6 +280,11 @@
         "description": "Learn how to get started with Docker with this helpful article! It covers the basics of installation and usage, and provides tips for creating and running containers.",
         "date": "1667624400000",
         "id": "docker-getting-started",
+        "time": {
+            "secs": "44",
+            "mins": "00",
+            "hours": "00"
+        },
         "tags": [
             "Technology",
             "Docker"
@@ -339,6 +359,11 @@
         "description": "Learn the basics of Jenkins, an open source automation server for continuous integration and continuous delivery. Get up and running quickly and easily.",
         "date": "1675365300000",
         "id": "jenkins-getting-started",
+        "time": {
+            "secs": "06",
+            "mins": "01",
+            "hours": "00"
+        },
         "tags": [
             "Technology",
             "Jenkins",
@@ -497,6 +522,11 @@
         "description": "System design study focuses on understanding user requirements, creating system architecture and developing a plan for implementation.",
         "date": "1675836000000",
         "id": "system-design",
+        "time": {
+            "secs": "12",
+            "mins": "07",
+            "hours": "00"
+        },
         "tags": [
             "System Design",
             "Technology",
@@ -772,6 +802,11 @@
         "description": "devotional from my morning reading on thankfulness and why we should always be thankful.",
         "date": "1678428000000",
         "id": "thankfulness",
+        "time": {
+            "secs": "20",
+            "mins": "01",
+            "hours": "00"
+        },
         "tags": [
             "Christ",
             "Salvation",
@@ -789,14 +824,84 @@
                     "text": "Command for Thankfulness"
                 },
                 "paragraphs": [
-                    "We seldom give thanks during all seasons of life. We give praises to God when things are well as we should, but not when things aren\u2019t. Prime example of this in scripture is Israel\u2019s ungrateful heart throughout their time in the wilderness (Num. 14:1-4; 20: 3-5). Also, remember this is after God hears their groaning in Egypt and rescues them out of the harness that they faced while there (Ex. 2: 24-25).",
-                    "The harshness that the Israelites faced in Egypt was bad and continued to get worse as Pharaoh saw how they were multiplying (Ex. 1: 8-15). Even when God had blessed Israel abundantly with manna and protection in the wilderness, they still thought it was better to go back and enjoy the life they had there with all the food (Num. 11:5). They\u2019re not the only ones that think this way.",
+                    "We seldom give thanks during all seasons of life. We give praises to God when things are well as we should, but not when things aren\u2019t. Prime example of this in scripture is Israel\u2019s ungrateful heart throughout their time in the wilderness (Num. 14:1-4;20:3-5). Also, remember this is after God hears their groaning in Egypt and rescues them out of the harness that they faced while there (Ex. 2:24-25).",
+                    "The harshness that the Israelites faced in Egypt was bad and continued to get worse as Pharaoh saw how they were multiplying (Ex. 1:8-15). Even when God had blessed Israel abundantly with manna and protection in the wilderness, they still thought it was better to go back and enjoy the life they had there with all the food (Num. 11:5). They\u2019re not the only ones that think this way.",
                     "As I read Col. 3:15, Paul commands the saints in Colossae to be thankful. This would seem like a weird command because you would think that we should always be thankful. Paul here reminds the believer to be thankful after just telling them to put on these godly characteristics (Col. 3:12-14). Why should we then be thankful? Why this command? I believe Paul wants us to remember the mercy of God in saving us from the bondage of sin that once enslaved us. The believer may grumble about these characteristics that they have to put off (Col. 3:5-11) which they prided themselves in having before the saving grace of Christ or because they\u2019ve been wrong by someone and that person deserves it. As I was reminded by a brother, \u201cWe deserve much worse than what this person just said about us even though it may not be true.\u201d God did not need to save Israel from Egypt nor did he need to save us from our sins.",
                     "So, to close as the Apostle Paul commands, \u201cBe Thankful\u201d. We ought to always be thankful in all circumstances because we deserve much more than we are receiving."
                 ],
                 "images": [],
                 "links": [],
                 "lists": []
+            }
+        ]
+    },
+    {
+        "title": "Debugging in NodeJS",
+        "description": "How to properly debug in NodeJS",
+        "date": "1680066000000",
+        "id": "debugging-in-node",
+        "time": {
+            "secs": "57",
+            "mins": "0",
+            "hours": "0"
+        },
+        "tags": [
+            "Technology",
+            "Engineer"
+        ],
+        "image": {
+            "name": "images/web-dev.png",
+            "alt": "web-dev-img"
+        },
+        "content": [
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Debugging in Node Using Chrome Devtools"
+                },
+                "paragraphs": [
+                    "As I\u2019m writing this the current Node version is 16.13. Debugging in NodeJS is a good trick to know how to do when you\u2019re a web developer. It is done by adding simply :special-text(key=italic,--)special-text-end :special-text(key=italic,inspect )special-text-end flag. What happens is that when using :special-text(key=italic,--)special-text-end :special-text(key=italic,inspect )special-text-end flag Node opens a port to accept WebSocket connections. Now you will be presented with the following::imagePlace(001)",
+                    "Once successful, now open up Google Chrome and type the following URL :special-text(key=italic,chrome)special-text-end :special-text(key=italic,://)special-text-end :special-text(key=italic,inspect)special-text-end :special-text(key=italic,/#)special-text-end :special-text(key=italic,devices)special-text-end . This will present you with a DevTools webpage that allows you to debug your node project.  Click Configure\u2026 which should open up a window in which you can see the discoverable ports on your PC. You should now see a remote target added to your DevTools dashboard. Click inspect and a new window should appear.",
+                    "One problem I had was getting the file to appear. In order to get it to appear I have to find the file by using CTRL-P and searching for the file. The location of mine was at the end of the list. Now you can debug away by adding breakpoints and running your application. While debugging you can hover over various variables in your code to find the problem. You will also notice arrows for stepping in and out of functions that are very useful."
+                ],
+                "images": [
+                    {
+                        "id": "001",
+                        "alt": "",
+                        "caption": "node --inspect snippet",
+                        "link": "/images/articles/node-inspect.png"
+                    }
+                ],
+                "links": [],
+                "lists": [],
+                "quotes": [],
+                "code": []
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Setting up Stack Trace"
+                },
+                "paragraphs": [
+                    "The basics behind displaying stack trace is simple in node. All one would have to do is."
+                ],
+                "images": [],
+                "links": [],
+                "lists": [],
+                "quotes": [],
+                "code": []
+            },
+            {
+                "title": {
+                    "tag": "h2",
+                    "text": "Soli Deo Gloria"
+                },
+                "paragraphs": [],
+                "images": [],
+                "links": [],
+                "lists": [],
+                "quotes": [],
+                "code": []
             }
         ]
     }

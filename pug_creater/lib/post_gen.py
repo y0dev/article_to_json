@@ -116,6 +116,33 @@ class Post_Generator:
         self.lines.append(f'{self.id_list[3]}div.post-header-tags')
         for tag in self.tags:
             self.lines.append(f'{self.id_list[5]}span.post-header-tag {tag}')
+    
+    def __addReadTime( self, indent_level:int ):
+        time = self.post_info['time']
+        timeStr = ''
+        print(f'Time {time}')
+        if int(time['hours']) != 0:
+            if int(time['hours']) == 1:
+                timeStr = '1 hour'
+            else:
+                timeStr = f'{int(time["hours"])} hours'
+        elif int(time['mins']) != 0:
+            if int(time['mins']) == 1:
+                if int(time['secs']) >= 30:
+                    timeStr = f'{int(time["mins"]) + 1} mins'
+                else:
+                    timeStr = '1 min'
+            else:
+                if int(time['secs']) >= 30:
+                    timeStr = f'{int(time["mins"]) + 1} mins'
+                else:
+                    timeStr = f'{int(time["mins"])} mins'
+        elif time['secs'] != '0' and time['secs'] != '00':
+            timeStr = '< 1 min'
+
+        self.lines.append(
+            f'{self.id_list[indent_level]}p#post-read-time {timeStr}')
+        
 
     def __addPostContent(self):
         self.lines.append(f'{self.id_list[1]}div.post-content')
@@ -362,9 +389,17 @@ class Post_Generator:
 
     def __addContentParagraph(self, content: dict, paragraph: str):
         # print(paragraph)
+        temp_paragraph = paragraph
         # Check for image in paragraph
-        if ':imagePlace' in paragraph:
-            img_id = paragraph[-4:-1]
+        if ':imagePlace' in temp_paragraph:
+            items, positions = self.__parse_string(temp_paragraph,':imagePlace')
+            for item in positions:
+                img_id = self.__remove_parentheses(item['item'])
+                temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
+
+            
+            # print(temp_paragraph)
+            # print(f'Image {img_id}')
             # print(l,idx,img_id)
             for image in content['images']:
                 if image['id'] == img_id:
@@ -378,26 +413,30 @@ class Post_Generator:
                     self.lines.append(
                         f'{self.id_list[4]}figcaption.post-image-caption {image["caption"]}')
         # Check for any links in text
-        elif ':linkPlace' in paragraph:
+        if ':linkPlace' in temp_paragraph:
+            items, positions = self.__parse_string(temp_paragraph,':linkPlace')
+            for item in positions:
+                link_id = self.__remove_parentheses(item['item'])
+                temp_paragraph = temp_paragraph.replace(item['item_with_key'],)
             l = len(':linkPlace(XYZ)')
-            idx = paragraph.index(':linkPlace')
-            link_location = paragraph[idx:idx + l]
+            idx = temp_paragraph.index(':linkPlace')
+            link_location = temp_paragraph[idx:idx + l]
             link_id = link_location[-4:-1]
             # print(l,idx,link_location,link_id)
             # Add the paragraph without the placeholder
             self.lines.append(
-                f'{self.id_list[3]}p.post-details {paragraph[:idx]}')
+                f'{self.id_list[3]}p.post-details {temp_paragraph[:idx]}')
             
             link_idx = 1
-            temp_para = paragraph[idx:]
-            num_of_links = paragraph.count(':linkPlace')
+            temp_para = temp_paragraph[idx:]
+            num_of_links = temp_paragraph.count(':linkPlace')
             # print(temp_para)
 
             while ':linkPlace' in temp_para:
                 idx = temp_para.index(':linkPlace')
                 link_location = temp_para[idx:idx + l]
                 link_id = link_location[-4:-1]
-                print(l,idx,link_location,link_id)
+                # print(l,idx,link_location,link_id)
                 for link in content['links']:
                     if link['id'] == link_id:
                         if num_of_links > 1:
@@ -422,13 +461,13 @@ class Post_Generator:
                 link_idx += 1
 
         # Check for lists in text
-        elif ':listPlace' in paragraph:
+        if ':listPlace' in temp_paragraph:
             l = len(':listPlace(XYZ)')
-            idx = paragraph.index(':listPlace')
-            code_location = paragraph[idx:idx + l]
+            idx = temp_paragraph.index(':listPlace')
+            code_location = temp_paragraph[idx:idx + l]
             code_id = code_location[-4:-1]
             self.lines.append(
-                f'{self.id_list[3]}p.post-details {paragraph[:idx]}')
+                f'{self.id_list[3]}p.post-details {temp_paragraph[:idx]}')
             for code in content['lists']:
                 if code['id'] == code_id:
                     if code['list_type'] == 'unordered':
@@ -486,59 +525,66 @@ class Post_Generator:
                             self.lines.append(
                                 f'{self.id_list[4]}li.post-list-item {item}')
 
-        elif ':codePlace' in paragraph:
+        if ':codePlace' in temp_paragraph:
             l_start = len(':codePlace(XYZ)')
-            idx_start = paragraph.index(':codePlace')
-            code_location = paragraph[idx_start:idx_start + l_start]
+            idx_start = temp_paragraph.index(':codePlace')
+            code_location = temp_paragraph[idx_start:idx_start + l_start]
             code_id = code_location[-4:-1]
             self.lines.append(
-                f'{self.id_list[3]}p.post-details {paragraph[:idx_start]}')
+                f'{self.id_list[3]}p.post-details {temp_paragraph[:idx_start]}')
             for code in content['code']:
                 if code['id'] == code_id:
                     self.__addCodeBlock(code)
 
-        elif ':user-defined-code' in paragraph:
+        if ':user-defined-code' in temp_paragraph:
             l_start = len(':user-defined-code')
             l_end = len(':end')
-            idx_start = paragraph.index(':user-defined-code')
-            idx_end = paragraph.index(':end')
-            code_ = paragraph[idx_start + l_start:idx_end]
+            idx_start = temp_paragraph.index(':user-defined-code')
+            idx_end = temp_paragraph.index(':end')
+            code_ = temp_paragraph[idx_start + l_start:idx_end]
             self.lines.append(f'{self.id_list[3]}p.post-details')
-            self.lines.append(f'{self.id_list[4]}| {paragraph[:idx_start]}')
+            self.lines.append(f'{self.id_list[4]}| {temp_paragraph[:idx_start]}')
             self.lines.append(
                 f'{self.id_list[4]}span.user-define-code{code_}')  # this can
             self.lines.append(
-                f'{self.id_list[4]}| {paragraph[idx_end + l_end:]}')
+                f'{self.id_list[4]}| {temp_paragraph[idx_end + l_end:]}')
         
         # Check for text 
-        elif ':special-text(key=' in paragraph:
-            l_start = len(':special-text(key=\'')
-            l_end = len(')special-text-end')
-            # Get key
-            key_idx_start = paragraph.index(':special-text(key=')
-            key_idx_end = paragraph.index('\',')
-            idx_start = paragraph.index(':special-text(key=')
-            key = paragraph[key_idx_start + l_start:key_idx_end]
-            # get text to 
-            text_idx_end = paragraph.index(')special-text-end')
-            text = paragraph[key_idx_end + 2:text_idx_end ]
+        if ':special-text(key=' in temp_paragraph:
+            # print(temp_paragraph)
+            p = self.__parse_string_to_get_between_par(temp_paragraph,':special-text', left_delimiter='(key=')
+            start_idx = 0
+            for idx, item in enumerate(p):
+                end_idx = item['start_position']
+                temp_para = self.__remove_key(temp_paragraph,item['item_with_key'])
+                if start_idx == 0:
+                    self.lines.append(f'{self.id_list[3]}p.post-details {temp_paragraph[start_idx:end_idx]}')
+                else:
+                    if temp_paragraph[start_idx:end_idx].strip() != '':
+                        self.lines.append(f'{self.id_list[4]}| {temp_paragraph[start_idx:end_idx]}')
+                
+                self.lines.append(f'{self.id_list[4]}span.{item["key"]}-text {item["text"]}')
 
-            # Add everything before identifier
-            self.lines.append(f'{self.id_list[3]}p.post-details {paragraph[:idx_start]}')
+                start_idx = item['end_position']
 
-            if key == 'bold':
-                self.lines.append(f'{self.id_list[4]}span.bold-text {text}')
-            elif key == 'italic':
-                self.lines.append(f'{self.id_list[4]}span.italic-text {text}')
-            elif key == 'underline':
-                self.lines.append(f'{self.id_list[4]}span.underline-text {text}')
             
-            # Add everything after identifier
-            self.lines.append(f'{self.id_list[4]}| {paragraph[text_idx_end + l_end:]}')
-        else:
-            self.lines.append(f'{self.id_list[3]}p.post-details {paragraph}')
-            # print(paragraph)
+            # Add rest of paragraph
+            if temp_paragraph[start_idx:].strip() != '':
+                if temp_paragraph[start_idx+1] == '.':
+                    plus = 1
+                else:
+                    plus = 0
+                self.lines.append(f'{self.id_list[4]}| {temp_paragraph[start_idx+plus:]}')
+            
+            #clean paragraph
+            # for item in p:
+            #     temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
 
+            # Since this is the final thing to search clear paragraph
+            temp_paragraph = ''
+
+        if temp_paragraph != '':
+            self.lines.append(f'{self.id_list[3]}p.post-details {temp_paragraph}')
     def __addJavascriptFiles(self):
         self.pm.addJavascriptFile(js_filename='scripts/main.js')
         if self.code_script_added:
@@ -558,8 +604,9 @@ class Post_Generator:
         self.lines.append(
             f'{self.id_list[4]}p.post-header-time {self.post_info["date"]}')
         self.lines.append(f'{self.id_list[4]}span.post-header-divider |')
-        self.lines.append(
-            f'{self.id_list[4]}p#post-read-time')
+
+        self.__addReadTime(indent_level=4)
+        
         self.lines.append(
             f'{self.id_list[4]}button.post-header-shareButton#shareButton')
         self.lines.append(
@@ -578,5 +625,146 @@ class Post_Generator:
 
         self.__addJavascriptFiles()
 
+    def __parse_string(self, string:str, key:str):
+        # Split string by key
+        items = string.split(key)
+        string.split()
+        # remove any leading or trailing white spaces from each item
+        items = [item.strip() for item in items if item.strip()]
+
+        # Initialize a dictionary to store each items's position in original string
+        positions = []
+
+        # Iterate over each parsed item and find its position in the original string
+        start = 0
+        for item in items:
+            pos = string.find(item, start)
+            itemInfo = {
+                'item': item,
+                'position': pos,
+                'item_with_key': f'{key}{item}'
+            }
+            positions.append(itemInfo)
+            start = pos + len(item)
+
+        # Return a tuple containing the list of parsed items and the dictionary of positions
+        return items, positions
+    
+    def __parse_string_to_get_between_par(self,input_string:str, separator:str, left_delimiter='(', right_delimiter=')'):
+        # Split the input string into a list of individual items
+        items = input_string.split(separator)
+        end_key = None
+        if separator == ':special-text':
+            end_key = 'special-text-end'
+
+        # Initialize a list to store the parsed information and its position in the input string
+        parsed_items = []
+
+        # Initialize a variable to keep track of the current position in the input string
+        current_position = 0
+
+        # Iterate over each item in the list
+        for item in items:
+            # Find the left and right delimiter strings in the item
+            left_index = item.find(left_delimiter)
+            right_index = item.find(right_delimiter)
+
+            # If both delimiters are found and the left delimiter comes before the right delimiter
+            if left_index != -1 and right_index != -1 and left_index < right_index:
+                # Extract the information between the delimiters and add it to the parsed items list
+                parsed_item = item[left_index + 1:right_index]
+                new_item = {
+                    'item': parsed_item,
+                    'start_position': current_position - len(separator),
+                    'position': current_position + left_index + 1,
+                    'item_with_key': f'{separator}({parsed_item}){end_key}'
+                }
+                if end_key != None:
+                    new_item['key'] = self.__extract_after_key_before_end_key(parsed_item,'=', ',')
+                    new_item['text'] = self.__extract_after_key_before_end_key(parsed_item,',', '')
+                    new_item['end_position'] = new_item['start_position'] + len(new_item['item_with_key'])
+
+                parsed_items.append(new_item)
+
+            # Increment the current position in the input string by the length of the current item and the separator
+            current_position += len(item) + len(separator)
+
+        # Return the list of parsed items
+        return parsed_items
+    
+    def __remove_parentheses(self, string:str):
+        # Replace all instances of "(" and ")" with empty strings
+        return string.replace("(", "").replace(")", "")
+    
+    def __remove_key(self, string:str, key:str):
+        # Replace all instances of "(" and ")" with empty strings
+        return string.replace(key, "")
+        
+    def __remove_except_key(self, string:str, key:str):
+         # Split the input string into a list of individual substrings
+        substrings = string.split(key)
+
+        # Initialize an empty string to store the output
+        output_string = ''
+
+        # Iterate over each substring in the list
+        for i, substring in enumerate(substrings):
+            # If the substring contains "key=", add it to the output string
+            if key in substring:
+                output_string += substring
+
+            # If the substring does not contain "key=" and this is not the last substring in the list, add "key=" to the output string
+            elif i < len(substrings) - 1:
+                output_string += key
+
+            # Return the resulting output string
+        return output_string   
+    
+    def __extract_after_key_before_end_key(self, string:str, first_key:str, ending_key:str):
+        # Find the index of the comma and closing parenthesis
+        comma_index = string.find(first_key)
+        if ending_key == '':
+            paren_index = len(string) 
+        else:
+            paren_index = string.find(ending_key)
+
+        # Extract the substring between the comma and closing parenthesis
+        output_string = string[comma_index+1:paren_index]
+
+        # Return the resulting output string
+        return output_string
+
+    def __add_string_at_index(self, string:str, index:int, string_to_add:str):
+        # Use string slicing to split the input string into two parts
+        first_part = string[:index]
+        second_part = string[index:]
+
+        # Concatenate the first part, the string to add, and the second part
+        output_string = first_part + string_to_add + second_part
+
+        # Return the resulting output string
+        return output_string
+    
+    def __find_positions_in_string(self, string:str):
+        import re
+
+        # pattern to match special-text
+        pattern = re.compile(":special-text\(key=(italic|bold),'(.+?)'\)special-text-end")
+
+        # find all matches
+        matches = pattern.findall(string)
+
+        # replace the matches with the desired text
+        new_string = re.sub(pattern, lambda match: match.group(2), string)
+
+        # find the positions of the matches and the replaced text
+        positions = []
+        for match in matches:
+            start = string.find(":special-text(key=%s,'%s')special-text-end" % (match[0], match[1]))
+            end = start + len(match[1])
+            positions.append((start, end))
+
+        return positions, new_string
+     
     def generatePugFile(self):
         self.pm.appendToBody(self.lines)

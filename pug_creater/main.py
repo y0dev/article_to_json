@@ -1,5 +1,5 @@
 from lib.post_gen import Post_Generator
-from lib.clean_json import clean_json_list, add_to_json_list, open_json_file
+from lib.clean_json import clean_json_list, add_to_json_list, open_json_file, add_time_to_json_list
 import os
 import json
 import glob
@@ -7,7 +7,7 @@ import glob
 
 PRINT_JSON_FOLDER = False
 
-SINGLE = False
+SINGLE = True
 ARTICLES = False
 APPEND_NEW_ARTICLE = False
 CLEAN_ARTICLES =  APPEND_NEW_ARTICLE
@@ -24,12 +24,13 @@ articles_filename = 'json/articles.json'
 notes_filename = 'json/notes.json'
 keys = ['date','id','image','tags','title']
 
+# add_time_to_json_list(notes_filename)
 if APPEND_NEW_ARTICLE:
     list_of_files = glob.glob('F:/Documents/blog_articles/json_outputs/*.json') # * means all if need specific format then *.csv
     latest_file = max(list_of_files, key=os.path.getctime)
     new_obj = open_json_file(latest_file)
     add_to_json_list(articles_filename,new_obj)
-    print(latest_file)
+    # print(latest_file)
 
 if ARTICLES:
     articles = open_json_file(articles_filename)

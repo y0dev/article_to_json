@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging in NodeJS</title>
+    <meta name="title" property="og:title" content="Debugging in NodeJS">
+    <meta name="title" property="twitter:title" content="Debugging in NodeJS">
+    <meta name="description" property="og:description" content="Blog post about How to properly debug in NodeJS.">
+    <meta name="description" property="twitter:description" content="Blog post about How to properly debug in NodeJS.">
+    <meta name="image" property="og:image" content="https://www.devontaereid.com/images/web-dev.png">
+    <meta name="image" property="twitter:image" content="https://www.devontaereid.com/images/web-dev.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@_yodev_">
+    <meta property="og:url" content="https://www.devontaereid.com">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div class="navbar header-content--mini" id="nav-bar">
+      <nav>
+        <div class="main-menu"><a class="menu-branding" href="/"><img class="menu-branding" src="/images/logo.png" alt="branding-logo">
+            <h3>Devontae Reid</h3></a>
+          <ul class="menu-list">
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/articles">Articles</a></li>
+            <li><a href="/gospel">Gospel</a></li>
+            <li>
+              <button class="display-switch">☀️</button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="post-body">
+      <article class="button" id="post-container"></article>
+      <div class="post-header-container">
+        <div class="post-header-details">
+          <h1 id="post-header-title">Debugging in NodeJS</h1>
+          <div class="post-header-meta"><img class="post-header-icon" src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot">
+            <p class="post-header-time">Sunday, April 02, 2023</p><span class="post-header-divider">|</span>
+            <p id="post-read-time">< 1 min</p>
+            <button class="post-header-shareButton" id="shareButton"><span class="post-header-shareButton-icon"><img src="/images/share_icon.png" alt="share_icon">Share</span></button>
+          </div>
+          <div class="post-header-tags"><span class="post-header-tag">Technology</span><span class="post-header-tag">Engineer</span></div>
+        </div><img class="post-header-image" src="/images/web-dev.png" alt="web-dev-img">
+      </div>
+      <div class="post-content">
+        <div class="post-section-container" id="debugging-in-node-using-chrome-devtools">
+          <h2 class="section-title">Debugging in Node Using Chrome Devtools</h2>
+          <div class="post-image-container"><a class="post-image-container" href="/images/articles/node-inspect.png"><img class="post-image" src="/images/articles/node-inspect.png" alt=""></a>
+            <figcaption class="post-image-caption">node --inspect snippet</figcaption>
+          </div>
+          <p class="post-details">As I’m writing this the current Node version is 16.13. Debugging in NodeJS is a good trick to know how to do when you’re a web developer. It is done by adding simply <span class="italic-text">--</span><span class="italic-text">inspect </span> flag. What happens is that when using <span class="italic-text">--</span><span class="italic-text">inspect</span> flag Node opens a port to accept WebSocket connections. Now you will be presented with the following:</p>
+          <p class="post-details">Once successful, now open up Google Chrome and type the following URL <span class="italic-text">chrome</span><span class="italic-text">://</span><span class="italic-text">inspect</span><span class="italic-text">/#</span><span class="italic-text">devices</span>. This will present you with a DevTools webpage that allows you to debug your node project.  Click Configure… which should open up a window in which you can see the discoverable ports on your PC. You should now see a remote target added to your DevTools dashboard. Click inspect and a new window should appear.</p>
+          <p class="post-details">One problem I had was getting the file to appear. In order to get it to appear I have to find the file by using CTRL-P and searching for the file. The location of mine was at the end of the list. Now you can debug away by adding breakpoints and running your application. While debugging you can hover over various variables in your code to find the problem. You will also notice arrows for stepping in and out of functions that are very useful.</p>
+        </div>
+        <div class="post-section-container" id="setting-up-stack-trace">
+          <h2 class="section-title">Setting up Stack Trace</h2>
+          <p class="post-details">The basics behind displaying stack trace is simple in node. All one would have to do is.</p>
+        </div>
+        <div class="post-section-container" id="soli-deo-gloria">
+          <h2 class="section-title">Soli Deo Gloria</h2>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-container">
+        <p>Sola Scriptura ( Scripture Alone ), Solus Christus ( Christ Alone ), Sola fide ( Faith Alone ), Sola Gratia ( Grace Alone ), and Soli Deo Gloria ( Glory to God Alone )</p>
+        <div class="socials">
+          <ul>
+            <li class="social-links"><a href="https://www.linkedin.com/in/devontaereid/"><img src="/images/websites/linkedin.png"></a></li>
+            <li class="social-links"><a href="https://twitter.com/_yodev_"><img src="/images/websites/twitter.png"></a></li>
+            <li class="social-links"><a href="https://github.com/y0dev"><img src="/images/websites/github.png"></a></li>
+          </ul>
+        </div>
+        <p class="footer-small">Icons provided by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></p>
+      </div>
+    </div>
+    <script type="text/javascript" src="/scripts/main.js"></script>
+    <script type="text/javascript" src="https://static.esvmedia.org/crossref/crossref.min.js"></script>
+  </body>
+</html>
