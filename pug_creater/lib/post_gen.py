@@ -418,7 +418,7 @@ class Post_Generator:
         if ':linkPlace' in temp_paragraph:
             items, positions = self.__parse_string(temp_paragraph,':linkPlace')
             start_idx = 0
-            print(items[12])
+            # print(items[12])
             for idx, item in enumerate(positions):
                 link_id = self.__get_id_from_string(item['item'])
                 # add previous text from paragraph into list if they are before link
@@ -437,71 +437,56 @@ class Post_Generator:
                 
                 temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
                 
-            print(temp_paragraph)
         # Check for lists in text
-        # if ':listPlace' in temp_paragraph:
-        #     l = len(':listPlace(XYZ)')
-        #     idx = temp_paragraph.index(':listPlace')
-        #     code_location = temp_paragraph[idx:idx + l]
-        #     code_id = code_location[-4:-1]
-        #     self.lines.append(
-        #         f'{self.id_list[3]}p.post-details {temp_paragraph[:idx]}')
-        #     for code in content['lists']:
-        #         if code['id'] == code_id:
-        #             if code['list_type'] == 'unordered':
-        #                 self.lines.append(f'{self.id_list[3]}ul')
-        #             else:
-        #                 self.lines.append(f'{self.id_list[3]}ol')
+        if ':listPlace' in temp_paragraph:
+            items, positions = self.__parse_string(temp_paragraph,':listPlace')
+            for item in positions:
+                matches = re.search(r"listPlace\(\d{3}\)", item['item_with_key'])
+                if matches:
+                    list_id = self.__get_id_from_string(item['item'])
 
-        #             for item in code['items']:
-        #                 # Check for sublist
-        #                 if ':listPlace' in item:
-        #                     idx = item.index(':listPlace')
-        #                     code_location = item[idx:idx + l]
-        #                     code_id = code_location[-4:-1]
-        #                     self.lines.append(
-        #                         f'{self.id_list[4]}li.post-list-item {item[:idx]}')
-        #                     for sub_list in content['lists']:
-        #                         if sub_list['id'] == code_id:
-        #                             if sub_list['list_type'] == 'unordered':
-        #                                 self.lines.append(
-        #                                     f'{self.id_list[5]}ul.sublist')
-        #                             else:
-        #                                 self.lines.append(
-        #                                     f'{self.id_list[5]}ol.sublist')
-        #                             for item in sub_list['items']:
-        #                                 self.lines.append(
-        #                                     f'{self.id_list[6]}li.post-sublist-item {item}')
-        #                             code_id = ''
-        #                 elif ':codePlace' in item:
+                    self.lines.append(
+                        f'{self.id_list[3]}p.post-details {temp_paragraph[:item["position"]]}')
+                    
+                    # Search for id in list
+                    for list in content['lists']:
+                        if list['id'] == list_id:
+                            if list['list_type'] == 'unordered':
+                                self.lines.append(f'{self.id_list[3]}ul')
+                            else:
+                                self.lines.append(f'{self.id_list[3]}ol')
+                            
+                            # Check for any sublist in list
+                            for li_item in list['items']:
+                                if ':listPlace' in li_item:
+                                    subitems, subpositions = self.__parse_string(li_item,':listPlace')
+                                    for subpos in subpositions:
+                                        submatch = re.search(r"listPlace\(\d{3}\)", subpos['item_with_key'])
+                                        if submatch:
+                                            sublist_id = self.__get_id_from_string(subpos['item'])
 
-        #                     l = len(':codePlace(XYZ)')
-        #                     idx = item.index(':codePlace')
-        #                     code_location = item[idx:idx + l]
-        #                     code_id = code_location[-4:-1]
-        #                     self.lines.append(
-        #                         f'{self.id_list[3]}p.post-details {item[:idx]}')
-        #                     for code in content['code']:
-        #                         if code['id'] == code_id:
-        #                             self.__addCodeBlock(code, indent_level=4)
-        #                 elif ':user-defined-code' in item:
-        #                     l_start = len(':user-defined-code')
-        #                     l_end = len(':end')
-        #                     idx_start = item.index(':user-defined-code')
-        #                     idx_end = item.index(':end')
-        #                     code_ = item[idx_start + l_start:idx_end]
-        #                     self.lines.append(
-        #                         f'{self.id_list[4]}li.post-list-item')
-        #                     self.lines.append(
-        #                         f'{self.id_list[5]}| {item[:idx_start]}')
-        #                     self.lines.append(
-        #                         f'{self.id_list[5]}span.user-define-code{code_}')  # this can
-        #                     self.lines.append(
-        #                         f'{self.id_list[5]}| {item[idx_end + l_end:]}')
-        #                 # If there isn't a sublist present
-        #                 else:
-        #                     self.lines.append(
-        #                         f'{self.id_list[4]}li.post-list-item {item}')
+                                            self.lines.append(
+                                                f'{self.id_list[4]}li.post-list-item {li_item[:subpos["position"]]}')
+                                            
+                                            for sub_list in content['lists']:
+                                                if sub_list['id'] == sublist_id:
+                                                    if sub_list['list_type'] == 'unordered':
+                                                        self.lines.append(
+                                                            f'{self.id_list[5]}ul.sublist')
+                                                    else:
+                                                        self.lines.append(
+                                                            f'{self.id_list[5]}ol.sublist')
+                                                    
+                                                    for slitem in sub_list['items']:
+                                                        self.lines.append(
+                                                            f'{self.id_list[6]}li.post-sublist-item {slitem}')
+                                            
+                                            temp_paragraph = self.__remove_key(li_item,subpos['item_with_key'])
+                                else:
+                                    self.lines.append(
+                                        f'{self.id_list[4]}li.post-list-item {li_item}')
+
+                    temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
 
         if ':codePlace' in temp_paragraph:
             l_start = len(':codePlace(XYZ)')
@@ -554,15 +539,13 @@ class Post_Generator:
                     plus = 0
                 self.lines.append(f'{self.id_list[4]}| {temp_paragraph[start_idx+plus:]}')
             
-            #clean paragraph
-            # for item in p:
-            #     temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
-
             # Since this is the final thing to search clear paragraph
             temp_paragraph = ''
 
         if temp_paragraph != '':
             self.lines.append(f'{self.id_list[3]}p.post-details {temp_paragraph}')
+        
+        
     def __addJavascriptFiles(self):
         self.pm.addJavascriptFile(js_filename='scripts/main.js')
         if self.code_script_added:
