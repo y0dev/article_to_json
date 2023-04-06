@@ -60,46 +60,22 @@ html(lang='en')
 							img.post-image(src="https://media.geeksforgeeks.org/wp-content/uploads/20200824215825/LoadBalancingSystemDesign.png" alt="system-design")
 						figcaption.post-image-caption Load Balancing from G4G
 					p.post-details Why system design? System design aims to build systems that are reliable, effective, and maintainable. Reliable systems handle faults, failures, and errors.  Effective systems meet all user needs and business requirements. Maintainable systems are flexible and easy to scale up or down. The ability to add new features also comes under the umbrella of maintainability.
-					p.post-details Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are 
-						a.post-link(href="https://engineering.fb.com/") Engineering at Meta
-						.
-							,
-						a.post-link(href="https://research.fb.com/") Meta Research
-						.
-							,
-						a.post-link(href="https://aws.amazon.com/blogs/architecture/") AWS Architecture Blog
-						.
-							,
-						a.post-link(href="https://www.amazon.science/blog") Amazon Science Blog
-						.
-							,
-						a.post-link(href="https://netflixtechblog.com/") Netflix TechBlog
-						.
-							,
-						a.post-link(href="https://research.google/") Google Research
-						.
-							,
-						a.post-link(href="https://quoraengineering.quora.com/") Engineering at Quora
-						.
-							,
-						a.post-link(href="https://eng.uber.com/") Uber Engineering Blog
-						.
-							,
-						a.post-link(href="https://databricks.com/blog/category/engineering") Databricks Blog
-						.
-							,
-						a.post-link(href="https://medium.com/@Pinterest_Engineering") Pinterest Engineering
-						.
-							,
-						a.post-link(href="https://medium.com/blackrock-engineering") BlackRock Engineering
-						.
-							,
-						a.post-link(href="https://eng.lyft.com/") Lyft Engineering
-						.
-							, and
-						a.post-link(href="https://engineering.salesforce.com/") Salesforce Engineering
-						.
-							.
+					p.post-details
+						| Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are
+						a.post-link(href="https://engineering.fb.com/") Engineering at Meta,
+						a.post-link(href="https://research.fb.com/") Meta Research,
+						a.post-link(href="https://aws.amazon.com/blogs/architecture/") AWS Architecture Blog,
+						a.post-link(href="https://www.amazon.science/blog") Amazon Science Blog,
+						a.post-link(href="https://netflixtechblog.com/") Netflix TechBlog,
+						a.post-link(href="https://research.google/") Google Research,
+						a.post-link(href="https://quoraengineering.quora.com/") Engineering at Quora,
+						a.post-link(href="https://eng.uber.com/") Uber Engineering Blog,
+						a.post-link(href="https://databricks.com/blog/category/engineering") Databricks Blog,
+						a.post-link(href="https://medium.com/@Pinterest_Engineering") Pinterest Engineering,
+						a.post-link(href="https://medium.com/blackrock-engineering") BlackRock Engineering,
+						a.post-link(href="https://eng.lyft.com/") Lyft Engineering, and
+						a.post-link(href="https://engineering.salesforce.com/") Salesforce Engineering.
+					p.post-details Preparing for system design interviews can be helpful when you have help from some of the big tech companies. Some companies share some of their technical details on tech blogs that are given to the public. Their reason for sharing this information is to encourage and challenge any future employees to problem solve and to gain an understanding of what it's like working at their company. The tech blogs are             
 					p.post-details Some thoughts that should happen when designing a system should be “Why does this system works?”. Look into why some of the popular applications works at a high level. Understand why some component was used instead of another. Build serious side projects and improve on them and refine them. Build a system from scratch and get familiar with all the processes and details of its construction.
 				div.post-section-container#stay-on-track
 					h2.section-title Stay on track
@@ -108,24 +84,30 @@ html(lang='en')
 					ol
 						li.post-list-item Functional requirements: These represent the features a user of the designed system will be able to use. For example, the system will allow a user to search for content using the search bar.
 						li.post-list-item Non-functional requirements (NFRs): The non-functional requirements are criteria based on which the user of a system will consider the system usable. NFR may include requirements like high availability, low latency, scalability, and so on.
+					p.post-details Key things to remember when thinking of deliverables expected from the developed design 
 				div.post-section-container#the-interview
 					h2.section-title The Interview
 					p.post-details When going into an interview remember that the interview has ask these questions to other candidates. So, don't produce a design that sounds the same as other candidates.
 					p.post-details The most recommended strategy to use in a design interview is to ask refining questions, handle the given data, discussing the components, and finally discussing trade-offs. First thing you want to do is better understand the system planning to design is by asking refining questions. We need to find the functional and nonfunctional requirements. For example, the ability to send messages in near real-time to friend's vs messaging service performance shouldn't degrade with increasing user load. To better understand the data, we should ask the following questions: 
 					ul
-						li.post-list-item What is the size of the data right now? (Guessing this is the size of data type)
+						li.post-list-item What is the size of the data right now?
+							ul.sublist
+								li.post-sublist-item Guessing this is the size of data type
 						li.post-list-item At what rate is the data expected to grow over time?
 						li.post-list-item How will the data be consumed by other subsystems or end users?
 						li.post-list-item Is the data read-heavy or write-heavy?
 						li.post-list-item Do we need strict consistency of data, or will eventual consistency work?
 						li.post-list-item What is the durability target of the data?
 						li.post-list-item What privacy and regulatory requirements do we require for storing or transmitting user data?
+					p.post-details What is the size of the data right now?
 				div.post-section-container#abstraction
 					h2.section-title Abstraction
 					p.post-details Abstraction is the process of hiding details that we don't need. Abstractions in distributed systems helps with simplifying their work and relieve them od the burden of dealing with the underlying complexity of the system.
 				div.post-section-container#remote-procedure-calls
 					h2.section-title Remote Procedure Calls
-					p.post-details Remote Procedure Calls (RPC) is an inter-process communication protocol that's widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics.
+					p.post-details Remote Procedure Calls (
+						span.bold-text RPC
+						| ) is an inter-process communication protocol that's widely used in distributed systems. Developers can use the RPC method without knowing the network communication details. As a result, they can concentrate on the design aspects, rather than the machine and communication-level specifics.
 				div.post-section-container#consistency
 					h2.section-title Consistency
 					p.post-details Consistency is having the same state across all different systems in the distributed system. A strong consistency means that our system is never in an inconsistent state, but at a cost of lower performance and availability because the systems must stay consistent with each other. Eventual consistency is having the system in an inconsistent state for some time but will eventually be in a consistent state. This is also the weakest of the consistencies. There are drawbacks from both. Let's use a YouTube example. Say if you have (n) number of users and one or more users watch a video. We must update the view counter every time a user watches a video, but we have other users that want to read the view count. If we use the strong consistency, we will have to be happy with a long wait time for the other users to read the view value of the video. This is mainly because you must replicate the data across multiple database servers which can be over many miles away from each other and possibility in many different geographic locations. Rather if we use the eventual consistency, we will have to be happy with stale servers (servers that haven't been updated with the current value). This will help with keeping the service up in running without users losing any time. In an interview describe both cases pros and cons. Stock market or updating are a good use for a strong consistency and YouTube is a good use of eventual consistency.
@@ -142,10 +124,12 @@ html(lang='en')
 					ul
 						li.post-list-item Request workload: This is the number of requests served by the system.
 						li.post-list-item Data/storage workload: This is the amount of data stored by the system.
+					p.post-details Scalability is the ability of a system to handle an increasing amount of workload without compromising performance. A search engine, for example, must accommodate increasing numbers of users, as well as the amount of data it indexes. The workload can be of different types, including the following: 
 					p.post-details There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. 
 					ul
 						li.post-list-item Vertical Scaling = more space in a single system
 						li.post-list-item Horizontal Scaling = more nodes that need to be in sync with one another
+					p.post-details There are two approaches to scalability. One being vertical scalability (scaling up) and the other being horizontal scalability (scaling out). Vertical scaling, refers to scaling by providing additional capabilities (for example, additional CPUs or RAM) to an existing device. Vertical scaling allows us to expand our present hardware or software capacity, but we can only grow it to the limitations of our server. This is pricier because of the need for expensive components. Horizontal scaling, refers to increasing the number of machines in the network. We use commodity nodes for this purpose because of their attractive dollar-cost benefits. The catch here is that we need to build a system such that many nodes could collectively work as if we had a single, huge server. 
 				div.post-section-container#maintainability
 					h2.section-title Maintainability
 					p.post-details Is the ability to keep the system up and running by finding and fixing bugs, adding new functionalities, keeping the system's platform updated, and ensuring smooth system operations. Maintainability can be defined more clearly in close relation to reliability. The only difference between them is the variable of interest. Maintainability refers to time-to-repair, whereas reliability refers to both time-to-repair and the time-to-failure. Combining maintainability and reliability analysis can help us achieve availability, downtime, and uptime insights.

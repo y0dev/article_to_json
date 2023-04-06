@@ -445,8 +445,9 @@ class Post_Generator:
                 if matches:
                     list_id = self.__get_id_from_string(item['item'])
 
+                    # Write text to file up until position of key
                     self.lines.append(
-                        f'{self.id_list[3]}p.post-details {temp_paragraph[:item["position"]]}')
+                        f'{self.id_list[3]}p.post-details {temp_paragraph[:item["position"] - item["key_length"]]}')
                     
                     # Search for id in list
                     for list in content['lists']:
@@ -464,9 +465,10 @@ class Post_Generator:
                                         submatch = re.search(r"listPlace\(\d{3}\)", subpos['item_with_key'])
                                         if submatch:
                                             sublist_id = self.__get_id_from_string(subpos['item'])
-
+                                            
+                                            # Write text to file up until position of key
                                             self.lines.append(
-                                                f'{self.id_list[4]}li.post-list-item {li_item[:subpos["position"]]}')
+                                                f'{self.id_list[4]}li.post-list-item {li_item[:subpos["position"]  - subpos["key_length"]]}')
                                             
                                             for sub_list in content['lists']:
                                                 if sub_list['id'] == sublist_id:
@@ -603,7 +605,8 @@ class Post_Generator:
             itemInfo = {
                 'item': item,
                 'position': pos,
-                'item_with_key': f'{key}{item}'
+                'item_with_key': f'{key}{item}',
+                'key_length': len(key)
             }
             itemInfo['end_position'] = itemInfo['position'] + len(itemInfo['item_with_key'])
             positions.append(itemInfo)
