@@ -62,6 +62,14 @@ namespace article_to_json.classes
 						tagList.Add("Engineer");
 						break;
 					}
+				case "algo":
+				case "algorithm":
+					{
+						tagList.Add("Data Structures");
+						tagList.Add("Algorithms");
+						tagList.Add("Tech Interview");
+						break;
+					}
 				case "system design":
 					{
 						tagList.Add("System Design");

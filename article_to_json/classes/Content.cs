@@ -29,14 +29,16 @@ namespace article_to_json.classes
         public string alt { get; set; }
         public string caption { get; set; }
         public string link { get; set; }
+		public string width { get; set; }
 
-        public ContentImage()
+		public ContentImage()
         {
             id = "";
             alt = "";
             caption = "";
             link = "";
-        }
+			width = "";
+		}
     }
 
     class ContentLink

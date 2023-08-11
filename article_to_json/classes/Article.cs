@@ -79,6 +79,13 @@ namespace article_to_json.classes
 						image.name = "images/web-dev.png";
 						break;
 					}
+				case "algo":
+				case "algorithm":
+					{
+						image.alt = "algo-img";
+						image.name = "images/algorithm.png";
+						break;
+					}
 				case "docker":
 					{
 						image.alt = "docker-image";

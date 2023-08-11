@@ -67,7 +67,12 @@ namespace article_to_json.helpers
 			Application application = new Application();
             application.Visible = false;
             Document document = application.Documents.Open(filepath, ReadOnly: true);
+
+			float documentWidth = document.PageSetup.PageWidth;
 			
+			// Calculate three-fourths of the page width
+			float threeFourthPageWidth = (3f / 4f) * documentWidth;
+
 
 			Regex regx = new Regex(@"[\u25A0\u00A0\s]+",
 				RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -84,12 +89,14 @@ namespace article_to_json.helpers
 			int imageIdx = 0;
 
 			bool sameList = false;
+			bool sameSublist = false;
             
             foreach (Paragraph paragraph in document.Paragraphs)
             {
                 Style style = paragraph.get_Style() as Style;
                 string styleName = style.NameLocal;
                 string text = paragraph.Range.Text.Replace("\r", String.Empty);
+				int textLength = text.Length;
 				string formattedString = "";
 
 				// Console.WriteLine("Style Name: {0}", styleName);
@@ -154,6 +161,7 @@ namespace article_to_json.helpers
 					image.alt = "";
 					image.link = shape.Hyperlink.Address;
 					image.id = String.Format("{0,2:D3}", imageIdx + 1);
+					image.width = shape.Width < threeFourthPageWidth ? "auto" : "";
 
 
 					article.content[ trueIdx - 1 ].paragraphs[ paragraphIdx - 1 ] += imagePlace;
@@ -180,14 +188,22 @@ namespace article_to_json.helpers
                                 // Console.WriteLine(content.title);
                                 trueIdx += 1;
                                 paragraphIdx = 0;
-                                sameList = false;
-                                break;
+								listIdx = 0;
+								sameList = false;
+								sameSublist = false;
+								break;
                             }
 
                         case "Normal":
                             {
+								// Clear index counts at the start of each paragraph
+								if (listIdx != 0)
+								{
+									listIdx = 0;
+								}
+
                                 string[] words = text.Split(new string[] { " " }, StringSplitOptions.None);
-                                // Console.WriteLine("Word Length {0}",words.Length);
+								// Console.WriteLine("Word Length {0}",words.Length);
 
 								// Check if text is Description
 								if ( text.ToLower() == "description" )
@@ -230,6 +246,25 @@ namespace article_to_json.helpers
 										boldEnd = rangeWord.End;
 
 										Range wordRange = document.Range(boldStart, boldEnd);
+										// Check for (***)
+										/*
+										if ( wordRange.Text == "(" )
+										{
+											// Check paragraph for next )
+											Range paragraphRange = paragraph.Range;
+											// Find the first closing parenthesis starting from the specified index
+											int closingParenIndex = FindNextClosingParenthesis(paragraphRange.Text, boldStart);
+
+											if (closingParenIndex != -1)
+											{
+												Console.WriteLine($"Closing parenthesis found at index: {closingParenIndex}");
+											}
+											else
+											{
+												Console.WriteLine("Closing parenthesis not found.");
+											}
+										}
+										*/
 										string boldString = String.Format(":special-text(key=bold,{0})special-text-end ", wordRange.Text);
 										// Console.WriteLine($"{boldString}");
 										rangeWord.Bold = 0;
@@ -350,29 +385,62 @@ namespace article_to_json.helpers
                                     paragraphIdx += 1;
                                 }
 
+								// Get level of list
+								int listLevel = GetListLevel(paragraph.Range.ListFormat);
 
-                                string listPlace = String.Format(":listPlace({0,2:D3})", listIdx + 1);
+								// Determine the type of list
+								string listType = paragraph.Range.ListFormat.ListType.ToString();
+
+								string listPlace = String.Format(":listPlace({0,2:D3})", listIdx + 1);
 
                                 // Add to end of previous paragraph
                                 if ( !sameList )
                                 {
                                     // Console.WriteLine(article.content[trueIdx - 1].paragraghs.Count);
+									// Append list placement to paragraph
                                     article.content[trueIdx - 1].paragraphs[paragraphIdx - 1] += listPlace;
 
-                                    string listType = paragraph.Range.ListFormat.ListType.ToString();
-                                    ContentList clist = new ContentList();
-                                    clist.id = String.Format("{0,2:D3}", listIdx + 1);
-                                    clist.items.Add(text.Replace("\r", String.Empty));
-                                    clist.listType = listType == "wdListBullet" ? "unordered" : "ordered";
+									// Create a content list object
+									ContentList clist = CreateContentList(trueIdx, listType, listIdx + 1, text.Replace("\r", String.Empty));
                                     article.content[trueIdx - 1].lists.Add(clist);
 
                                     listIdx += 1;
                                     sameList = true;
-                                }
+									sameSublist = false;
+								}
                                 else // List has already been created just update list items
                                 {
-                                    article.content[trueIdx - 1].lists[listIdx - 1].items.Add(text.Replace("\r", String.Empty));
-                                }
+									// Check for sublist
+									if (listLevel > 1)
+									{
+										// Create new sublist
+										if ( !sameSublist )
+										{
+											int listItemLength = article.content[trueIdx - 1].lists[listIdx - 1].items.Count;
+											// Append to previous list text
+											article.content[trueIdx - 1].lists[listIdx - 1].items[listItemLength - 1] += listPlace;
+
+											// Create a content list object
+											ContentList clist = CreateContentList(trueIdx, listType, listIdx + 1, text.Replace("\r", String.Empty));
+											article.content[trueIdx - 1].lists.Add(clist);
+											listIdx += 1;
+											sameSublist = true;
+										}
+										else
+										{
+											// Append text to list
+											article.content[trueIdx - 1].lists[listIdx - 1].items.Add(text.Replace("\r", String.Empty));
+										}
+
+									}
+									else
+									{
+										// Append text to list
+										article.content[trueIdx - 1].lists[listIdx - 1].items.Add(text.Replace("\r", String.Empty));
+									}
+
+
+								}
                                 break;
                             }
                         default:
@@ -416,6 +484,36 @@ namespace article_to_json.helpers
             return true;
         } // end parseDoc()
 
+		private int FindNextClosingParenthesis(string text, int startIndex)
+		{
+			for (int i = startIndex; i < text.Length; i++)
+			{
+				if (text[i] == ')')
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
 
+		private int GetListLevel(ListFormat listFormat)
+		{
+			if (listFormat.ListType != WdListType.wdListNoNumbering)
+			{
+				return listFormat.ListLevelNumber;
+			}
+			return 0;
+		}
+
+		private ContentList CreateContentList(int paragraphIndex, string listType, int listIndex, string text)
+		{
+			// Create a content list object
+			ContentList clist = new ContentList();
+			clist.id = String.Format("{0,2:D3}", listIndex);
+			clist.items.Add(text.Replace("\r", String.Empty));
+			clist.listType = listType == "wdListBullet" ? "unordered" : "ordered";
+
+			return clist;
+		}
 	} // end class
 } // end namespace

@@ -30,6 +30,11 @@ namespace article_to_json
 			string Title = "";
             string Filename = "";
 			string DocType = "Sample";
+			/*
+			JavascriptParser jp = new JavascriptParser("");
+
+			jp.parse();
+			*/
 
 			List<string> TagList = new List<string>();
 
@@ -65,8 +70,12 @@ namespace article_to_json
 
 				Article article;
 				article = docuReader.article;
+				article.title = title;
+
+				// Get article subject image icon
 				article.generateImage(DocType);
 
+				// Get tags for article
 				Tags tags = new Tags(DocType);
 				TagList = tags.getTagList();
 
@@ -86,7 +95,7 @@ namespace article_to_json
 			}
 
 
-			// Console.ReadKey();
+			Console.ReadKey();
         }
 
 		private static string FirstCharToUpper(string input)
