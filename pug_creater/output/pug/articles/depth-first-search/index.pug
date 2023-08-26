@@ -16,6 +16,9 @@ html(lang='en')
 		meta(property="og:url" content="https://www.devontaereid.com")
 		meta(property="og:type" content="website")
 		link(rel="stylesheet" href="/style.css")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-python.min.js")
 	body
 		div#nav-bar.navbar.header-content--mini
 			nav
@@ -39,7 +42,7 @@ html(lang='en')
 					h1#post-header-title Depth First Search
 					div.post-header-meta
 						img.post-header-icon(src="https://i.ibb.co/HY4dx9s/headshot.jpg" alt="headshot")
-						p.post-header-time Tuesday, August 22, 2023
+						p.post-header-time Friday, August 11, 2023
 						span.post-header-divider |
 						p#post-read-time 2 mins
 						button.post-header-shareButton#shareButton
@@ -85,15 +88,45 @@ html(lang='en')
 				div.post-section-container#implementation
 					h3.section-title Implementation
 					p.post-details 	To implement DFS algorithm is simple for both a tree and a graph. It is implemented just as it is defined. See the example below written in Python:
-					div.post-image-container
-						a.post-image-container(href="/images/articles/dfs_in-order.png")
-							img.post-image(src="/images/articles/dfs_in-order.png" alt="" style="width:auto;")
-						figcaption.post-image-caption In-Order DFS Implementation
+						div.code-snippet-container
+							div.code-snippet-header
+								h5.code-snippet-title DFS Implementation for Tree Traversal
+								button.copy-bttn
+									img.copy-icon(src="/images/copy-icon.png")
+							div.code-snippet-body
+								pre
+									code.code-body.language-python
+										| def dfs(root):
+										| 	if not root:
+										| 		return
+										| 	# Traverse the left subtree
+										| 	dfs(root.left)
+										| 	# Visit current node
+										| 	print(root)
+										| 	# Traverse the right subtree
+										| 	dfs(root.right)
+										| 	return
 					p.post-details 	The difference in the implementation for a tree and a graph is including a visited set as a state. In the implementation of DFS in a graph you will add a visited set to store all the vertices/nodes that were already visited. Since a graph uses a visited set, you no longer need to used the goal state that a tree would used to find a left node. The python example below shows the basic implementation to start from: 
-					div.post-image-container
-						a.post-image-container(href="/images/articles/dfs_graph-traversal.png")
-							img.post-image(src="/images/articles/dfs_graph-traversal.png" alt="" style="width:auto;")
-						figcaption.post-image-caption DFS Implementation of Graph Traversal
+						div.code-snippet-container
+							div.code-snippet-header
+								h5.code-snippet-title DFS Implementation for Graph Traversal
+								button.copy-bttn
+									img.copy-icon(src="/images/copy-icon.png")
+							div.code-snippet-body
+								pre
+									code.code-body.language-python
+										| def dfs(root, visited):
+										| 	# Visit all neighbors
+										| 	for neighbor in get_neighbors(root):
+										| 		# Check if neighbor has been visited before
+										| 		if neighbor in visited:
+										| 			continue
+										| 
+										| 		# Add neighbor to visited set
+										| 		visited.add(neighbor)
+										| 
+										| 		# Add neighbor to stack
+										| 		dfs(neighbor, visited)
 		.footer
 			.footer-container
 				p Sola Scriptura ( Scripture Alone ), Solus Christus ( Christ Alone ), Sola fide ( Faith Alone ), Sola Gratia ( Grace Alone ), and Soli Deo Gloria ( Glory to God Alone )
@@ -111,4 +144,5 @@ html(lang='en')
 				p.footer-small Icons provided by 
 					a(href="https://www.flaticon.com/authors/freepik" title="Freepik") Freepik
 		script(type="text/javascript" src="/scripts/main.js")
+		script(type="text/javascript" src="/scripts/code_script.js")
 		script(type="text/javascript" src="https://static.esvmedia.org/crossref/crossref.min.js")

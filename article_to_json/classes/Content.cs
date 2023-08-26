@@ -88,14 +88,14 @@ namespace article_to_json.classes
 		}
 	}
 
-	class ContentCode
+	class Code
 	{
 		public string id { get; set; }
 		public string title { get; set; }
 		public string language { get; set; }
 		public List<string> content { get; set; }
 
-		public ContentCode()
+		public Code()
 		{
 			id = "";
 			title = "";
@@ -112,7 +112,7 @@ namespace article_to_json.classes
         public List<ContentLink> links { get; set; }
         public List<ContentList> lists { get; set; }
 		public List<ContentQuotes> quotes { get; set; }
-		public List<ContentCode> code { get; set; }
+		public List<Code> code { get; set; }
 
 		public Content()
         {
@@ -122,7 +122,7 @@ namespace article_to_json.classes
             links = new List<ContentLink>();
             lists = new List<ContentList>();
 			quotes = new List<ContentQuotes>();
-			code = new List<ContentCode>();
+			code = new List<Code>();
         }
 
         public override string ToString()

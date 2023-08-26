@@ -90,7 +90,7 @@ namespace article_to_json
 
 				File.WriteAllText(String.Format(@"F:\Documents\blog_articles\json_outputs\{0}.json", title.ToLower().Replace(" ", "-")), stringjson);
 
-				Console.WriteLine("Finished");
+				Console.WriteLine(@"Finished {0}", title.ToLower());
 
 			}
 

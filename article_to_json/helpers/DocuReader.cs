@@ -79,11 +79,13 @@ namespace article_to_json.helpers
 			bool articleTitleFound = false;
 			bool articleIdFound = false;
 			bool descriptionFound = false;
+			bool codeBlockFound = false;
 			int trueIdx = 0; // This is for each content in the document based on finding the heading or a title
 
             int paragraphIdx = 0;
 
             int listIdx = 0;
+			int codeIdx = 0;
 
 			bool imageFound = false;
 			int imageIdx = 0;
@@ -171,23 +173,82 @@ namespace article_to_json.helpers
 					imageIdx += 1;
 					continue;
 				}
+
+				// Check if this is a code block
+				if (text == "code-start" && !codeBlockFound)
+				{
+					// Create a new code object
+					// Console.WriteLine("Code Start: {0}", text);
+					string codePlace = String.Format(":codePlace({0,2:D3})", codeIdx + 1);
+					Code code = new Code();
+					code.id = String.Format("{0,2:D3}", codeIdx + 1);
+
+					// Add code to content
+					article.content[trueIdx - 1].code.Add(code);
+					article.content[trueIdx - 1].paragraphs[paragraphIdx - 1] += codePlace;
+
+					codeIdx += 1;
+					codeBlockFound = true;
+					continue;
+				}
+				else if (text == "code-end" && codeBlockFound)
+				{
+					// Console.WriteLine("Code End: {0}", text);
+					codeBlockFound = false;
+					continue;
+				}
+				else if (codeBlockFound)
+				{
+					if(text.ToLower().Contains("language= "))
+					{
+						int startIdx = "language= ".Length;
+						string language = text.Substring(startIdx);
+						article.content[trueIdx - 1].code[codeIdx - 1].language = language;
+						continue;
+					}
+					else if (text.ToLower().Contains("code-title= "))
+					{
+						int startIdx = "code-title= ".Length;
+						string codeTitle = text.Substring(startIdx);
+						article.content[trueIdx - 1].code[codeIdx - 1].title = codeTitle;
+						continue;
+					}
+					article.content[trueIdx - 1].code[codeIdx - 1].content.Add(text);
+					// Console.WriteLine("Code: {0}", text);
+					continue;
+				}
+
 				try
                 {
 
 
 					switch (styleName)
-                    {
-                        case "Heading 1":
-                        case "Heading 2":
-                            {
-                                Content content = new Content();
-                                article.content.Add(content);
-                                content.title.tag = "h2";
-                                content.title.text = text.Replace("\r", String.Empty);
+					{
+						case "Heading 1":
+							{
+								Content content = new Content();
+								article.content.Add(content);
+								content.title.tag = "h2";
+								content.title.text = text.Replace("\r", String.Empty);
 
-                                // Console.WriteLine(content.title);
-                                trueIdx += 1;
-                                paragraphIdx = 0;
+								// Console.WriteLine(content.title);
+								trueIdx += 1;
+								paragraphIdx = 0;
+								listIdx = 0;
+								sameList = false;
+								sameSublist = false;
+								break;
+							}
+						case "Heading 2":
+							{
+								Content content = new Content();
+								article.content.Add(content);
+								content.title.tag = "h3";
+								content.title.text = text.Replace("\r", String.Empty);
+
+								// Console.WriteLine(content.title);
+								trueIdx += 1;
+								paragraphIdx = 0;
 								listIdx = 0;
 								sameList = false;
 								sameSublist = false;
@@ -308,8 +369,8 @@ namespace article_to_json.helpers
                                     
                                     string paragraphText = "";
 
-                                    // Check if paragraph has links
-                                    int linksCount = paragraph.Range.Hyperlinks.Count;
+									// Check if paragraph has links
+									int linksCount = paragraph.Range.Hyperlinks.Count;
 									// Add Links to paragraph
                                     if (linksCount > 0)
                                     {
