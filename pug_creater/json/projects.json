@@ -6,7 +6,7 @@
     "content":
       "Looking for homes and organizing them in an excel document hasn't become more easier with this browser extension. This tool allows you to visit Zillow, Redfin, and Trulia, and gather the information (Address, Selling Price, Rooms and Square Footage) to place into an excel sheet and have your way with the data of the home.",
     "preview_links": {
-      
+      "github": "https://github.com/y0dev/DevHotel"
     },
     "image": {
       "link":"images/house.png",

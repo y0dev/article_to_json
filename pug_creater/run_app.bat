@@ -1,7 +1,7 @@
 @echo off
 
 echo Building posts
-python ./main.py
+python ./main.py single
 
 echo Running pug and cleaning up html
 pug -P ./output/pug -o ./output/html

@@ -152,7 +152,7 @@ class Post_Generator:
             id_tag = f'{new_string.replace(" ","-").lower()}'
             self.lines.append(f'{self.id_list[2]}div.post-section-container#{id_tag}')
             self.lines.append(
-                f'{self.id_list[3]}h2.section-title {content["title"]["text"]}')
+                f'{self.id_list[3]}{content["title"]["tag"]}.section-title {content["title"]["text"]}')
             for paragraph in content['paragraphs']:
                 self.__addContentParagraph(content, paragraph)
 
@@ -399,10 +399,12 @@ class Post_Generator:
                 img_id = self.__get_id_from_string(item['item'])
                 temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
 
-            
+            self.lines.append(f'{self.id_list[3]}p.post-details {temp_paragraph}')
+
             # print(temp_paragraph)
             # print(f'Image {img_id}')
             # print(l,idx,img_id)
+            # Add content image
             for image in content['images']:
                 if image['id'] == img_id:
                     # print(image)
@@ -410,10 +412,16 @@ class Post_Generator:
                         f'{self.id_list[3]}div.post-image-container')
                     self.lines.append(
                         f'{self.id_list[4]}a.post-image-container(href="{image["link"]}")')
-                    self.lines.append(
-                        f'{self.id_list[5]}img.post-image(src="{image["link"]}" alt="{image["alt"]}")')
+                    if "width" in image:
+                        self.lines.append(
+                            f'{self.id_list[5]}img.post-image(src="{image["link"]}" alt="{image["alt"]}" style="width:{image["width"]};")')
+                    else:
+                        self.lines.append(
+                            f'{self.id_list[5]}img.post-image(src="{image["link"]}" alt="{image["alt"]}")')
                     self.lines.append(
                         f'{self.id_list[4]}figcaption.post-image-caption {image["caption"]}')
+            
+            temp_paragraph = ''
         # Check for any links in text
         if ':linkPlace' in temp_paragraph:
             items, positions = self.__parse_string(temp_paragraph,':linkPlace')
@@ -426,14 +434,17 @@ class Post_Generator:
                     self.lines.append(
                         f'{self.id_list[3]}p.post-details')
                     self.lines.append(
-                        f'{self.id_list[4]}| {items[idx]}')
+                        f'{self.id_list[4]}| {items[idx]} ')
                 
                 # search for id in list
                 for link in content['links']:
                     if link['id'] == link_id:
                         text = self.__get_non_id_from_string(item['item'])
                         self.lines.append(
-                            f'{self.id_list[4]}a.post-link(href="{link["link"]}") {link["text"]}{text}')
+                            f'{self.id_list[4]}a.post-link(href="{link["link"]}") {link["text"]}')
+                        # Add rest of paragraph
+                        self.lines.append(
+                            f'{self.id_list[4]}| {text} ')
                 
                 temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
                 
@@ -444,7 +455,7 @@ class Post_Generator:
                 matches = re.search(r"listPlace\(\d{3}\)", item['item_with_key'])
                 if matches:
                     list_id = self.__get_id_from_string(item['item'])
-
+                    # print(temp_paragraph[:item["position"] - item["key_length"]])
                     # Write text to file up until position of key
                     self.lines.append(
                         f'{self.id_list[3]}p.post-details {temp_paragraph[:item["position"] - item["key_length"]]}')
@@ -452,11 +463,18 @@ class Post_Generator:
                     # Search for id in list
                     for list in content['lists']:
                         if list['id'] == list_id:
-                            if list['list_type'] == 'unordered':
-                                self.lines.append(f'{self.id_list[3]}ul')
-                            else:
-                                self.lines.append(f'{self.id_list[3]}ol')
-                            
+                            # Legacy
+                            if "list_type" in list:
+                                if list['list_type'] == 'unordered':
+                                    self.lines.append(f'{self.id_list[3]}ul')
+                                else:
+                                    self.lines.append(f'{self.id_list[3]}ol')
+                            elif "listType" in list:
+                                if list['listType'] == 'unordered':
+                                    self.lines.append(f'{self.id_list[3]}ul')
+                                else:
+                                    self.lines.append(f'{self.id_list[3]}ol')
+                                
                             # Check for any sublist in list
                             for li_item in list['items']:
                                 if ':listPlace' in li_item:
@@ -472,24 +490,34 @@ class Post_Generator:
                                             
                                             for sub_list in content['lists']:
                                                 if sub_list['id'] == sublist_id:
-                                                    if sub_list['list_type'] == 'unordered':
-                                                        self.lines.append(
-                                                            f'{self.id_list[5]}ul.sublist')
-                                                    else:
-                                                        self.lines.append(
-                                                            f'{self.id_list[5]}ol.sublist')
+                                                    # Legacy
+                                                    if "list_type" in sub_list:
+                                                        if sub_list['list_type'] == 'unordered':
+                                                            self.lines.append(
+                                                                f'{self.id_list[5]}ul.sublist')
+                                                        else:
+                                                            self.lines.append(
+                                                                f'{self.id_list[5]}ol.sublist')
+                                                    elif "listType" in sub_list:
+                                                        if sub_list['listType'] == 'unordered':
+                                                            self.lines.append(
+                                                                f'{self.id_list[5]}ul.sublist')
+                                                        else:
+                                                            self.lines.append(
+                                                                f'{self.id_list[5]}ol.sublist')
                                                     
                                                     for slitem in sub_list['items']:
                                                         self.lines.append(
                                                             f'{self.id_list[6]}li.post-sublist-item {slitem}')
                                             
                                             temp_paragraph = self.__remove_key(li_item,subpos['item_with_key'])
+                                            # print(temp_paragraph)
                                 else:
                                     self.lines.append(
                                         f'{self.id_list[4]}li.post-list-item {li_item}')
-
+                    # Remove list key
                     temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
-
+                    
         if ':codePlace' in temp_paragraph:
             l_start = len(':codePlace(XYZ)')
             idx_start = temp_paragraph.index(':codePlace')
@@ -519,7 +547,9 @@ class Post_Generator:
             # print(temp_paragraph)
             p = self.__parse_string_to_get_between_par(temp_paragraph,':special-text', left_delimiter='(key=')
             start_idx = 0
+            # Iterate through 
             for idx, item in enumerate(p):
+                # print(item)
                 end_idx = item['start_position']
                 temp_para = self.__remove_key(temp_paragraph,item['item_with_key'])
                 if start_idx == 0:
@@ -546,6 +576,7 @@ class Post_Generator:
 
         if temp_paragraph != '':
             self.lines.append(f'{self.id_list[3]}p.post-details {temp_paragraph}')
+            # print(temp_paragraph)
         
         
     def __addJavascriptFiles(self):
@@ -632,7 +663,7 @@ class Post_Generator:
         for item in items:
             # Find the left and right delimiter strings in the item
             left_index = item.find(left_delimiter)
-            right_index = item.find(right_delimiter)
+            right_index = item.find(right_delimiter+end_key)
 
             # If both delimiters are found and the left delimiter comes before the right delimiter
             if left_index != -1 and right_index != -1 and left_index < right_index:
