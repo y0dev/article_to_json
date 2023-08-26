@@ -52,17 +52,17 @@
       <div class="post-content">
         <div class="post-section-container" id="initial-steps-to-running-docker">
           <h2 class="section-title">Initial Steps to Running Docker</h2>
-          <div class="post-image-container"><a class="post-image-container" href="/images/articles/docker_image.png"><img class="post-image" src="/images/articles/docker_image.png" alt="docker"></a>
+          <div class="post-image-container"><a class="post-image-container" href="https://www.ondat.io/hubfs/Docker.png"><img class="post-image" src="https://www.ondat.io/hubfs/Docker.png" alt="docker"></a>
             <figcaption class="post-image-caption">Docker @ Resource from Docker Website</figcaption>
           </div>
           <p class="post-details">The lightweight development platform that we should all use as developers is Docker. What is Docker? Well, Docker is a software platform for building applications based on containers. Containers are small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another. What is the difference between an image and a container? An image is a portable, read-only, executable file containing the instructions for creating a container. This image gets created using a dockerfile. What is also included in these instructions are operating system, languages, environmental variables, file locations, network ports, and any other components it needs to run.</p>
           <p class="post-details">If you have installed docker on your pc or mac. The steps to run a docker container are as follows: </p>
           <ol>
             <li class="post-list-item">Create a docker</li>
-            <li class="post-list-item">Build docker image " docker build -t <span class="user-define-code">image</span>"</li>
-            <li class="post-list-item">Run the docker container " docker run --name <span class="user-define-code">container_name image</span>"</li>
-            <li class="post-list-item">Stop container "docker stop <span class="user-define-code">container_name</span>"</li>
-            <li class="post-list-item">List running containers "docker ps -a"</li>
+            <li class="post-list-item">Build docker image " docker build -t <span class="user-define-code">image</span> . "</li>
+            <li class="post-list-item">Run the docker container " docker run --name <span class="user-define-code">container_name image</span> "</li>
+            <li class="post-list-item">Stop container "docker stop <span class="user-define-code">container_name</span> "</li>
+            <li class="post-list-item">List running containers "docker ps -a "</li>
           </ol>
           <p class="post-details">Creating a dockerfile and building and running it. Here's an example of a basic dockerfile 
             <div class="code-snippet-container">

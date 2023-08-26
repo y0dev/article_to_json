@@ -148,6 +148,19 @@ class Pug_Manager:
         with open(self.filename, 'w') as f:
             f.writelines(new_lines)
 
+    def addPrismCode(self,languages:[str]):
+        # print('Adding Meta')
+        lines = []
+        # lines.append(f'link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css")\n')
+        lines.append(f'script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js")\n')
+        lines.append(f'script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js")\n')
+        for language in languages:
+            lines.append(f'script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-{language}.min.js")\n')
+        lines = self.__updateListIndex(lines,2)
+        new_lines = self.__findLocationInFile('head',lines,after=self.elements['head'])
+        with open(self.filename, 'w') as f:
+            f.writelines(new_lines)
+
     def addIcon(self,logo_filename='logo.png'):
         lines = [f'link(rel="icon" type="image/x-icon" href="{logo_filename}")\n']
         lines = self.__updateListIndex(lines,2)

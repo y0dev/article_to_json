@@ -16,6 +16,9 @@ html(lang='en')
 		meta(property="og:url" content="https://www.devontaereid.com")
 		meta(property="og:type" content="website")
 		link(rel="stylesheet" href="/style.css")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-docker.min.js")
 	body
 		div#nav-bar.navbar.header-content--mini
 			nav
@@ -55,8 +58,8 @@ html(lang='en')
 				div.post-section-container#initial-steps-to-running-docker
 					h2.section-title Initial Steps to Running Docker
 					div.post-image-container
-						a.post-image-container(href="https://www.ondat.io/hubfs/Docker.png")
-							img.post-image(src="https://www.ondat.io/hubfs/Docker.png" alt="docker")
+						a.post-image-container(href="/images/articles/docker_image.png")
+							img.post-image(src="/images/articles/docker_image.png" alt="docker")
 						figcaption.post-image-caption Docker @ Resource from Docker Website
 					p.post-details The lightweight development platform that we should all use as developers is Docker. What is Docker? Well, Docker is a software platform for building applications based on containers. Containers are small and lightweight execution environments that make shared use of the operating system kernel but otherwise run in isolation from one another. What is the difference between an image and a container? An image is a portable, read-only, executable file containing the instructions for creating a container. This image gets created using a dockerfile. What is also included in these instructions are operating system, languages, environmental variables, file locations, network ports, and any other components it needs to run.
 					p.post-details If you have installed docker on your pc or mac. The steps to run a docker container are as follows: 
@@ -65,16 +68,16 @@ html(lang='en')
 						li.post-list-item
 							| Build docker image " docker build -t 
 							span.user-define-code image
-							|  . "
+							| "
 						li.post-list-item
 							| Run the docker container " docker run --name 
 							span.user-define-code container_name image
-							|  "
+							| "
 						li.post-list-item
 							| Stop container "docker stop 
 							span.user-define-code container_name
-							|  "
-						li.post-list-item List running containers "docker ps -a "
+							| "
+						li.post-list-item List running containers "docker ps -a"
 					p.post-details Creating a dockerfile and building and running it. Here's an example of a basic dockerfile 
 						div.code-snippet-container
 							div.code-snippet-header
@@ -82,43 +85,17 @@ html(lang='en')
 								button.copy-bttn
 									img.copy-icon(src="/images/copy-icon.png")
 							div.code-snippet-body
-								pre.language-docker
-									code.language-docker
-										span.code-comment # Parent Image: Software and version
-										br
-										span.code-specific FROM 
-										.
-											python:3
-										br
-										span.code-specific WORKDIR 
-										span.code-file-path /Users/user_directory/docker/textblob 
-										br
-										span.code-specific COPY 
-										.
-											requirements.txt 
-										span.code-file-path ./ 
-										br
-										span.code-specific RUN 
-										.
-											pip install --no-cache-dir -r requirements.txt
-										br
-										span.code-comment # First dot is relative file path where dockerfile resides
-										br
-										span.code-comment # Second dot is the root directory
-										br
-										span.code-specific COPY 
-										.
-											. .
-										br
-										span.code-specific CMD 
-										span.code-bracket [
-										span.code-string "python"
-										.
-											, 
-										span.code-string "./main.py"
-											 
-										span.code-bracket ]
-										br
+								pre
+									code.code-body.language-docker
+										| # Parent Image: Software and version
+										| FROM python:3
+										| WORKDIR /Users/user_directory/docker/textblob
+										| COPY requirements.txt ./
+										| RUN pip install --no-cache-dir -r requirements.txt
+										| # First dot is relative file path where dockerfile resides
+										| # Second dot is the root directory
+										| COPY . .
+										| CMD [ "python", "./main.py" ]
 		.footer
 			.footer-container
 				p Sola Scriptura ( Scripture Alone ), Solus Christus ( Christ Alone ), Sola fide ( Faith Alone ), Sola Gratia ( Grace Alone ), and Soli Deo Gloria ( Glory to God Alone )

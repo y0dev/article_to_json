@@ -27,6 +27,7 @@ class Post_Generator:
         self.title = title
         self.description = description
         self.embedded = False
+        self.languages = []
         self.code_script_added = False
         self.headshot = 'https://i.ibb.co/HY4dx9s/headshot.jpg'  # 'headshot.png'
         self.logo = '/images/logo.png'  # 'images/logo192.png'
@@ -166,84 +167,10 @@ class Post_Generator:
         for item in items:
             pass
 
-    def __handlePath(self, line: str, indent_level=4) -> str:
-        l_start = len(':path-start ')
-        l_end = len(' :path-end')
-
-        idx_start = line.index(':path-start')
-        idx_end = line.index(':path-end')
-        file_path = line[idx_start + l_start: idx_end]
-        # print(file_path)
-        self.lines.append(
-            f'{self.id_list[indent_level + 3]}span.code-file-path {file_path}')
-
-        code_line = line[idx_end + l_end:]
-        if len(code_line) == 0:
-            self.lines.append(
-                f'{self.id_list[indent_level + 3]}br')
-        else:
-            self.lines.append(
-                f'{self.id_list[indent_level + 4]}.')
-            self.lines.append(
-                f'{self.id_list[indent_level + 5]}{code_line[idx_end + l_end:]}')
-            self.lines.append(
-                f'{self.id_list[indent_level + 3]}br')
-        return code_line
-
-    def __handleString(self, line: str, indent_level=4) -> str:
-        l_start = len(':string-open ')
-        l_end = len(':string-close ')
-        code_line = line
-        if code_line[:l_start] == ':string-open ':
-            idx_start = line.index(':string-open')
-            idx_end = line.index(':string-close')
-            string = line[idx_start + l_start:idx_end-1] + "\""
-            # print(f'handleString Intro- {string}')
-            self.lines.append(
-                f'{self.id_list[indent_level + 3]}span.code-string {string}')
-            code_line = line[idx_end + l_end:]
-            # print(f'handleString-{code_line}')
-        return code_line
-
-    def __handlePunc(self, line: str, indent_level=4) -> str:
-        l_start = len(':string-open ')
-        l_end = len(':string-close ')
-        code_line = line
-        if code_line[:l_start] == ':string-open ':
-            idx_start = line.index(':string-open')
-            idx_end = line.index(':string-close')
-            string = line[idx_start + l_start:idx_end] + "\""
-            self.lines.append(
-                f'{self.id_list[indent_level + 4]}span.code-punctuation {string}')
-            code_line = line[idx_end + l_end:]
-            # print(code_line)
-        return code_line
-
-    def __handleBrackets(self, line: str, indent_level=4) -> str:
-        l_start = len(':bracket-open ')
-        l_end = len(':bracket-close ')
-        code_line = line
-        if code_line[:l_start] == ':bracket-open ':
-            idx_start = line.index(':bracket-open')
-            open_bracket = line[idx_start + l_start]
-            # print(open_bracket)
-            self.lines.append(
-                f'{self.id_list[indent_level + 3]}span.code-bracket {open_bracket}')
-            code_line = line[idx_start + l_start + 2:]
-        elif code_line[:l_end] == ':bracket-close ':
-            idx_end = line.index(':bracket-close')
-            closing_bracket = line[idx_end + l_end]
-            # print(closing_bracket)
-            self.lines.append(
-                f'{self.id_list[indent_level + 3]}span.code-bracket {closing_bracket}')
-            code_line = line[idx_end + l_end + 2:]
-            if len(code_line) == 0:
-                self.lines.append(f'{self.id_list[indent_level + 3]}br')
-        # print(f'Bracket: {code_line}')
-        return code_line
 
     def __addCodeBlock(self, code_content: dict, indent_level=4):
 
+        # print(code_content)
         if not self.code_script_added:
             self.code_script_added = True
 
@@ -259,133 +186,18 @@ class Post_Generator:
 
         self.lines.append(
             f'{self.id_list[indent_level + 1]}div.code-snippet-body')
+        
         self.lines.append(
-            f'{self.id_list[indent_level + 2]}pre.language-{code_content["language"]}')
-        # Remove . from end
+            f'{self.id_list[indent_level + 2]}pre')
         self.lines.append(
-            f'{self.id_list[indent_level + 3]}code.language-{code_content["language"]}')
+            f'{self.id_list[indent_level + 3]}code.code-body.language-{code_content["language"]}')
+        for content in code_content['content']:
+            # print(content)
+            self.lines.append(
+                f'{self.id_list[indent_level + 4]}| {content}')
+        
 
-        for line in code_content["content"]:
-            if ':comment ' in line:
-                l_start = len(':comment ')
-                idx_start = line.index(':comment')
-                comment = line[idx_start + l_start:]
-                # print(comment)
-                self.lines.append(
-                    f'{self.id_list[indent_level + 4]}span.code-comment {comment}')
-                self.lines.append(f'{self.id_list[indent_level + 4]}br')
-                continue
-
-            code_line = line
-            # print(f'Original-Line{line}')
-            while ':code-specific ' in code_line or ':path-start ' in code_line or ':bracket-open ' in code_line or ':bracket-close ' in code_line or ':string-open ' in code_line or ':indent-text' in code_line:
-
-                # Check for indentation of line
-                indent = ''
-                if code_line[:len(':indent-text')] == ':indent-text':
-                    i_start = len(':indent-text')
-                    i_end = len(':indent-text[X]')
-                    # print(f'indent size:{code_line[i_start:i_end]}')
-                    indent = f'indent-{code_line[i_start+1:i_end-1]}'
-                    code_line = code_line[i_end+1:]
-                # print(indent,code_line)
-
-                if code_line[:len(':code-specific ')] == ':code-specific ':
-                    l_start = len(':code-specific ')
-                    l_end = len(' :code-specific-end')
-
-                    idx_start = code_line.index(':code-specific')
-                    idx_end = code_line.index(':code-specific-end')
-                    code_specific = code_line[idx_start + l_start: idx_end]
-                    # print(code_specific)
-
-                    # print(f'C-Line {code_line}')
-                    if indent == '':
-                        self.lines.append(
-                            f'{self.id_list[indent_level + 4]}span.code-specific {code_specific}')
-                    else:
-                        self.lines.append(
-                            f'{self.id_list[indent_level + 4]}span.code-specific(class="{indent}") {code_specific}')
-                        
-                    code_line = code_line[idx_end + l_end:]
-                else:
-                    # print(f'E-Line {code_line}')
-                    # Check for any brackets or string before moving on
-                    if code_line[:len(':path-start ')] == ':path-start ':
-                        code_line = self.__handlePath(line=code_line,
-                                                      indent_level=indent_level+1)
-                        # print(f'P-Line {code_line}')
-                    elif code_line[:len(':bracket-open ')] == ':bracket-open ' or code_line[:len(':bracket-close ')] == ':bracket-close ':
-                        # print(f'B-Line {code_line[:len(": bracket-open ")]}')
-                        code_line = self.__handleBrackets(
-                            line=code_line, indent_level=indent_level+1)
-                    # or code_line[:len(':string-close')] == ':string-close':
-                    elif code_line[:len(':string-open ')] == ':string-open ':
-                        # print(f'S-Line {code_line[:len(":string-open ")]}')
-                        code_line = self.__handleString(
-                            line=code_line, indent_level=indent_level+1)
-                    else:
-                        # Restart beginning of text, by finding the min_index keyword
-                        # Maybe is some text
-                        min_idx = 10000
-                        name = ''
-                        if ':code-specific' in code_line:
-                            name = ':code-specific'
-                            min_idx = min(
-                                min_idx, code_line.index(':code-specific'))
-                        if ':path-start' in code_line:
-                            name = ':path-start'
-                            min_idx = min(
-                                min_idx, code_line.index(':path-start'))
-                        if ':bracket-open' in code_line:
-                            name = ':bracket-open'
-                            min_idx = min(
-                                min_idx, code_line.index(':bracket-open'))
-                        if ':bracket-close' in code_line:
-                            name = ':bracket-close'
-                            min_idx = min(
-                                min_idx, code_line.index(':bracket-close'))
-                        if ':string-open' in code_line:
-                            name = ':string-open'
-                            min_idx = min(
-                                min_idx, code_line.index(':string-open'))
-                        length = len(name)
-
-                        if length > 0:
-                            # print(
-                            #     f'El2-Line {code_line[:min_idx]}')
-                            # print(
-                            #     f'El2-Line {code_line[min_idx:]}')
-
-                            # Must be line without keyword
-                            if min_idx > 1 and self.lines[-1] != 'br':
-                                self.lines.append(
-                                    f'{self.id_list[indent_level + 4]}.')
-                                
-                            
-                            self.lines.append(
-                                f'{self.id_list[indent_level + 5]}{code_line[:min_idx]}')
-
-                            code_line = code_line[min_idx:]
-
-                            # print(min_idx)
-                            # print(f'End-Line{code_line}')
-
-            # Clean up any left over from line
-            if len(code_line) != 0:
-                # print(f'Exit Line {code_line}')
-                
-                if indent == '':
-                    self.lines.append(f'{self.id_list[indent_level + 4]}.')
-                    self.lines.append(
-                        f'{self.id_list[indent_level + 5]}{code_line}')
-                    self.lines.append(
-                        f'{self.id_list[indent_level + 4]}br')
-                else:
-                    self.lines.append(
-                        f'{self.id_list[indent_level + 4]}span.{indent} {code_line}')
-                    self.lines.append(
-                        f'{self.id_list[indent_level + 4]}br')
+        
 
 
     def __addContentParagraph(self, content: dict, paragraph: str):
@@ -398,8 +210,10 @@ class Post_Generator:
             for item in positions:
                 img_id = self.__get_id_from_string(item['item'])
                 temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
-
-            self.lines.append(f'{self.id_list[3]}p.post-details {temp_paragraph}')
+            
+            # Handle case where just a string with imagePlace
+            if len(temp_paragraph.split()) != 0:
+                self.lines.append(f'{self.id_list[3]}p.post-details {temp_paragraph}')
 
             # print(temp_paragraph)
             # print(f'Image {img_id}')
@@ -475,8 +289,10 @@ class Post_Generator:
                                 else:
                                     self.lines.append(f'{self.id_list[3]}ol')
                                 
-                            # Check for any sublist in list
+                            # Loop through list items
                             for li_item in list['items']:
+
+                                # Check for any sublist in list
                                 if ':listPlace' in li_item:
                                     subitems, subpositions = self.__parse_string(li_item,':listPlace')
                                     for subpos in subpositions:
@@ -513,38 +329,56 @@ class Post_Generator:
                                             temp_paragraph = self.__remove_key(li_item,subpos['item_with_key'])
                                             # print(temp_paragraph)
                                 else:
-                                    self.lines.append(
-                                        f'{self.id_list[4]}li.post-list-item {li_item}')
+                                    if ':user-defined-code' in li_item:
+                                        code_ = self.__find_user_defined_code(li_item)
+                                        # print(code_)
+
+                                        self.lines.append(f'{self.id_list[4]}li.post-list-item')
+                                        self.lines.append(f'{self.id_list[5]}| {code_["before_text"]} ')
+                                        self.lines.append(
+                                            f'{self.id_list[5]}span.user-define-code {code_["user_defined_code"]}')  # this can
+                                        self.lines.append(
+                                            f'{self.id_list[5]}| {code_["after_text"]}')
+                                    else:
+                                        self.lines.append(
+                                            f'{self.id_list[4]}li.post-list-item {li_item}')
                     # Remove list key
                     temp_paragraph = self.__remove_key(temp_paragraph,item['item_with_key'])
-                    
+            
+            # Clear the paragraph
+            temp_paragraph = ''       
         if ':codePlace' in temp_paragraph:
+
+            # items, positions = self.__parse_string(temp_paragraph,':codePlace')
             l_start = len(':codePlace(XYZ)')
             idx_start = temp_paragraph.index(':codePlace')
             code_location = temp_paragraph[idx_start:idx_start + l_start]
             code_id = code_location[-4:-1]
             self.lines.append(
                 f'{self.id_list[3]}p.post-details {temp_paragraph[:idx_start]}')
+            
+            temp_paragraph = ''
+            
+            # Loop through code list
             for code in content['code']:
                 if code['id'] == code_id:
+                    if not code['language'] in self.languages:
+                        self.languages.append(code['language'])
                     self.__addCodeBlock(code)
 
         if ':user-defined-code' in temp_paragraph:
-            l_start = len(':user-defined-code')
-            l_end = len(':end')
-            idx_start = temp_paragraph.index(':user-defined-code')
-            idx_end = temp_paragraph.index(':end')
-            code_ = temp_paragraph[idx_start + l_start:idx_end]
+            code_ = self.__find_user_defined_code(li_item)
+            # print(code_)
+
             self.lines.append(f'{self.id_list[3]}p.post-details')
-            self.lines.append(f'{self.id_list[4]}| {temp_paragraph[:idx_start]}')
+            self.lines.append(f'{self.id_list[4]}| {code_["before_text"]} ')
             self.lines.append(
-                f'{self.id_list[4]}span.user-define-code{code_}')  # this can
+                f'{self.id_list[4]}span.user-define-code {code_["user_defined_code"]}')  # this can
             self.lines.append(
-                f'{self.id_list[4]}| {temp_paragraph[idx_end + l_end:]}')
+                f'{self.id_list[4]}| {code_["after_text"]}')
         
-        # Check for text 
+        # Check for bold and italic texts
         if ':special-text(key=' in temp_paragraph:
-            # print(temp_paragraph)
             p = self.__parse_string_to_get_between_par(temp_paragraph,':special-text', left_delimiter='(key=')
             start_idx = 0
             # Iterate through 
@@ -583,6 +417,7 @@ class Post_Generator:
         self.pm.addJavascriptFile(js_filename='scripts/main.js')
         if self.code_script_added:
             self.pm.addJavascriptFile(js_filename='scripts/code_script.js')
+            self.pm.addPrismCode(self.languages)
         self.pm.addBibleJavascriptFile()
 
     def __setupBody(self):
@@ -745,6 +580,28 @@ class Post_Generator:
         # Return the resulting output string
         return output_string
     
+    def __find_user_defined_code(self, text):
+        start_marker = ':user-defined-code'
+        end_marker = ':end'
+        
+        start_index = text.find(start_marker)
+        end_index = text.find(end_marker)
+        
+        if start_index == -1 or end_index == -1:
+            return None
+        
+        start_index += len(start_marker)
+        user_defined_code = text[start_index:end_index].strip()
+        
+        before_text = text[:start_index - len(start_marker)].strip()
+        after_text = text[end_index + len(end_marker):].strip()
+        
+        return {
+            'location': (start_index, end_index),
+            'before_text': before_text,
+            'user_defined_code': user_defined_code,
+            'after_text': after_text
+        }
     def __find_positions_in_string(self, string:str):
 
         # pattern to match special-text
